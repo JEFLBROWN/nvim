@@ -50,6 +50,7 @@ o.scrolloff = 8               -- padding so you dont have to go all the way to t
 o.sidescrolloff = 8           -- same as above, but with horizontal scrolling
 o.termguicolors = true				-- nvim has its own colorscheme
 o.showmode = false 
+o.cursorline = true -- highlight cursor line
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
