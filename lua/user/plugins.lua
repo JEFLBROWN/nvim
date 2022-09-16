@@ -49,16 +49,17 @@ return packer.startup(function(use)
 	use({ "kyazdani42/nvim-tree.lua" })
 	use({ "nvim-lualine/lualine.nvim", requires = { 'kyazdani42/nvim-web-devicons', opt = true }})
 	use({ "folke/which-key.nvim" })
+	use ({ "folke/twilight.nvim" })
 	use({ "folke/zen-mode.nvim" })
 	use({ "akinsho/toggleterm.nvim" })
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "numToStr/Comment.nvim" })
 	use({ "uga-rosa/ccc.nvim" })
 	use({ "ggandor/leap.nvim" })
-
+	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
+	
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
-	use({ "nvim-telescope/telescope-project.nvim" })
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
 	-- Treesitter

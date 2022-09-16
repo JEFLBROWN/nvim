@@ -13,6 +13,10 @@ require "user.catppuccin"
 require "user.comment"
 require "user.ccc"
 require "user.leap"
+require "user.telescope"
+require "user.session_lens"
+require "user.twilight"
+
 
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
@@ -110,7 +114,6 @@ keymap("i", "kj", "<ESC>", opts)
 keymap("n", ";", ":", opts)
 keymap("v", ";", ":", opts)
 
-
 -- BUFFERS --
 
 -- close buffer
@@ -130,29 +133,16 @@ keymap("n", "<C-q>", ":wq!<CR>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- Move Text
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
- -- VISUAL MODE --
-
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
-
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- Line Movement
+keymap('n', '<A-up>', ':m -2<CR>', opts)
+keymap('n', '<A-down>', ':m +1<CR>', opts)
+keymap('v', '<A-up>', ':m -2<CR>', opts)
+keymap('v', '<A-down>', ':m +1<CR>', opts)
 
 -- Zenmode --
 keymap("n", "<leader>z", "<cmd>ZenMode<CR>", opts)
 
 -- Commenter --
-keymap("n", "<leader>/", "<cmd>gcc<CR>", opts)
 
 -- Nvim-Tree --
 keymap ("n", "<leader><tab>", "<cmd>NvimTreeToggle<CR>", opts)
@@ -160,5 +150,6 @@ keymap ("n", "<leader><S>", "<cmd>NvimTreeFocus<CR", opts)
 
 -- Telescope --
 
-keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
-keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
+-- keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+-- keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
+keymap("n", "<Leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>", opts)
