@@ -16,7 +16,14 @@ require "user.leap"
 require "user.telescope"
 require "user.session_lens"
 require "user.twilight"
+require "user.gitsigns"
+require "user.autopairs"
+require "user.numbertoggle"
+require "user.todo"
 
+
+
+-- TODO: Toggle Relative Numbers on and off depending on if you're in Normal or insert
 
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
@@ -35,26 +42,27 @@ vim.g.maplocalleader = " "
 -- └─┘┴   ┴ ┴└─┘┘└┘└─┘
  
 o.encoding = "utf-8"					-- encoding displayed
-o.mouse = "a"									-- enables the mouse
-o.splitbelow = true						-- horizontal splits always appear below current buffer
-o.splitright = true						-- vertical splits always appear to the right
-o.tabstop = 2									-- insert 2 spaces for a tab
-o.shiftwidth = 2							-- insert 2 spaces for Indent
-o.smarttab = true							-- Makes tabbing better, will realize you have 2 vs 4
+o.mouse = "a"						-- enables the mouse
+o.splitbelow = true					-- horizontal splits always appear below current buffer
+o.splitright = true					-- vertical splits always appear to the right
+o.tabstop = 2						-- insert 2 spaces for a tab
+o.shiftwidth = 2					-- insert 2 spaces for Indent
+o.smarttab = true					-- Makes tabbing better, will realize you have 2 vs 4
 o.smartindent = true					-- Makes indenting better
-o.autoindent = true						-- Good autoindent
-o.laststatus = 2							-- always display status line
-o.number = true								-- show line numbers
-o.showtabline = 0							-- Show/Hide Tabs(buffers)
-o.updatetime = 300						-- faster completion
-o.timeoutlen = 500						-- time to wait for a mapped sequence to complete (in milliseconds)
-o.clipboard = "unnamedplus"		-- Copy and Paste in/out of Nvim
-o.listchars = "trail:·"				-- places these glyphs on tabs and trailing spaces
-o.scrolloff = 8               -- padding so you dont have to go all the way to the bottom to scroll the page
-o.sidescrolloff = 8           -- same as above, but with horizontal scrolling
-o.termguicolors = true				-- nvim has its own colorscheme
-o.showmode = false 
-o.cursorline = true -- highlight cursor line
+o.autoindent = true					-- Good autoindent
+o.laststatus = 2					-- always display status line
+o.showtabline = 0					-- Show/Hide Tabs(buffers)
+o.updatetime = 300					-- faster completion
+o.timeoutlen = 500					-- time to wait for a mapped sequence to complete (in milliseconds)
+o.clipboard = "unnamedplus"				-- Copy and Paste in/out of Nvim
+o.listchars = "trail:·"					-- places these glyphs on tabs and trailing spaces
+o.scrolloff = 8               				-- padding so you dont have to go all the way to the bottom to scroll the page
+o.sidescrolloff = 8           				-- same as above, but with horizontal scrolling
+o.termguicolors = true					-- nvim has its own colorscheme
+o.showmode = false					-- hide the mode 
+o.cursorline = true					-- highlight cursor line
+o.number = true						-- show line numbers
+
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
@@ -90,7 +98,6 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 -- Select All 	 	 	
 keymap("n", "<leader>a", "ggVG", opts)
 
@@ -121,7 +128,10 @@ keymap("n", "<C-w>", ":bd<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<tab>", ":bnext<CR>", opts)
-keymap("n", "<S-tab>", ":bprevious<CR>", opts)
+
+-- Jump Between splits
+keymap("n", "<silent> <C-h>", ":wincmd j<CR>", opts)
+keymap("n", "<silent> <C-l>", ":wincmd k<CR>", opts)
 
 -- Save
 keymap("n", "<C-s>", ":w<CR>", opts)
@@ -138,6 +148,8 @@ keymap('n', '<A-up>', ':m -2<CR>', opts)
 keymap('n', '<A-down>', ':m +1<CR>', opts)
 keymap('v', '<A-up>', ':m -2<CR>', opts)
 keymap('v', '<A-down>', ':m +1<CR>', opts)
+keymap('x', '<A-up>', ':m -2<CR>', opts)
+keymap('x', '<A-down>', ':m +1<CR>', opts)
 
 -- Zenmode --
 keymap("n", "<leader>z", "<cmd>ZenMode<CR>", opts)
@@ -150,6 +162,6 @@ keymap ("n", "<leader><S>", "<cmd>NvimTreeFocus<CR", opts)
 
 -- Telescope --
 
--- keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
--- keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
-keymap("n", "<Leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>", opts)
+keymap("n", "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
+keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<Leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)

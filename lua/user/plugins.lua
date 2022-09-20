@@ -49,7 +49,7 @@ return packer.startup(function(use)
 	use({ "kyazdani42/nvim-tree.lua" })
 	use({ "nvim-lualine/lualine.nvim", requires = { 'kyazdani42/nvim-web-devicons', opt = true }})
 	use({ "folke/which-key.nvim" })
-	use ({ "folke/twilight.nvim" })
+	use({ "folke/twilight.nvim" })
 	use({ "folke/zen-mode.nvim" })
 	use({ "akinsho/toggleterm.nvim" })
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
@@ -57,7 +57,16 @@ return packer.startup(function(use)
 	use({ "uga-rosa/ccc.nvim" })
 	use({ "ggandor/leap.nvim" })
 	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
-	
+	use({ 'lewis6991/gitsigns.nvim' })
+	use({ "sitiom/nvim-numbertoggle" })
+	use({ "mattn/emmet-vim" }) 
+	use({ "folke/todo-comments.nvim" })
+
+	-- LSP
+	use({ "williamboman/mason.nvim" }) 
+	use({ "williamboman/mason-lspconfig.nvim" })
+	use({ "neovim/nvim-lspconfig" })
+
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
 	use({ "catppuccin/nvim", as = "catppuccin" })

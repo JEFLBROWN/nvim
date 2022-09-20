@@ -5,7 +5,9 @@ end
 
 local actions = require "telescope.actions"
 
+-- this is where you call your extensions
 telescope.load_extension("session-lens")
+
 
 telescope.setup {
 	
