@@ -16,7 +16,7 @@ zenmode.setup {
     -- uncomment any of the options below, or add other vim.wo options you want to apply
     options = {
       -- signcolumn = "no", -- disable signcolumn
-      -- number = false, -- disable number column
+      number = false, -- disable number column
       -- relativenumber = false, -- disable relative numbers
       cursorline = false, -- disable cursorline
       -- cursorcolumn = false, -- disable cursor column
@@ -34,7 +34,7 @@ zenmode.setup {
       showcmd = false, -- disables the command in the last line of the screen
     },
     twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-    -- gitsigns = { enabled = false }, -- disables git signs
+    gitsigns = { enabled = false }, -- disables git signs
     -- this will change the font size on kitty when in zen mode
     -- to make this work, you need to set the following kitty options:
     -- - allow_remote_control socket-only

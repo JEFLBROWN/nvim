@@ -15,6 +15,9 @@ nvim_tree.setup {
     enable = true,
     update_cwd = true,
   },
+	filters = { 
+		dotfiles = false,
+		custom = { "^.git$",".DS_Store" } },
   renderer = {
     root_folder_modifier = ":t",
     icons = {
@@ -55,7 +58,7 @@ nvim_tree.setup {
   },
   view = {
     width = 30,
-    height = 30,
+    -- height = 30,
     side = "left",
     mappings = {
       list = {

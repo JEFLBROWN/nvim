@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/auto-session",
     url = "https://github.com/rmagatti/auto-session"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   catppuccin = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -99,15 +94,15 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/ccc.nvim",
     url = "https://github.com/uga-rosa/ccc.nvim"
   },
-  ["emmet-vim"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/emmet-vim",
-    url = "https://github.com/mattn/emmet-vim"
-  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  harpoon = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
   },
   ["leap.nvim"] = {
     loaded = true,
@@ -143,6 +138,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-numbertoggle",
     url = "https://github.com/sitiom/nvim-numbertoggle"
+  },
+  ["nvim-surround"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

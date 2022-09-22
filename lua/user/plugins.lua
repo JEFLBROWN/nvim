@@ -42,25 +42,30 @@ packer.init({
 return packer.startup(function(use)
 	-- My plugins here
 
+	-- Themes
+	use({ "catppuccin/nvim", as = "catppuccin" })
+	
+	-- Plugins
 	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
+	use({ "nvim-lualine/lualine.nvim", requires = { 'kyazdani42/nvim-web-devicons', opt = true }})
 	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
 	use({ "kyazdani42/nvim-web-devicons" })
 	use({ "kyazdani42/nvim-tree.lua" })
-	use({ "nvim-lualine/lualine.nvim", requires = { 'kyazdani42/nvim-web-devicons', opt = true }})
 	use({ "folke/which-key.nvim" })
 	use({ "folke/twilight.nvim" })
 	use({ "folke/zen-mode.nvim" })
+	use({ "folke/todo-comments.nvim" })
 	use({ "akinsho/toggleterm.nvim" })
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "numToStr/Comment.nvim" })
 	use({ "uga-rosa/ccc.nvim" })
 	use({ "ggandor/leap.nvim" })
 	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
 	use({ 'lewis6991/gitsigns.nvim' })
 	use({ "sitiom/nvim-numbertoggle" })
-	use({ "mattn/emmet-vim" }) 
-	use({ "folke/todo-comments.nvim" })
+	use({ "kylechui/nvim-surround" })
+	use({ "ThePrimeagen/harpoon" })
 
 	-- LSP
 	use({ "williamboman/mason.nvim" }) 
@@ -69,7 +74,6 @@ return packer.startup(function(use)
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
-	use({ "catppuccin/nvim", as = "catppuccin" })
 
 	-- Treesitter
 	use({
