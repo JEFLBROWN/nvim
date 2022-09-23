@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["auto-session"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/auto-session",
@@ -93,6 +98,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/ccc.nvim",
     url = "https://github.com/uga-rosa/ccc.nvim"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -129,15 +149,15 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-numbertoggle"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-numbertoggle",
-    url = "https://github.com/sitiom/nvim-numbertoggle"
   },
   ["nvim-surround"] = {
     loaded = true,
@@ -169,6 +189,11 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["project.nvim"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/project.nvim",
+    url = "https://github.com/ahmedkhalf/project.nvim"
+  },
   ["session-lens"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/session-lens",
@@ -193,11 +218,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/twilight.nvim",
     url = "https://github.com/folke/twilight.nvim"
-  },
-  ["which-key.nvim"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
   },
   ["zen-mode.nvim"] = {
     loaded = true,

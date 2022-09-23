@@ -4,4 +4,4 @@ if not status_ok then
 end
 
 require ("user.lsp.mason")
-require ("user.lsp.mason-lspconfig").setup()
+require ("user.lsp.mason-lspconfig")

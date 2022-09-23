@@ -81,7 +81,13 @@ keymap ("n", "<leader>`", "<cmd>NvimTreeFocus<CR>", opts)
 
 -- Telescope --
 
-keymap("n", "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
-keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>",opts)
+keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
+keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
+keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
+
+keymap("n", "<leader>hn", "<cmd>lua require('telescope.builtin').harpoon(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').projects(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+

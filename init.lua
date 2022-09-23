@@ -5,26 +5,33 @@
 -- Settings --
 require "user.keymap"
 require "user.opts"
+require "user.lsp"
+require "user.plugins"
 
 -- this is where we require Packer, plugins, and configs
 require "user.autopairs"
--- require "user.bufferline"
 require "user.catppuccin"
+require "user.ccc"
 require "user.comment"
+require "user.cmp"
 require "user.gitsigns"
 require "user.harpoon"
 require "user.leap"
 require "user.lualine"
-require "user.numbertoggle"
+require "user.project"
 require "user.nvim-tree"
 require "user.nvim_surround"
-require "user.plugins"
 require "user.session_lens"
 require "user.telescope"
 require "user.todo"
 require "user.toggleterm"
 require "user.twilight"
 require "user.zenmode"
--- require "user.ccc"
--- require "user.session-manager"
 
+-- Experimental Plugins
+
+-- Plugins I had installed but removed
+
+-- require "user.numbertoggle"
+-- require "user.bufferline"
+-- require "user.ddsession-manager"

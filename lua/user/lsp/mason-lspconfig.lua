@@ -1,18 +1,12 @@
-local status_ok mason-config = (require, "mason-lspconfig.nvim")
+local status_ok, mason_config = pcall(require, "mason-lspconfig.nvim")
 if not status_ok then
 	return
 end
 
-local DEFAULT_SETTINGS = {
+mason_config.setup = ({
 -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
 -- This setting has no relation with the `automatic_installation` setting.
-ensure_installed = {
-
-	cssls = true
-
-
-
-},
+ensure_installed = {},
 
 -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
 -- This setting has no relation with the `ensure_installed` setting.
@@ -22,4 +16,5 @@ ensure_installed = {
 --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
 --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
 automatic_installation = false,
-}
+
+})

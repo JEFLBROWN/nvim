@@ -52,7 +52,6 @@ return packer.startup(function(use)
 	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
 	use({ "kyazdani42/nvim-web-devicons" })
 	use({ "kyazdani42/nvim-tree.lua" })
-	use({ "folke/which-key.nvim" })
 	use({ "folke/twilight.nvim" })
 	use({ "folke/zen-mode.nvim" })
 	use({ "folke/todo-comments.nvim" })
@@ -63,9 +62,18 @@ return packer.startup(function(use)
 	use({ "ggandor/leap.nvim" })
 	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
 	use({ 'lewis6991/gitsigns.nvim' })
-	use({ "sitiom/nvim-numbertoggle" })
+	-- use({ "sitiom/nvim-numbertoggle" })
 	use({ "kylechui/nvim-surround" })
 	use({ "ThePrimeagen/harpoon" })
+	use({ "ahmedkhalf/project.nvim" })
+
+	-- CMP & Snippets
+	use({ "hrsh7th/nvim-cmp" })
+	use({ "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" })
+	use({ "L3MON4D3/LuaSnip" }) -- Snippet Engine
+	use({ "saadparwaiz1/cmp_luasnip" }) -- Snippet Completion
+	use({ "rafamadriz/friendly-snippets" })
+	-- use({ "hrsh7th/cmp-nvim-lua", commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21" })
 
 	-- LSP
 	use({ "williamboman/mason.nvim" }) 

@@ -1,9 +1,9 @@
-local status_ok, mason = pcall(require, "mason.nvim")
+local status_ok, mason = pcall(require, "mason")
 if not status_ok then
 	return
 end
 
-local DEFAULT_SETTINGS = {
+mason.setup({
     ui = {
         -- Whether to automatically check for new versions when opening the :Mason window.
         check_outdated_packages_on_open = true,
@@ -13,11 +13,11 @@ local DEFAULT_SETTINGS = {
 
         icons = {
             -- The list icon to use for installed packages.
-            package_installed = "◍",
+            package_installed = "✓",
             -- The list icon to use for packages that are installing, or queued for installation.
-            package_pending = "◍",
+            package_pending = "➜",
             -- The list icon to use for packages that are not installed.
-            package_uninstalled = "◍",
+            package_uninstalled = "✗",
         },
 
         keymaps = {
@@ -43,7 +43,7 @@ local DEFAULT_SETTINGS = {
     },
 
     -- The directory in which to install packages.
-    install_root_dir = path.concat { vim.fn.stdpath "data", "mason" },
+    -- install_root_dir = path.concat { vim.fn.stdpath "data", "mason" },
 
     pip = {
         -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
@@ -69,4 +69,4 @@ local DEFAULT_SETTINGS = {
         -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
         download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
-}
+})
