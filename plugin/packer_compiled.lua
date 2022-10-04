@@ -89,15 +89,10 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/auto-session",
     url = "https://github.com/rmagatti/auto-session"
   },
-  catppuccin = {
+  ["bufferline.nvim"] = {
     loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "https://github.com/catppuccin/nvim"
-  },
-  ["ccc.nvim"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/ccc.nvim",
-    url = "https://github.com/uga-rosa/ccc.nvim"
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -108,6 +103,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  everforest = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/everforest",
+    url = "https://github.com/sainnhe/everforest"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -124,10 +124,15 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
-  ["leap.nvim"] = {
+  ["hop.nvim"] = {
     loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/leap.nvim",
-    url = "https://github.com/ggandor/leap.nvim"
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/hop.nvim",
+    url = "https://github.com/phaazon/hop.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -144,6 +149,21 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mini.nvim"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/mini.nvim",
+    url = "https://github.com/echasnovski/mini.nvim"
+  },
+  ["neoscroll.nvim"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
+    url = "https://github.com/karb94/neoscroll.nvim"
+  },
+  neovim = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -153,6 +173,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -173,6 +198,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-tundra"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-tundra",
+    url = "https://github.com/sam4llis/nvim-tundra"
   },
   ["nvim-web-devicons"] = {
     loaded = true,

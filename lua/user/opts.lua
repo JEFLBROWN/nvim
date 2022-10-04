@@ -31,16 +31,15 @@ o.cursorline = true									-- highlight cursor line
 o.number = true											-- show	line numbers
 o.signcolumn = "yes"								-- always show sign column so it doesnt shift
 o.fillchars:append { eob = " " }    -- remove tilde ~
+o.relativenumber = true
+
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
-vim.cmd [[colorscheme catppuccin]] -- colorscheme
+vim.cmd [[colorscheme rose-pine]] -- set colorscheme
 
 -- these are styles that are wrapped in legacy VimL, Lua doesn't have an equivilant command yet, so the vim.cmd[[]] allows you to use the old code in the lua file
-
--- Line Number color
--- vim.cmd[[highlight LineNR ctermfg=darkgray ctermbg=none]]
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]
@@ -53,3 +52,4 @@ vim.cmd[[hi! link EndOfBuffer Ignore]]
 
 -- hide the ~ by making it the same color as the bkg
 -- vim.cmd[[hi! EndOfBuffer ctermfg=black ctermfg=black guiblack=black guifg=black]]
+ 

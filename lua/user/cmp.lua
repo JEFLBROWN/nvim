@@ -95,7 +95,7 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    fields = { "kind", "abbr", "menu"}, -- changed from { "kind", "abbr", "menu" } kind gets you the icon 
     format = function(entry, vim_item)
       -- Kind icons
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
