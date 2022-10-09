@@ -59,7 +59,7 @@ keymap("n", "<silent> <C-l>", ":wincmd k<CR>", opts)
 
 -- Save
 keymap("n", "<C-s>", ":w<CR>", opts)
-
+keymap("i", "<C-s>", ":w<CR>", opts)
 -- Save and Quit
 keymap("n", "<C-q>", ":wq!<CR>", opts)
 

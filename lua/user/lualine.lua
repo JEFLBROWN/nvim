@@ -64,7 +64,7 @@ end
 
 require('lualine').setup {
   options = {
-    theme = "rose-pine",
+    theme = "nightfox",
     component_separators = { left = "", right = "" },
     section_separators = { left = '', right = '' },
 		diabled_filetypes = {},

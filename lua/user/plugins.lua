@@ -49,6 +49,7 @@ return packer.startup(function(use)
 	use ({ "sam4llis/nvim-tundra" }) -- dark blue, doesn't work with lualine
 	-- use ({"rebelot/kanagawa.nvim" }) -- Purple
   use({ "rose-pine/neovim" }) -- dark violet
+	use { "EdenEast/nightfox.nvim", } 	
 
 	-- Important Plugins
 	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
