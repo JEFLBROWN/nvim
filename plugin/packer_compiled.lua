@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mellow.nvim"] = {
+    loaded = true,
+    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/mellow.nvim",
+    url = "https://github.com/kvrohit/mellow.nvim"
+  },
   ["mini.nvim"] = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/mini.nvim",
@@ -188,11 +193,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-surround"] = {
-    loaded = true,
-    path = "/Users/macbook/.local/share/nvim/site/pack/packer/start/nvim-surround",
-    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

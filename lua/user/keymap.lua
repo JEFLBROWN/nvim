@@ -29,6 +29,9 @@ keymap("n", "<A-Right>" , ":vertical resize -3<CR>", opts)
 -- keymap("n", "<A-Up>" , ":resize +3<CR>", opts)
 -- keymap("n", "<A-Down>" , ":resize -3<CR>", opts)
 
+-- Close split
+keymap("n", "<leader>x", "<C-W>q", opts)
+
 -- Escape chord
 keymap("i", "kj", "<ESC>", opts)
 

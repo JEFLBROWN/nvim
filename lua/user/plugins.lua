@@ -50,7 +50,8 @@ return packer.startup(function(use)
 	-- use ({"rebelot/kanagawa.nvim" }) -- Purple
   use({ "rose-pine/neovim" }) -- dark violet
 	use { "EdenEast/nightfox.nvim", } 	
-
+	use ({'kvrohit/mellow.nvim'})
+	
 	-- Important Plugins
 	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
@@ -72,13 +73,12 @@ return packer.startup(function(use)
 	use({ "phaazon/hop.nvim" })
 	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
 	use({ "numToStr/Comment.nvim" })
-	use({ "kylechui/nvim-surround" })
 	
 	-- Features --
 	use({ 'echasnovski/mini.nvim', branch = 'stable' })
-	-- use({ "uga-rosa/ccc.nvim" })
 	use({ "norcalli/nvim-colorizer.lua" })
 	use({ 'karb94/neoscroll.nvim'})
+	
 	-- CMP & Snippets
 	use({ "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" })
@@ -98,12 +98,11 @@ return packer.startup(function(use)
 	use({ "ahmedkhalf/project.nvim" })
 
 	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter"})
+	use({"nvim-treesitter/nvim-treesitter"})
 
  -- TIMEOUT -- 
 	-- use({ "ggandor/leap.nvim" })
-
+	-- use({ "uga-rosa/ccc.nvim" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -37,7 +37,8 @@ o.relativenumber = true
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
-vim.cmd [[colorscheme rose-pine]] -- set colorscheme
+-- vim.cmd [[colorscheme rose-pine]] -- set colorscheme
+vim.cmd [[colorscheme mellow]] -- set colorscheme
 
 -- these are styles that are wrapped in legacy VimL, Lua doesn't have an equivilant command yet, so the vim.cmd[[]] allows you to use the old code in the lua file
 
@@ -52,4 +53,7 @@ vim.cmd[[hi! link EndOfBuffer Ignore]]
 
 -- hide the ~ by making it the same color as the bkg
 -- vim.cmd[[hi! EndOfBuffer ctermfg=black ctermfg=black guiblack=black guifg=black]]
- 
+
+-- these hide the bottom command line
+-- vim.cmd[[vim.o.ls = 0]]
+-- vim.cmd[[vim.o.ch = 0]]
