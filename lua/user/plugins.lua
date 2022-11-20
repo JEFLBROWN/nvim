@@ -43,14 +43,14 @@ return packer.startup(function(use)
 	-- My plugins here
 
 	-- Themes
-	use({ "sainnhe/everforest" })
+	-- use({ "sainnhe/everforest" })
 	-- use({ "catppuccin/nvim", as = "catppuccin" }) -- variety
 	-- use ({ "EdenEast/nightfox.vim" }) -- variety
-	use ({ "sam4llis/nvim-tundra" }) -- dark blue, doesn't work with lualine
+	-- use ({ "sam4llis/nvim-tundra" }) -- dark blue, doesn't work with lualine
 	-- use ({"rebelot/kanagawa.nvim" }) -- Purple
-  use({ "rose-pine/neovim" }) -- dark violet
-	use { "EdenEast/nightfox.nvim", } 	
-	use ({'kvrohit/mellow.nvim'})
+ --  use({ "rose-pine/neovim" }) -- dark violet
+	-- use { "EdenEast/nightfox.nvim", } 	
+	-- use ({'kvrohit/mellow.nvim'})
 	
 	-- Important Plugins
 	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
@@ -92,7 +92,7 @@ return packer.startup(function(use)
 	use({ "neovim/nvim-lspconfig" })
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim" })
+	use({ 'nvim-telescope/telescope.nvim', tag = '0.1.0' })
 	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
 	use({ "ThePrimeagen/harpoon" })
 	use({ "ahmedkhalf/project.nvim" })
@@ -100,9 +100,27 @@ return packer.startup(function(use)
 	-- Treesitter
 	use({"nvim-treesitter/nvim-treesitter"})
 
- -- TIMEOUT -- 
+	-- EXPERIMENTAL
+use({
+  "folke/noice.nvim",
+  config = function()
+    require("noice").setup()
+  end,
+  requires = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    "MunifTanjim/nui.nvim",
+    -- OPTIONAL:
+    --   `nvim-notify` is only needed, if you want to use the notification view.
+    --   If not available, we use `mini` as the fallback
+    "rcarriga/nvim-notify",
+    }
+})
+
+	-- TIMEOUT -- 
 	-- use({ "ggandor/leap.nvim" })
 	-- use({ "uga-rosa/ccc.nvim" })
+
+
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

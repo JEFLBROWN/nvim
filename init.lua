@@ -7,7 +7,7 @@ require "user.keymap"
 require "user.lsp"
 require "user.plugins"
 require "user.opts"
-require "user.nightfox"
+-- require "user.nightfox"
 -- require "user.rose-pine"
 require "user.autopairs"
 require "user.bufferline"
@@ -30,8 +30,8 @@ require "user.toggleterm"
 require "user.twilight"
 require "user.zenmode"
 require "user.treesitter"
-
 -- Experimental Plugins
+require "user.noice"
 
 -- Plugins I had installed but removed
 

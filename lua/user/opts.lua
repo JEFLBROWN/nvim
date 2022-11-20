@@ -37,8 +37,8 @@ o.relativenumber = true
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
--- vim.cmd [[colorscheme rose-pine]] -- set colorscheme
-vim.cmd [[colorscheme mellow]] -- set colorscheme
+vim.cmd [[colorscheme rose-pine]] -- set colorscheme
+-- vim.cmd [[colorscheme mellow]] -- set colorscheme
 
 -- these are styles that are wrapped in legacy VimL, Lua doesn't have an equivilant command yet, so the vim.cmd[[]] allows you to use the old code in the lua file
 
