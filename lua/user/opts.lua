@@ -51,9 +51,26 @@ vim.cmd[[highlight VertSplit cterm=none]]
 
 vim.cmd[[hi! link EndOfBuffer Ignore]]
 
+-- relative number toggle --
+vim.keymap.set({'n', 'v'}, '<Space>j', function () vim.cmd([[
+  set relativenumber
+  redraw
+  let cmd = ""
+  let key = nr2char(getchar())
+  while key !~ "[jk]"
+    let cmd .= key
+    let key = nr2char(getchar())
+  endwhile
+  exe "normal " . cmd . key
+  set norelativenumber
+]]) end)
+
+
 -- hide the ~ by making it the same color as the bkg
 -- vim.cmd[[hi! EndOfBuffer ctermfg=black ctermfg=black guiblack=black guifg=black]]
 
 -- these hide the bottom command line
 -- vim.cmd[[vim.o.ls = 0]]
 -- vim.cmd[[vim.o.ch = 0]]
+
+
