@@ -1,4 +1,10 @@
+local status_ok, surround = pcall(require, "surround")
+if not status_ok then
+  return
+end
+
 require('mini.surround').setup({
+
 {
   -- Add custom surroundings to be used on top of builtin ones. For more
   -- information with examples, see `:h MiniSurround.config`.

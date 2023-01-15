@@ -1,130 +1,81 @@
+
+-- install lazy.nvim
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
-end
-
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
-
--- Have packer use a popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
-
--- Install your plugins here
-return packer.startup(function(use)
-	-- My plugins here
+require('lazy').setup({
 
 	-- Themes
-	-- use({ "sainnhe/everforest" })
-	-- use({ "catppuccin/nvim", as = "catppuccin" }) -- variety
-	-- use ({ "EdenEast/nightfox.vim" }) -- variety
-	-- use ({ "sam4llis/nvim-tundra" }) -- dark blue, doesn't work with lualine
-	-- use ({"rebelot/kanagawa.nvim" }) -- Purple
- --  use({ "rose-pine/neovim" }) -- dark violet
-	-- use { "EdenEast/nightfox.nvim", } 	
-	-- use ({'kvrohit/mellow.nvim'})
-	
-	-- Important Plugins
-	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
-	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
-	use({ "kyazdani42/nvim-web-devicons" })
+	'rose-pine/neovim', -- dark violet
+	-- 'sainnhe/everforest', -- green
+	-- 'catppuccin/nvim', as = 'catppuccin',  -- variety
+	-- 'EdenEast/nightfox.vim',  -- variety
+	-- 'sam4llis/nvim-tundra',  -- dark blue, doesn't work with lualine
+	-- 'rebelot/kanagawa.nvim',  -- Purple
+	-- 'EdenEast/nightfox.nvim',  	
+	-- 'kvrohit/mellow.nvim',
 
-	-- UI --
-	-- use({ "sitiom/nvim-numbertoggle" })
-	use({ "folke/todo-comments.nvim" })
-	use({ "folke/twilight.nvim" })
-	use({ "nvim-lualine/lualine.nvim", requires = { 'kyazdani42/nvim-web-devicons', opt = true }})
-	use({ "folke/zen-mode.nvim" })
-	use({ "akinsho/toggleterm.nvim" })
-	use({ "kyazdani42/nvim-tree.lua" })
-	use({ 'lewis6991/gitsigns.nvim' })
-	use({ "lukas-reineke/indent-blankline.nvim" })
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	-- Important Plugins
+	 'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
+	 'kyazdani42/nvim-web-devicons', 
+	
+	-- { 'akinsho/bufferline.nvim', dependencies = { 'kyazdani42/nvim-web-devicons' }}, 
+	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
+	 'folke/todo-comments.nvim', 
+	 'folke/twilight.nvim', 
+	 'folke/zen-mode.nvim', 
+
+'akinsho/toggleterm.nvim', 
+	 'kyazdani42/nvim-tree.lua', 
+	 'lewis6991/gitsigns.nvim', 
+	 'lukas-reineke/indent-blankline.nvim', 
 	
 	-- Mechanics --
-	use({ "phaazon/hop.nvim" })
-	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
-	use({ "numToStr/Comment.nvim" })
+	 'phaazon/hop.nvim',
+	 'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
+	 'numToStr/Comment.nvim', 
+	 'echasnovski/mini.surround', 
 	
 	-- Features --
-	use({ 'echasnovski/mini.nvim', branch = 'stable' })
-	use({ "norcalli/nvim-colorizer.lua" })
-	use({ 'karb94/neoscroll.nvim'})
+	 'norcalli/nvim-colorizer.lua', 
+	 'karb94/neoscroll.nvim',
 	
 	-- CMP & Snippets
-	use({ "hrsh7th/nvim-cmp" })
-	use({ "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" })
-	use({ "L3MON4D3/LuaSnip" }) -- Snippet Engine
-	use({ "saadparwaiz1/cmp_luasnip" }) -- Snippet Completion
-	use({ "rafamadriz/friendly-snippets" })
+	 'hrsh7th/nvim-cmp',
+	 -- 'hrsh7th/cmp-nvim-lsp', commit = 'affe808a5c56b71630f17aa7c38e15c59fd648a8',
+	 'rafamadriz/friendly-snippets',
+	 'L3MON4D3/LuaSnip',  -- Snippet Engine
+	 'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
 
 	-- LSP
-	use({ "williamboman/mason.nvim" }) 
-	use({ "williamboman/mason-lspconfig.nvim" })
-	use({ "neovim/nvim-lspconfig" })
+	 'williamboman/mason.nvim',
+	 'williamboman/mason-lspconfig.nvim', 
+	 'neovim/nvim-lspconfig',
 
 	-- Telescope
-	use({ 'nvim-telescope/telescope.nvim', tag = '0.1.0' })
-	use({ 'rmagatti/session-lens', requires = 'rmagatti/auto-session' })
-	use({ "ThePrimeagen/harpoon" })
-	use({ "ahmedkhalf/project.nvim" })
+	 'nvim-telescope/telescope.nvim', 
+	-- ({ 'rmagatti/session-lens', dependencies = {'rmagatti/auto-session'}}) 
+	 'ThePrimeagen/harpoon',
+	 'ahmedkhalf/project.nvim', 
 
 	-- Treesitter
-	use({"nvim-treesitter/nvim-treesitter"})
-
-	-- EXPERIMENTAL
-use({
-  "folke/noice.nvim",
-  config = function()
-    require("noice").setup()
-  end,
-  requires = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    "MunifTanjim/nui.nvim",
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    "rcarriga/nvim-notify",
-    }
-})
-
-	-- TIMEOUT -- 
-	-- use({ "ggandor/leap.nvim" })
-	-- use({ "uga-rosa/ccc.nvim" })
+	'nvim-treesitter/nvim-treesitter',
+	''
 
 
+}) -- END LAZY
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-end)

@@ -29,8 +29,6 @@ keymap("n", "<A-Right>" , ":vertical resize -3<CR>", opts)
 -- keymap("n", "<A-Up>" , ":resize +3<CR>", opts)
 -- keymap("n", "<A-Down>" , ":resize -3<CR>", opts)
 
--- Close split
-keymap("n", "<leader>x", "<C-W>q", opts)
 
 -- Escape chord
 keymap("i", "kj", "<ESC>", opts)
@@ -39,7 +37,12 @@ keymap("i", "kj", "<ESC>", opts)
 keymap("n", ";", ":", opts)
 keymap("v", ";", ":", opts)
 
--- BUFFERS --
+----------------------
+-- BUFFERS & SPLITS --
+----------------------
+
+-- Close split
+keymap("n", "<leader>x", "<C-W>q", opts)
 
 -- swap splits, and move the cursor in the left split. this is actually all I'd use, because I think splitting once is enough, so Ikeep the split on the right for reference, and then just move it over to my working LEFT split. Im such a damn genius.
 keymap("n", "<C-j>", "<C-W>r <C-W>h", opts)
