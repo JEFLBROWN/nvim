@@ -49,7 +49,7 @@ require('lazy').setup({
 	 'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
 	 'numToStr/Comment.nvim', 
 	 'echasnovski/mini.surround', 
-	
+	 'echasnovski/mini.move',
 	-- Features --
 	 'norcalli/nvim-colorizer.lua', 
 	 'karb94/neoscroll.nvim',
