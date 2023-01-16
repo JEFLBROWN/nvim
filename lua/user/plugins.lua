@@ -39,8 +39,8 @@ require('lazy').setup({
 	 'folke/twilight.nvim', 
 	 'folke/zen-mode.nvim', 
 
-'akinsho/toggleterm.nvim', 
-	 'kyazdani42/nvim-tree.lua', 
+	'akinsho/toggleterm.nvim', 
+	'kyazdani42/nvim-tree.lua', 
 	 'lewis6991/gitsigns.nvim', 
 	 'lukas-reineke/indent-blankline.nvim', 
 	
@@ -74,8 +74,6 @@ require('lazy').setup({
 
 	-- Treesitter
 	'nvim-treesitter/nvim-treesitter',
-	''
-
 
 }) -- END LAZY
 

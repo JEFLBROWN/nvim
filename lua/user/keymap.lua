@@ -107,7 +107,6 @@ keymap ("n", "<leader>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR
 -- add a harpoon mark
 keymap ("n", "<leader>m", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts)
 
-
 -- Telescope --
 keymap("n", "<C-p>", "<cmd>Telescope projects<cr>", opts)
 
