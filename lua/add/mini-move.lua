@@ -2,7 +2,7 @@ local status_ok, move = pcall(require, "move")
 if not status_ok then
 	return
 end
--- No need to copy this inside `setup()`. Will be used automatically.
+
 require('mini.move').setup({
 
   -- Module mappings. Use `''` (empty string) to disable one.

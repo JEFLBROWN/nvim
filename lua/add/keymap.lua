@@ -1,6 +1,7 @@
 --  ┬┌─┌─┐┬ ┬┌┬┐┌─┐┌─┐ 
 --  ├┴┐├─ └┬┘│││├─┤├─┘ 
 --  ┴ ┴└─┘ ┴ ┴ ┴┴ ┴┴  
+
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
@@ -28,7 +29,6 @@ keymap("n", "<A-Left>", ":vertical resize +3<CR>", opts)
 keymap("n", "<A-Right>" , ":vertical resize -3<CR>", opts)
 -- keymap("n", "<A-Up>" , ":resize +3<CR>", opts)
 -- keymap("n", "<A-Down>" , ":resize -3<CR>", opts)
-
 
 -- Escape chord
 keymap("i", "kj", "<ESC>", opts)

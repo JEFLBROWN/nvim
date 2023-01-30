@@ -1,7 +1,6 @@
-
 -- install lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.loop.fs_stat(lazypath)then
   vim.fn.system({
     'git',
     'clone',
@@ -28,7 +27,9 @@ require('lazy').setup({
 	-- 'rebelot/kanagawa.nvim',  -- Purple
 	-- 'EdenEast/nightfox.nvim',  	
 	-- 'kvrohit/mellow.nvim',
-
+	
+  -- "folke/styler.nvim",
+	
 	-- Important Plugins
 	 'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
 	 'kyazdani42/nvim-web-devicons', 
@@ -41,19 +42,19 @@ require('lazy').setup({
 
 	'akinsho/toggleterm.nvim', 
 	'kyazdani42/nvim-tree.lua', 
-	 'lewis6991/gitsigns.nvim', 
-	 'lukas-reineke/indent-blankline.nvim', 
+	'lewis6991/gitsigns.nvim', 
+	'lukas-reineke/indent-blankline.nvim', 
 	
 	-- Mechanics --
-	 'phaazon/hop.nvim',
-	 'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
-	 'numToStr/Comment.nvim', 
-	 'echasnovski/mini.surround', 
-	 'echasnovski/mini.move',
+	'phaazon/hop.nvim',
+	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
+	'numToStr/Comment.nvim', 
+	'kylechui/nvim-surround', 
+
 	-- Features --
 	 'norcalli/nvim-colorizer.lua', 
 	 'karb94/neoscroll.nvim',
-	
+
 	-- CMP & Snippets
 	 'hrsh7th/nvim-cmp',
 	 -- 'hrsh7th/cmp-nvim-lsp', commit = 'affe808a5c56b71630f17aa7c38e15c59fd648a8',
