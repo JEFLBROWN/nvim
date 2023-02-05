@@ -6,7 +6,7 @@ local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
 -- Shorten function name
- local o = vim.opt
+local o = vim.opt
 
 o.encoding = "utf-8"								    -- encoding displayed
 o.clipboard = "unnamedplus"					-- Copy and Paste in/out of Nvim
@@ -37,10 +37,9 @@ o.relativenumber = true
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
-vim.cmd [[colorscheme rose-pine]] -- set colorscheme
--- vim.cmd [[colorscheme mellow]] -- set colorscheme
-
--- these are styles that are wrapped in legacy VimL, Lua doesn't have an equivilant command yet, so the vim.cmd[[]] allows you to use the old code in the lua file
+-- vim.cmd[[colorscheme rose-pine]] -- set colorscheme
+-- vim.cmd[[colorscheme mellow]] -- set colorscheme
+vim.cmd[[colorscheme melange]] -- set colorscheme
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]
@@ -65,7 +64,12 @@ vim.keymap.set({'n', 'v'}, '<Space>j', function () vim.cmd([[
   set norelativenumber
 ]]) end)
 
-
+-- attempts to set a colorscheme for markdown
+-- vim.api.nvim_create_autocmd("Filetype", {
+--     group = vim.api.nvim_create_augroup("colorscheme", { clear = true }),
+--     pattern = { "markdown" },
+--     command = "colorscheme everforest",
+-- })
 -- hide the ~ by making it the same color as the bkg
 -- vim.cmd[[hi! EndOfBuffer ctermfg=black ctermfg=black guiblack=black guifg=black]]
 

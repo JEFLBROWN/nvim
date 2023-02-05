@@ -20,15 +20,14 @@ require('lazy').setup({
 
 	-- Themes
 	'rose-pine/neovim', -- dark violet
-	-- 'sainnhe/everforest', -- green
-	-- 'catppuccin/nvim', as = 'catppuccin',  -- variety
-	-- 'EdenEast/nightfox.vim',  -- variety
-	-- 'sam4llis/nvim-tundra',  -- dark blue, doesn't work with lualine
-	-- 'rebelot/kanagawa.nvim',  -- Purple
-	-- 'EdenEast/nightfox.nvim',  	
-	-- 'kvrohit/mellow.nvim',
-	
-  -- "folke/styler.nvim",
+	'sainnhe/everforest', -- green
+	'catppuccin/nvim', as = 'catppuccin',  -- variety
+	'sam4llis/nvim-tundra',  -- dark blue, doesn't work with lualine
+	'rebelot/kanagawa.nvim',  -- Purple
+	'EdenEast/nightfox.nvim',  	
+	'kvrohit/mellow.nvim',
+	'savq/melange-nvim',	
+	'folke/styler.nvim',
 	
 	-- Important Plugins
 	 'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
@@ -36,33 +35,39 @@ require('lazy').setup({
 	
 	-- { 'akinsho/bufferline.nvim', dependencies = { 'kyazdani42/nvim-web-devicons' }}, 
 	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
-	 'folke/todo-comments.nvim', 
-	 'folke/twilight.nvim', 
-	 'folke/zen-mode.nvim', 
+	'folke/todo-comments.nvim', 
+	'folke/twilight.nvim', 
+	{ 'folke/zen-mode.nvim',},
 
-	'akinsho/toggleterm.nvim', 
-	'kyazdani42/nvim-tree.lua', 
-	'lewis6991/gitsigns.nvim', 
-	'lukas-reineke/indent-blankline.nvim', 
+
+	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
+	'kyazdani42/nvim-tree.lua', -- file explorer sidebar
+	'lewis6991/gitsigns.nvim', -- add git signs in the statusbar 
+	'lukas-reineke/indent-blankline.nvim', -- add indentation guides for tabs, spaces, and returns 
 	
 	-- Mechanics --
 	'phaazon/hop.nvim',
 	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
-	'numToStr/Comment.nvim', 
-	'kylechui/nvim-surround', 
-
+	'numToStr/Comment.nvim',  -- Commenting functionality 
+	{ 'echasnovski/mini.surround', version = false },	
+	-- 'kylechui/nvim-surround', -- change surrounding characters or add surrounding punctuation 
+	"hinell/move.nvim", 			-- mimics VS code line movement
+	
 	-- Features --
 	 'norcalli/nvim-colorizer.lua', 
 	 'karb94/neoscroll.nvim',
 
-	-- CMP & Snippets
+	-- Completion & Snippets
 	 'hrsh7th/nvim-cmp',
 	 -- 'hrsh7th/cmp-nvim-lsp', commit = 'affe808a5c56b71630f17aa7c38e15c59fd648a8',
 	 'rafamadriz/friendly-snippets',
 	 'L3MON4D3/LuaSnip',  -- Snippet Engine
 	 'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
 
-	-- LSP
+-- ┬  ┌─┐┌─┐
+-- │  └─┐├─┘
+-- ┴─┘└─┘┴  
+
 	 'williamboman/mason.nvim',
 	 'williamboman/mason-lspconfig.nvim', 
 	 'neovim/nvim-lspconfig',

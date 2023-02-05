@@ -7,7 +7,8 @@ configs.setup({
 	ensure_installed = { -- one of "all" or a list of languages
 		"html", 
 		"css", 
-		"lua", 
+		"lua",
+		"vim",
 		"c",
 		"javascript",
 		"typescript",
