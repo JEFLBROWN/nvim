@@ -12,32 +12,48 @@ if not vim.loop.fs_stat(lazypath)then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local fn = vim.fn
 require('lazy').setup({
 
-	-- Themes
-	'rose-pine/neovim', -- dark violet
-	'sainnhe/everforest', -- green
-	'catppuccin/nvim', as = 'catppuccin',  -- variety
-	'sam4llis/nvim-tundra',  -- dark blue, doesn't work with lualine
-	'rebelot/kanagawa.nvim',  -- Purple
-	'EdenEast/nightfox.nvim',  	
-	'kvrohit/mellow.nvim',
-	'savq/melange-nvim',	
-	'folke/styler.nvim',
-	
 	-- Important Plugins
 	 'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
 	 'kyazdani42/nvim-web-devicons', 
+
+	-- Colorschemes
+{
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = true,
+    priority = 1000,
+    config = function()
+        require("rose-pine").setup({
+				dark_variant = 'moon'
+			})
+        vim.cmd('colorscheme rose-pine')
+    end
+},
+	'sainnhe/everforest',
+	'rebelot/kanagawa.nvim',
+	'kvrohit/mellow.nvim',
+	'savq/melange-nvim',	
 	
-	-- { 'akinsho/bufferline.nvim', dependencies = { 'kyazdani42/nvim-web-devicons' }}, 
-	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
+	'folke/styler.nvim',
 	'folke/todo-comments.nvim', 
+	
+	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
+
+	{ 
+		'folke/zen-mode.nvim', 
+		config = function()
+			require("zen-mode").setup({
+				window = {
+					backdrop = 1,
+					width = .75, -- width will be 75% of the editor width
+				}
+			})
+		end,
+		},
 	'folke/twilight.nvim', 
-	{ 'folke/zen-mode.nvim',},
 
 
 	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
@@ -56,6 +72,16 @@ require('lazy').setup({
 	-- Features --
 	 'norcalli/nvim-colorizer.lua', 
 	 'karb94/neoscroll.nvim',
+	
+	{
+		'rmagatti/auto-session',
+		config = function()
+			require("auto-session").setup ({
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    })
+  	end,
+	},
 
 	-- Completion & Snippets
 	 'hrsh7th/nvim-cmp',
@@ -64,10 +90,7 @@ require('lazy').setup({
 	 'L3MON4D3/LuaSnip',  -- Snippet Engine
 	 'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
 
--- ┬  ┌─┐┌─┐
--- │  └─┐├─┘
--- ┴─┘└─┘┴  
-
+-- LSP
 	 'williamboman/mason.nvim',
 	 'williamboman/mason-lspconfig.nvim', 
 	 'neovim/nvim-lspconfig',
