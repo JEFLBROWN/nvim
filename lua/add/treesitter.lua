@@ -5,14 +5,17 @@ end
 
 configs.setup({
 	ensure_installed = { -- one of "all" or a list of languages
-		"html", 
+		"astro",
+		"html",
 		"css", 
 		"lua",
 		"vim",
+		"tsx",
 		"c",
 		"javascript",
 		"typescript",
 		"markdown",
+		"toml",
 		"yaml",
 	},
 	ignore_install = { "" }, -- List of parsers to ignore installing

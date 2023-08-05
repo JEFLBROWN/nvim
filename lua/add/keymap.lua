@@ -29,18 +29,15 @@ keymap("v", ">", ">gv", opts)
 -- └─┐├─┘│  │ │ └─┐
 -- └─┘┴  ┴─┘┴ ┴ └─┘
 
-keymap("n", "<leader>v", "<C-w>v", opts)				-- Create a Vertical Split
-keymap("n", "<A-Left>", ":vertical resize +3<CR>", opts) -- Resize Vertical Split, make it wider
-keymap("n", "<A-Right>" , ":vertical resize -3<CR>", opts) -- Resize Vertical Split, make it smaller
--- keymap("n", "<A-Up>" , ":resize +3<CR>", opts) -- Resize Horizontal Split, make it taller
--- keymap("n", "<A-Down>" , ":resize -3<CR>", opts) -- Resize Horizontal Split, make it shorter
+keymap("n", "<leader>v", "<C-w>v", opts)	-- Create a Vertical Split
+keymap("n", "<A-Left>", ":vertical resize +6<CR>", opts) -- Resize Vertical Split, make it wider
+keymap("n", "<A-Right>" , ":vertical resize 0<CR>", opts) -- Resize Vertical Split, make it smaller
+-- keymap("n", "<A-Up>" , ":resize +6<CR>", opts) -- Resize Horizontal Split, make it taller
+-- keymap("n", "<A-Down>" , ":resize 0<CR>", opts) -- Resize Horizontal Split, make it shorter
 keymap("n", "<leader>x", "<C-W>q", opts) -- Close Split window
 keymap("n", "<C-j>", "<C-W>r <C-W>h", opts) -- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>", "<C-W>l", opts) -- Jump to the right Split
 keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split	
--- Jump Between splits
--- keymap("n", "<silent> <C-h>", ":wincmd j<CR>", opts)
--- keymap("n", "<silent> <C-l>", ":wincmd k<CR>", opts)
 
 -- ┌┐ ┬ ┬┌─┐┌─┐┌─┐┬─┐┌─┐
 -- ├┴┐│ │├┤ ├┤ ├┤ ├┬┘└─┐
@@ -48,24 +45,23 @@ keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split
 
 keymap("n", "<leader>w", ":bd<CR>", opts) -- Close Buffer
 keymap("n", "<tab>", ":bnext<CR>", opts) -- Next Buffer
-keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
+-- keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
 
 keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
-keymap("i", "<C-s>", ":w<CR>", opts) -- Save Insert mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
-keymap("n", "<leader>a", "ggVG", opts)	    	-- Select All
+keymap("n", "<C-a>", "ggVG", opts)	    	-- Select All
 
 -- ┌┬┐┌─┐┬  ┬┌─┐┌┬┐┌─┐┌┐┌┌┬┐
 -- ││││ │└┐┌┘├┤ │││├┤ │││ │ 
 -- ┴ ┴└─┘ └┘ └─┘┴ ┴└─┘┘└┘ ┴ 
 
--- Line Movement
-keymap('n', '<C-.', '$', opts) -- move to the end of a line
-keymap('v', '<C-.', '$', opts)
-keymap('x', '<C-.', '$', opts)
-keymap('n', '<C-,>', '0', opts) -- move to the beginning of the line
-keymap('v', '<C-,>', '0', opts)
-keymap('x', '<C-,>', '0', opts)
+-- Cursor Movement
+keymap("n", "<C-m>", "$", opts) -- move to the end of a line
+keymap("v", "<C-m>", "$", opts)
+keymap("x", "<C-m>", "$", opts)
+keymap("n", "<C-n>", "0", opts) -- move to the beginning of the line
+keymap("v", "<C-n>", "0", opts)
+keymap("x", "<C-n>", "0", opts)
 
 -- Normal-mode commands
 keymap('n', '<A-Up>'    ,':MoveLine -1<CR>', opts)
@@ -79,36 +75,33 @@ keymap('x', '<A-Up>'   , ':MoveBlock -1<CR>', opts)
 keymap('v', '<A-Left>' , ':MoveHBlock -1<CR>', opts)
 keymap('v', '<A-Right>', ':MoveHBlock 1<CR>', opts)
 
--- ┌─┐┌─┐┌┐┌
--- ┌─┘├┤ │││
--- └─┘└─┘┘└┘
+-- zen
+keymap("n", "<leader>z", ":ZenMode<CR>", {})
 
-keymap("n", "<leader>zm", ":ZenMode<CR>", {})
-
--- Hop --
-keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
-keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
-keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
-
--- Nvim-Tree --
-keymap ("n", "<leader><tab>", "<cmd>NvimTreeToggle<CR>", opts)
-keymap ("n", "<leader>`", "<cmd>NvimTreeFocus<CR>", opts)
+-- oil
+keymap("n", "-",":Oil--float<CR>",opts)
 
 -- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
-
-keymap("n", "<C-p>", "<cmd>Telescope projects<cr>", opts)
-
-keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+-- telescope
+keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
-keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
-keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
-keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
+keymap("n", "<leader>h", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
+keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap("n", "<leader>s", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
 
--- Harpoon --
-keymap ("n", "<leader>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
--- add a harpoon mark
-keymap ("n", "<leader>m", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts)
+-- projects
+keymap('n', '<C-p>',":lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
+
+-- ┬ ┬┌─┐┬─┐┌─┐┌─┐┌─┐┌┐┌
+-- ├─┤├─┤├┬┘├─┘│ ││ ││││
+-- ┴ ┴┴ ┴┴└─┴  └─┘└─┘┘└┘
+
+keymap ("n", "<leader>n", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+keymap ("n", "<leader>m", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts) -- Add mark
+keymap ("n", "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", opts) -- navigates to file 1
+keymap ("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", opts) -- navigates to file 2
+keymap ("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", opts) -- navigates to file 3
+keymap ("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", opts) -- navigates to file 4

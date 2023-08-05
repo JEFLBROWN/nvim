@@ -40,6 +40,7 @@ o.relativenumber = true
 vim.cmd[[colorscheme rose-pine]] -- set default colorscheme
 -- vim.cmd[[colorscheme mellow]] -- set colorscheme
 -- vim.cmd[[colorscheme melange]] -- set colorscheme
+-- vim.cmd[[colorscheme everforest]]
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]
@@ -51,7 +52,7 @@ vim.cmd[[highlight VertSplit cterm=none]]
 vim.cmd[[hi! link EndOfBuffer Ignore]]
 
 -- relative number toggle --
-vim.keymap.set({'n', 'v'}, '<Space>j', function () vim.cmd([[
+vim.keymap.set({'n', 'v'}, '<leader>0', function () vim.cmd([[
   set relativenumber
   redraw
   let cmd = ""
