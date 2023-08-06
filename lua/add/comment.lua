@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-require('Comment').setup ({
+require('comment').setup ({
 
     ---Add a space b/w comment and the line
     padding = true,

@@ -7,6 +7,7 @@ local actions = require "telescope.actions"
 
 -- this is where you call your extensions you already "required" telescope in the pcall so you dont have to do it twice when you load extensions
 telescope.load_extension('project')
+telescope.load_extension('undo')
 
 telescope.setup {
 	

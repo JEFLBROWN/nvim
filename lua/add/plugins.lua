@@ -27,7 +27,22 @@ require('lazy').setup({
 	'nvim-telescope/telescope.nvim', 
 	'ThePrimeagen/harpoon',
 	'nvim-telescope/telescope-project.nvim',
-
+	{ 'nvim-telescope/telescope.nvim',
+  	dependencies = {
+    	"nvim-lua/plenary.nvim",
+    	"debugloop/telescope-undo.nvim",
+  	},
+  	config = function()
+    	require("telescope").setup({
+      	extensions = {
+        	undo = {
+          -- telescope-undo.nvim config, see below
+        },
+      },
+    })
+    	require("telescope").load_extension("undo")
+  	end,
+	},
 -- ┌─┐┌─┐┬  ┌─┐┬─┐┌─┐
 -- │  │ ││  │ │├┬┘└─┐
 -- └─┘└─┘┴─┘└─┘┴└─└─┘
@@ -46,8 +61,7 @@ require('lazy').setup({
 	},
 
 	{ 'sainnhe/everforest', name = 'everforest', },
-	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
-	'lewis6991/gitsigns.nvim', -- add git signs in the statusbar 
+
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
@@ -117,9 +131,6 @@ require('lazy').setup({
   	},
 	},
 
-	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
-	'lukas-reineke/indent-blankline.nvim', -- add indentation guides for tabs, spaces, and returns
-
 -- oil	
 	{ 'stevearc/oil.nvim',
 		config = function()
@@ -130,21 +141,24 @@ require('lazy').setup({
 		})
 		end
 	},
-
-	{ 'echasnovski/mini.surround', version = false },	
-	'numToStr/Comment.nvim',  -- Commenting functionality 
-	"hinell/move.nvim", 			-- mimics VS code line movement
 	
 -- Features --
 	'norcalli/nvim-colorizer.lua', 
 	'karb94/neoscroll.nvim',
+	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
+	'lewis6991/gitsigns.nvim', -- add git signs in the statusbar 
+	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
+	'lukas-reineke/indent-blankline.nvim', -- add indentation guides for tabs, spaces, and returns
+	{ 'echasnovski/mini.surround', version = false },	
+	'numToStr/Comment.nvim',  -- Commenting functionality 
+	"hinell/move.nvim", 			-- mimics VS code line movement
+	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
 
 -- Completion & Snippets
 	'hrsh7th/nvim-cmp',
-	'rafamadriz/friendly-snippets',
 	'L3MON4D3/LuaSnip',  -- Snippet Engine
-	'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
-	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
+	-- 'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
+	'rafamadriz/friendly-snippets',
 
 -- ┬  ┌─┐┌─┐
 -- │  └─┐├─┘
