@@ -150,10 +150,10 @@ require('lazy').setup({
 	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
 	'lukas-reineke/indent-blankline.nvim', -- add indentation guides for tabs, spaces, and returns
 	{ 'echasnovski/mini.surround', version = false },	
-	'numToStr/Comment.nvim',  -- Commenting functionality 
+	{ 'echasnovski/mini.comment', version = '*' },
+	-- 'numToStr/Comment.nvim',  -- Commenting functionality 
 	"hinell/move.nvim", 			-- mimics VS code line movement
 	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
-
 -- Completion & Snippets
 	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',  -- Snippet Engine

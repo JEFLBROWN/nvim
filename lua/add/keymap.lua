@@ -45,7 +45,7 @@ keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split
 
 keymap("n", "<leader>w", ":bd<CR>", opts) -- Close Buffer
 keymap("n", "<tab>", ":bnext<CR>", opts) -- Next Buffer
-keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
+keymap("n", "<S-Tab>", ":bprevious<CR>", opts) -- Previous Buffer
 
 keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
@@ -97,6 +97,7 @@ keymap('n', '<C-p>',"<cmd>lua require'telescope'.extensions.project.project(requ
 
 -- Undo
 keymap("n", "<leader>u", "<cmd>Telescope undo<cr>", opts)
+
 -- ┬ ┬┌─┐┬─┐┌─┐┌─┐┌─┐┌┐┌
 -- ├─┤├─┤├┬┘├─┘│ ││ ││││
 -- ┴ ┴┴ ┴┴└─┴  └─┘└─┘┘└┘

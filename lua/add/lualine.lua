@@ -55,24 +55,20 @@ end
 require('lualine').setup {
   options = {
     theme = "rose-pine",
-    component_separators = { left = "", right = "" },
+    component_separators = { left = "░▒▓", right = "" },
     section_separators = { left = '▓▒░', right = '' },
 		diabled_filetypes = {},
   },
   sections = {
-    lualine_a = {
-			{ 'mode', separator = { left = '', right = '' }, right_padding = 2 },
-		},
-    lualine_b = { 'filename' },
+    lualine_a = {},
+    lualine_b = {},
 		lualine_c = {},
-		lualine_x = {'branch', 'diff' },
-    lualine_y = { 
-			{ 'filetype', separator = { left = '', right = '' }, right_padding = 2 },
-		},
-		lualine_z = {},
+		lualine_x = { 'filename' },
+    lualine_y = {'branch', 'diff'},
+		lualine_z = {'mode'},
   },
   inactive_sections = {
-    lualine_a = { 'filename' },
+    lualine_a = {},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
@@ -81,7 +77,14 @@ require('lualine').setup {
   },
   tabline = {},
   extensions = {},
+	winbar = {},
 }
 
-
+--{ left = '', right = ''},
+-- section_separators = { left = '', right = ''},
 -- 
+-- ░▒▓
+-- 
+-- 
+--	{ 'mode', separator = { left = '', right = '' }, right_padding = 2, },
+--{ 'filetype', separator = { left = '', right = '' } },
