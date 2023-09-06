@@ -62,12 +62,23 @@ require('lazy').setup({
 
 	{ 'sainnhe/everforest', name = 'everforest', },
 
+  { "RaphaeleL/my_vivid" },
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
 -- └  └─┘┴─┘┴ ┴└─┘
 
-	'folke/styler.nvim', -- switch colorschemes depeding on the filetype
+{ "folke/styler.nvim",
+  config = function()
+    require("styler").setup({
+      themes = {
+       -- markdown = { colorscheme = "my_vivid" },
+        --help = { colorscheme = "rose-pine-main", background = "dark" },
+      },
+    })
+  end,
+},
+
 
 	{ 'folke/zen-mode.nvim', 
 		config = function()
@@ -76,8 +87,8 @@ require('lazy').setup({
 					backdrop = 1,
 					width = .60, -- percentage (%) 
 						options = {
-     					-- signcolumn = "no", -- disable signcolumn
-      				-- number = false, -- disable number column
+     					signcolumn = "no", -- disable signcolumn
+      				number = false, -- disable number column
       				-- relativenumber = false, -- disable relative numbers
       				-- cursorline = false, -- disable cursorline
       				-- cursorcolumn = false, -- disable cursor column
@@ -141,7 +152,15 @@ require('lazy').setup({
 		})
 		end
 	},
-	
+
+-- Mini-files
+{ 'echasnovski/mini.files', version = false,
+config = function()	
+	require('mini.files').setup({
+	})
+end
+	},
+
 -- Features --
 	'norcalli/nvim-colorizer.lua', 
 	'karb94/neoscroll.nvim',

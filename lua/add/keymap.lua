@@ -79,7 +79,10 @@ keymap('v', '<A-Right>', ':MoveHBlock 1<CR>', opts)
 keymap("n", "<leader>z", ":ZenMode<CR>", {})
 
 -- oil
-keymap("n", "-",":Oil--float<CR>",opts)
+--keymap("n", "-",":Oil--float<CR>",opts)
+
+--Mini Files
+keymap ("n","-",":lua MiniFiles.open()<CR>",opts)
 
 -- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
