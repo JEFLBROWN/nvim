@@ -142,16 +142,16 @@ require('lazy').setup({
   	},
 	},
 
--- oil	
-	{ 'stevearc/oil.nvim',
-		config = function()
-			require('oil').setup({
-  		opts = {},
-  		-- Optional dependencies
-  		dependencies = { "nvim-tree/nvim-web-devicons" },
-		})
-		end
-	},
+-- -- oil	
+-- 	{ 'stevearc/oil.nvim',
+-- 		config = function()
+-- 			require('oil').setup({
+--   		opts = {},
+--   		-- Optional dependencies
+--   		dependencies = { "nvim-tree/nvim-web-devicons" },
+-- 		})
+-- 		end
+-- 	},
 
 -- Mini-files
 { 'echasnovski/mini.files', version = false,
@@ -160,6 +160,15 @@ config = function()
 	})
 end
 	},
+
+-- Mini-Starter
+{  'echasnovski/mini.starter', version = false,
+	config = function()
+	require('mini.starter').setup({
+	})
+		end	
+},
+ 
 
 -- Features --
 	'norcalli/nvim-colorizer.lua', 
