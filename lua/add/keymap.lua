@@ -19,7 +19,7 @@ vim.g.maplocalleader = " "
 keymap("i", "kj", "<ESC>", opts) -- Escape Chord
 keymap("n", ";", ":", opts) -- Colon is Semi-Colon
 keymap("v", ";", ":", opts)
--- keymap("n", "gf", ":edit <cfile><CR>", opts)		-- open non-existant files
+keymap("n", "gf", ":edit <cfile><CR>", opts)		-- open non-existant files
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -45,7 +45,7 @@ keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split
 
 keymap("n", "<leader>w", ":bd<CR>", opts) -- Close Buffer
 keymap("n", "<tab>", ":bnext<CR>", opts) -- Next Buffer
-keymap("n", "<S-Tab>", ":bprevious<CR>", opts) -- Previous Buffer
+keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
 
 keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
@@ -75,11 +75,8 @@ keymap('x', '<A-Up>'   , ':MoveBlock -1<CR>', opts)
 keymap('v', '<A-Left>' , ':MoveHBlock -1<CR>', opts)
 keymap('v', '<A-Right>', ':MoveHBlock 1<CR>', opts)
 
--- zen
+-- Zen
 keymap("n", "<leader>z", ":ZenMode<CR>", {})
-
--- oil
---keymap("n", "-",":Oil--float<CR>",opts)
 
 --Mini Files
 keymap ("n","-",":lua MiniFiles.open()<CR>",opts)
@@ -105,8 +102,8 @@ keymap("n", "<leader>u", "<cmd>Telescope undo<cr>", opts)
 -- ├─┤├─┤├┬┘├─┘│ ││ ││││
 -- ┴ ┴┴ ┴┴└─┴  └─┘└─┘┘└┘
 
-keymap ("n", "<leader>n", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
-keymap ("n", "<leader>m", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts) -- Add mark
+keymap ("n", "<leader>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+keymap ("n", "<C-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts) -- Add mark
 keymap ("n", "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", opts) -- navigates to file 1
 keymap ("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", opts) -- navigates to file 2
 keymap ("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", opts) -- navigates to file 3

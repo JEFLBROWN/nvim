@@ -99,7 +99,7 @@ require('lazy').setup({
 				plugins = {
 						gitsigns = { enabled = false }, -- disables git signs
 					kitty = {
-						enabled = false,
+						enabled = true,
 						font = "+4", -- font size increment
 						},
 					},
@@ -112,11 +112,11 @@ require('lazy').setup({
 			dimming = {
 				alpha = 0.25, -- amount of dimming
     	-- we try to get the foreground from the highlight groups or fallback color
-    		color = { "Normal", "#ffffff" },
+    		color = { "Normal", "#333333" },
 				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
   		},
-			context = 10, -- amount of lines we will try to show around the current line
+			context = 2, -- amount of lines we will try to show around the current line
   		treesitter = true, -- use treesitter when available for the filetype
   		expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
     		"function",
@@ -171,8 +171,15 @@ end
  
 
 -- Features --
+	{
+  'max397574/better-escape.nvim',
+  config = function()
+    require("better_escape").setup()
+  end,
+},
 	'norcalli/nvim-colorizer.lua', 
 	'karb94/neoscroll.nvim',
+	'yuttie/comfortable-motion.vim', --smooth scrolling
 	{ 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }},
 	'lewis6991/gitsigns.nvim', -- add git signs in the statusbar 
 	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
@@ -187,7 +194,6 @@ end
 	'L3MON4D3/LuaSnip',  -- Snippet Engine
 	-- 'saadparwaiz1/cmp_luasnip',  -- Snippet Completion
 	'rafamadriz/friendly-snippets',
-
 -- ┬  ┌─┐┌─┐
 -- │  └─┐├─┘
 -- ┴─┘└─┘┴  
