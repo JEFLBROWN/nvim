@@ -39,10 +39,10 @@ o.ch = 0 -- command height (the bar at the bottom that shows the last command) d
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
-vim.cmd[[colorscheme rose-pine]] -- set default colorscheme
+-- vim.cmd[[colorscheme rose-pine]] -- set default colorscheme
 -- vim.cmd[[colorscheme mellow]] -- set colorscheme
 -- vim.cmd[[colorscheme melange]] -- set colorscheme
--- vim.cmd[[colorscheme everforest]]
+vim.cmd[[colorscheme everforest]]
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]

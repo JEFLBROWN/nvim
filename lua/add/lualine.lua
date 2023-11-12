@@ -20,6 +20,7 @@ local diagnostics = {
 local diff = {
 	"diff",
 	colored = true,
+	icons_enabled = true,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width
 }
@@ -39,13 +40,13 @@ local filetype = {
 
 local branch = {
 	"branch",
-	icons_enabled = true,
-	icon = "",
+	icons_enabled = false,
+	-- icon = "",
 }
 
 local location = {
 	"location",
-	padding = 0,
+	-- padding = 0,
 }
 
 local spaces = function()
@@ -54,7 +55,7 @@ end
 
 require('lualine').setup {
   options = {
-    theme = "rose-pine",
+    theme = "everforest",
     component_separators = { left = "░▒▓", right = "" },
     section_separators = { left = '▓▒░', right = '' },
 		diabled_filetypes = {},
