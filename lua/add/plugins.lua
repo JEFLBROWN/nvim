@@ -24,12 +24,12 @@ require('lazy').setup({
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
 
-	'nvim-telescope/telescope.nvim', 
+	-- 'nvim-telescope/telescope.nvim', 
 	'ThePrimeagen/harpoon',
-	'nvim-telescope/telescope-project.nvim',
 	{ 'nvim-telescope/telescope.nvim',
   	dependencies = {
     	"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-project.nvim",
     	"debugloop/telescope-undo.nvim",
   	},
   	config = function()
@@ -177,6 +177,31 @@ end
   end,
 },
 	'norcalli/nvim-colorizer.lua', 
+
+--WINBAR
+
+	-- NOTE: When you upgrade to Nvim 0.10.0 you can use this without error, but for now it requires the latest version.
+  -- {
+  --   'Bekaboo/dropbar.nvim',
+  --   -- optional, but required for fuzzy finder support
+  --   dependencies = {
+  --     'nvim-telescope/telescope-fzf-native.nvim'
+  --   }
+  -- },
+
+	{
+  "utilyre/barbecue.nvim",
+  name = "barbecue",
+  version = "*",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    "nvim-tree/nvim-web-devicons", -- optional dependency
+  },
+  opts = {
+    -- configurations go here
+  },
+},
+
 {
   "karb94/neoscroll.nvim",
   config = function ()

@@ -1,9 +1,9 @@
-local status_ok, comfortable-motion = pcall(require, "comfortable-motion")
+local status_ok, comfymotion = pcall(require, "comfymotion")
 if not status_ok then
 	return
 end
 
-comfortable-motion.setup({
+comfymotion.setup({
 
 
 nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>

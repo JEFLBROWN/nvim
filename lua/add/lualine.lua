@@ -64,7 +64,7 @@ require('lualine').setup {
     lualine_a = {},
     lualine_b = {},
 		lualine_c = {},
-		lualine_x = { 'filename' },
+		lualine_x = {},
     lualine_y = {'branch', 'diff'},
 		lualine_z = {'mode'},
   },
