@@ -221,13 +221,6 @@ end
 
 -- Completion & Snippets
 	{'hrsh7th/nvim-cmp'},
-{
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp"
-},
 	'rafamadriz/friendly-snippets',
 	-- 'saadparwaiz2/cmp_luasnip',  -- Snippet Completion
 
