@@ -8,6 +8,7 @@ require "add.lsp"
 -- Plugins Start -- 
 require "add.barbeque"
 require "add.cmp"
+require "add.colorizer"
 require "add.comment"
 require "add.flash"
 require "add.gitsigns"
