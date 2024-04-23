@@ -79,13 +79,13 @@ keymap('v', '<A-Right>', ':MoveHBlock 2<CR>', opts)
 keymap("n", "<leader>z", ":ZenMode<CR>", {})
 
 --Mini Files
-keymap ("n","-",":lua MiniFiles.open()<CR>",opts)
+-- keymap ("n","-",":lua MiniFiles.open()<CR>",opts)
 -- I want to use - to close  fminifiles as well
 
 -- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
--- telescope
+
 keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader><tab>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview

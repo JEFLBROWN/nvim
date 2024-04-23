@@ -15,7 +15,10 @@ vim.opt.rtp:prepend(lazypath)
 local fn = vim.fn
 require('lazy').setup({
 
-	-- Important Plugins
+-- ┬┌┬┐┌─┐┌─┐┬─┐┌┬┐┌─┐┌┐┌┌┬┐
+-- ││││├─┘│ │├┬┘ │ ├─┤│││ │ 
+-- ┴┴ ┴┴  └─┘┴└─ ┴ ┴ ┴┘└┘ ┴ 
+
 	'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
 	'kyazdani43/nvim-web-devicons', 
 	'nvim-treesitter/nvim-treesitter',
@@ -43,9 +46,10 @@ require('lazy').setup({
     	require("telescope").load_extension("undo")
   	end,
 	},
--- ┌─┐┌─┐┬  ┌─┐┬─┐┌─┐
--- │  │ ││  │ │├┬┘└─┐
--- └─┘└─┘┴─┘└─┘┴└─└─┘
+
+-- ┌─┐┌─┐┬  ┌─┐┬─┐
+-- │  │ ││  │ │├┬┘
+-- └─┘└─┘┴─┘└─┘┴└─
 
 	{
     'rose-pine/neovim',
@@ -62,7 +66,7 @@ require('lazy').setup({
 
 	{ 'sainnhe/everforest', name = 'everforest', },
 
-  { "RaphaeleL/my_vivid" },
+	{ 'norcalli/nvim-colorizer.lua' }, -- Color hex,hsv, and hsl
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
@@ -143,16 +147,16 @@ require('lazy').setup({
   	},
 	},
 
--- -- oil
--- 	{ 'stevearc/oil.nvim',
--- 		config = function()
--- 			require('oil').setup({
---   		opts = {},
---   		-- Optional dependencies
---   		dependencies = { "nvim-tree/nvim-web-devicons" },
--- 		})
--- 		end
--- 	},
+-- oil
+	{ 'stevearc/oil.nvim',
+		config = function()
+			require('oil').setup({
+  		opts = {},
+  		-- Optional dependencies
+  		dependencies = { "nvim-tree/nvim-web-devicons" },
+		})
+		end
+	},
 
 	{
   "utilyre/barbecue.nvim",
@@ -173,12 +177,13 @@ require('lazy').setup({
 
 	{ 'echasnovski/mini.surround', version = false },	
 	{ 'echasnovski/mini.comment', version = '*' },
-	{ 'echasnovski/mini.files', version = false,
-config = function()	
-	require('mini.files').setup({
-	})
-end
-	},
+
+	-- { 'echasnovski/mini.files', version = false,
+	-- 	config = function()	
+	-- require('mini.files').setup({
+	-- })
+	-- end
+	-- },
 
 {  'echasnovski/mini.starter', version = false,
 	config = function()
@@ -194,7 +199,6 @@ end
   end,
 },
 
-	'norcalli/nvim-colorizer.lua', 
 
 --WINBAR
 

@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 -- Attaches to every FileType mode
-require 'colorizer'.setup()
+-- require 'colorizer'.setup()
 
 -- Attach to certain Filetypes, add special configuration for `html`
 -- Use `background` for everything else.

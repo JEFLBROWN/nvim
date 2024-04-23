@@ -1,3 +1,8 @@
+local status_ok, oil = pcall(require, "oil")
+if not status_ok then
+  return
+end
+
 require("oil").setup({
 	-- Id is automatically added at the beginning, and name at the end
   -- See :help oil-columns
