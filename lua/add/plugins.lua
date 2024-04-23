@@ -102,7 +102,7 @@ require('lazy').setup({
 						enabled = true,
 						font = "+5", -- font size increment
 						},
-					},
+			},
 			})
 		end,
 		},
@@ -129,6 +129,7 @@ require('lazy').setup({
 	},
 	
 	{ "folke/flash.nvim",
+		--search labels, enhanced character motions, and Treesitter integration.
 		event = "VeryLazy",
   	---@type Flash.Config
   	opts = {},
@@ -142,7 +143,7 @@ require('lazy').setup({
   	},
 	},
 
--- -- oil	
+-- -- oil
 -- 	{ 'stevearc/oil.nvim',
 -- 		config = function()
 -- 			require('oil').setup({
@@ -152,42 +153,6 @@ require('lazy').setup({
 -- 		})
 -- 		end
 -- 	},
-
--- Mini-files
-{ 'echasnovski/mini.files', version = false,
-config = function()	
-	require('mini.files').setup({
-	})
-end
-	},
-
--- Mini-Starter
-{  'echasnovski/mini.starter', version = false,
-	config = function()
-	require('mini.starter').setup({
-	})
-		end	
-},
- 
-
--- Features --
-	{ 'max397574/better-escape.nvim',
-  config = function()
-    require("better_escape").setup()
-  end,
-},
-	'norcalli/nvim-colorizer.lua', 
-
---WINBAR
-
-	-- NOTE: When you upgrade to Nvim 0.10.0 you can use this without error, but for now it requires the latest version.
-  -- {
-  --   'Bekaboo/dropbar.nvim',
-  --   -- optional, but required for fuzzy finder support
-  --   dependencies = {
-  --     'nvim-telescope/telescope-fzf-native.nvim'
-  --   }
-  -- },
 
 	{
   "utilyre/barbecue.nvim",
@@ -202,26 +167,62 @@ end
   },
 },
 
+-- ┌┬┐┬┌┐┌┬
+-- ││││││││
+-- ┴ ┴┴┘└┘┴
+
+	{ 'echasnovski/mini.surround', version = false },	
+	{ 'echasnovski/mini.comment', version = '*' },
+	{ 'echasnovski/mini.files', version = false,
+config = function()	
+	require('mini.files').setup({
+	})
+end
+	},
+
+{  'echasnovski/mini.starter', version = false,
+	config = function()
+	require('mini.starter').setup({
+	})
+		end	
+},
+
+-- Features --
+	{ 'max397574/better-escape.nvim',
+  config = function()
+    require("better_escape").setup()
+  end,
+},
+
+	'norcalli/nvim-colorizer.lua', 
+
+--WINBAR
+
+-- --	NOTE: When you upgrade to Nvim 0.10.0 you can use this without error, but for now it requires the latest version.
+--   {
+--     'Bekaboo/dropbar.nvim',
+--     -- optional, but required for fuzzy finder support
+--     dependencies = {
+--       'nvim-telescope/telescope-fzf-native.nvim'
+--     }
+--   },
+
 {
   "karb94/neoscroll.nvim",
   config = function ()
     require('neoscroll').setup {}
   end
 },
-	'yuttie/comfortable-motion.vim', --smooth scrolling
+	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
 	{ 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }},
-	'lewis6991/gitsigns.nvim', -- add git signs in the statusbar 
-	'akinsho/toggleterm.nvim', -- toggle a floating terminal 
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, -- indentation, space, and tab guide line
-	{ 'echasnovski/mini.surround', version = false },	
-	{ 'echasnovski/mini.comment', version = '*' },
-	-- 'numToStr/Comment.nvim',  -- Commenting functionality 
-	"hinell/move.nvim", 			-- mimics VS code line movement
-	'windwp/nvim-autopairs',  -- Autopairs, integrates with both cmp and treesitter
+	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {} }, -- indentation, space, and tab guide line
+	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
+	{ 'hinell/move.nvim'}, 			-- mimics VS code line movement
+	{	'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
 
 -- Completion & Snippets
-	{'hrsh7th/nvim-cmp'},
-	'rafamadriz/friendly-snippets',
+	{ 'hrsh7th/nvim-cmp'},
+	{ 'rafamadriz/friendly-snippets'},
 	-- 'saadparwaiz2/cmp_luasnip',  -- Snippet Completion
 
 -- ┬  ┌─┐┌─┐
@@ -245,3 +246,5 @@ end
 
 }) -- END LAZY
 
+	-- 'numToStr/Comment.nvim',  -- Commenting functionality 
+	--'yuttie/comfortable-motion.vim', --smooth scrolling

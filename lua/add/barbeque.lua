@@ -118,7 +118,8 @@ barbecue.setup ({
     ---Entry separator.
     ---
     ---@type string
-    separator = "",
+    separator = ">",
+    -- separator = "",
   },
 
   ---@alias barbecue.Config.kinds
