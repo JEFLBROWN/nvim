@@ -27,7 +27,7 @@ require('lazy').setup({
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
 
-	-- 'nvim-telescope/telescope.nvim', 
+	'nvim-telescope/telescope.nvim',
 	'ThePrimeagen/harpoon',
 	{ 'nvim-telescope/telescope.nvim',
   	dependencies = {
@@ -63,26 +63,26 @@ require('lazy').setup({
         vim.cmd('colorscheme rose-pine')
     end
 	},
-
+	{ 'yorickpeterse/vim-paper'},
 	{ 'sainnhe/everforest', name = 'everforest', },
-
+	{ 'NLKNguyen/papercolor-theme' },
+	{ 'aktersnurra/no-clown-fiesta.nvim' },	
 	{ 'norcalli/nvim-colorizer.lua' }, -- Color hex,hsv, and hsl
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
 -- └  └─┘┴─┘┴ ┴└─┘
 
-{ "folke/styler.nvim",
-  config = function()
-    require("styler").setup({
-      themes = {
-       -- markdown = { colorscheme = "my_vivid" },
-        --help = { colorscheme = "rose-pine-main", background = "dark" },
-      },
-    })
-  end,
-},
-
+	-- { "folke/styler.nvim",
+	--  	config = function()
+	--    	require("styler").setup({
+	--      	themes = {
+	--       		markdown = { colorscheme = '' },
+	--        	help = { colorscheme = '' },
+	--      },
+	--    })
+	--  end,
+	-- },
 
 	{ 'folke/zen-mode.nvim', 
 		config = function()
@@ -135,17 +135,21 @@ require('lazy').setup({
 	{ "folke/flash.nvim",
 		--search labels, enhanced character motions, and Treesitter integration.
 		event = "VeryLazy",
-  	---@type Flash.Config
-  	opts = {},
-  	-- stylua: ignore
-  	keys = {
-   		{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    	{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  	},
+	 	---@type Flash.Config
+	 	opts = {},
+	 	-- stylua: ignore
+	 	keys = {
+	  		{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+	   	{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+	   	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+	   	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+	   	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+	 	},
 	},
+
+-- ┌┐┌┌─┐┬  ┬┬┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
+-- │││├─┤└┐┌┘││ ┬├─┤ │ ││ ││││
+-- ┘└┘┴ ┴ └┘ ┴└─┘┴ ┴ ┴ ┴└─┘┘└┘
 
 -- oil
 	{ 'stevearc/oil.nvim',
@@ -158,23 +162,9 @@ require('lazy').setup({
 		end
 	},
 
-	{
-  "utilyre/barbecue.nvim",
-  name = "barbecue",
-  version = "*",
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
-  },
-  opts = {
-    -- configurations go here
-  },
-},
-
 -- ┌┬┐┬┌┐┌┬
 -- ││││││││
 -- ┴ ┴┴┘└┘┴
-
 	{ 'echasnovski/mini.surround', version = false },	
 	{ 'echasnovski/mini.comment', version = '*' },
 
@@ -192,24 +182,15 @@ require('lazy').setup({
 		end	
 },
 
--- Features --
+-- ┌┬┐┌─┐┌─┐┬ ┬┌─┐┌┐┌┬┌─┐┌─┐
+-- │││├┤ │  ├─┤├─┤│││││  └─┐
+-- ┴ ┴└─┘└─┘┴ ┴┴ ┴┘└┘┴└─┘└─┘
+
 	{ 'max397574/better-escape.nvim',
   config = function()
     require("better_escape").setup()
   end,
 },
-
-
---WINBAR
-
--- --	NOTE: When you upgrade to Nvim 0.10.0 you can use this without error, but for now it requires the latest version.
---   {
---     'Bekaboo/dropbar.nvim',
---     -- optional, but required for fuzzy finder support
---     dependencies = {
---       'nvim-telescope/telescope-fzf-native.nvim'
---     }
---   },
 
 {
   "karb94/neoscroll.nvim",

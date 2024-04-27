@@ -51,6 +51,11 @@ keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
 keymap("n", "<C-a>", "ggVG", opts)	    	-- Select All
 
+
+-- Marks
+-- create marks with lowercase tags
+-- clear marks
+-- vim.keymap.set("n", "<c-1>", "mA") vim.keymap.set("n", "<s-1>", "A") vim.keymap.set("n", "<c-2>", "mB") vim.keymap.set("n", "<s-2>", "B") vim.keymap.set("n", "<c-3>", "mC") vim.keymap.set("n", "<s-3>", "C") vim.keymap.set("n", "<c-4>", "mD") vim.keymap.set("n", "<s-4>", "D") 
 -- ┌┬┐┌─┐┬  ┬┌─┐┌┬┐┌─┐┌┐┌┌┬┐
 -- ││││ │└┐┌┘├┤ │││├┤ │││ │ 
 -- ┴ ┴└─┘ └┘ └─┘┴ ┴└─┘┘└┘ ┴ 
@@ -92,6 +97,7 @@ keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>
 keymap("n", "<leader>/", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
 keymap("n", "<leader>s", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap("n", "<leader>m", "<cmd>lua require('telescope.builtin').marks(require('telescope.themes').get_dropdown())<cr>", opts)
 
 -- projects
 keymap('n', '<C-p>',"<cmd>lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)

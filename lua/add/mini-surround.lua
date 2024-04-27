@@ -1,4 +1,4 @@
-local status_ok, surround = pcall(require, "mini.surround")
+local status_ok, surround = pcall(require, 'mini.surround')
 if not status_ok then
 	return
 end
@@ -16,7 +16,7 @@ require('mini.surround').setup {
   mappings = {
     add = '<leader>sa', -- Add surrounding in Normal and Visual modes
     delete = '<leader>sd', -- Delete surrounding
-		replace = '<leader>ss', -- Replace surrounding
+		replace = '<leader>sr', -- Replace surrounding
 		update_n_lines = '<leader>sn', -- Update `n_lines`
     find = '', -- Find surrounding (to the right)
     find_left = '', -- Find surrounding (to the left)
