@@ -30,10 +30,10 @@ keymap("v", ">", ">gv", opts)
 -- └─┘┴  ┴─┘┴ ┴ └─┘
 
 keymap("n", "<leader>v", "<C-w>v", opts)	-- Create a Vertical Split
-keymap("n", "<A-Left>", ":vertical resize +7<CR>", opts) -- Resize Vertical Split, make it wider
-keymap("n", "<A-Right>" , ":vertical resize 1<CR>", opts) -- Resize Vertical Split, make it smaller
--- keymap("n", "<A-Up>" , ":resize +7<CR>", opts) -- Resize Horizontal Split, make it taller
--- keymap("n", "<A-Down>" , ":resize 1<CR>", opts) -- Resize Horizontal Split, make it shorter
+keymap("n", "<A-Left>", ":vertical resize +8<CR>", opts) -- Resize Vertical Split, make it wider
+keymap("n", "<A-Right>" , ":vertical resize 2<CR>", opts) -- Resize Vertical Split, make it smaller
+-- keymap("n", "<A-Up>" , ":resize +8<CR>", opts) -- Resize Horizontal Split, make it taller
+-- keymap("n", "<A-Down>" , ":resize 2<CR>", opts) -- Resize Horizontal Split, make it shorter
 keymap("n", "<leader>x", "<C-W>q", opts) -- Close Split window
 keymap("n", "<C-j>", "<C-W>r <C-W>h", opts) -- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>", "<C-W>l", opts) -- Jump to the right Split
@@ -43,7 +43,7 @@ keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split
 -- ├┴┐│ │├┤ ├┤ ├┤ ├┬┘└─┐
 -- └─┘└─┘└  └  └─┘┴└─└─┘
 
-keymap("n", "<leader>w", ":bd<CR>", opts) -- Close Buffer
+keymap("n", "<C-w>", ":bd<CR>", opts) -- Close Buffer
 keymap("n", "<tab>", ":bnext<CR>", opts) -- Next Buffer
 keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
 
@@ -51,11 +51,6 @@ keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
 keymap("n", "<C-a>", "ggVG", opts)	    	-- Select All
 
-
--- Marks
--- create marks with lowercase tags
--- clear marks
--- vim.keymap.set("n", "<c-1>", "mA") vim.keymap.set("n", "<s-1>", "A") vim.keymap.set("n", "<c-2>", "mB") vim.keymap.set("n", "<s-2>", "B") vim.keymap.set("n", "<c-3>", "mC") vim.keymap.set("n", "<s-3>", "C") vim.keymap.set("n", "<c-4>", "mD") vim.keymap.set("n", "<s-4>", "D") 
 -- ┌┬┐┌─┐┬  ┬┌─┐┌┬┐┌─┐┌┐┌┌┬┐
 -- ││││ │└┐┌┘├┤ │││├┤ │││ │ 
 -- ┴ ┴└─┘ └┘ └─┘┴ ┴└─┘┘└┘ ┴ 
@@ -69,30 +64,33 @@ keymap("v", "<C-n>", "1", opts)
 keymap("x", "<C-n>", "1", opts)
 
 -- Normal-mode commands
-keymap('n', '<A-Up>'    ,':MoveLine 0<CR>', opts)
+keymap('n', '<A-Up>'    ,':MoveLine 1<CR>', opts)
 keymap('n', '<A-Right>' ,':MoveHChar 2<CR>', opts)
 keymap('n', '<A-Down>'  ,':MoveLine 2<CR>', opts)
-keymap('n', '<A-Left>'  ,':MoveHChar 0<CR>', opts)
+keymap('n', '<A-Left>'  ,':MoveHChar 1<CR>', opts)
 
 -- Visual-mode commands
-keymap('x', '<A-Down>' , ':MoveBlock 2<CR>', opts)
-keymap('x', '<A-Up>'   , ':MoveBlock 0<CR>', opts)
-keymap('v', '<A-Left>' , ':MoveHBlock 0<CR>', opts)
-keymap('v', '<A-Right>', ':MoveHBlock 2<CR>', opts)
+keymap('x', '<A-Down>' , ':MoveBlock 3<CR>', opts)
+keymap('x', '<A-Up>'   , ':MoveBlock 1<CR>', opts)
+keymap('v', '<A-Left>' , ':MoveHBlock 1<CR>', opts)
+keymap('v', '<A-Right>', ':MoveHBlock 3<CR>', opts)
 
 -- Zen
 keymap("n", "<leader>z", ":ZenMode<CR>", {})
 
---Mini Files
--- keymap ("n","-",":lua MiniFiles.open()<CR>",opts)
+-- Mini Files
+keymap("n","-",":lua MiniFiles.open()<CR>",opts)
 -- I want to use - to close  fminifiles as well
 
+-- nvim tree
+-- keymap("n", "<leader>`", ":NvimTree<CR>", opts)
+-- keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
 
 keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader><tab>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
 keymap("n", "<leader>/", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
@@ -111,7 +109,7 @@ keymap("n", "<leader>u", "<cmd>Telescope undo<cr>", opts)
 
 keymap ("n", "<leader>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 keymap ("n", "<C-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts) -- Add mark
-keymap ("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", opts) -- navigates to file 1
-keymap ("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", opts) -- navigates to file 2
-keymap ("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", opts) -- navigates to file 3
-keymap ("n", "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", opts) -- navigates to file 4
+keymap ("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", opts) -- navigates to file 1
+keymap ("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", opts) -- navigates to file 2
+keymap ("n", "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", opts) -- navigates to file 3
+keymap ("n", "<leader>6", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", opts) -- navigates to file 4

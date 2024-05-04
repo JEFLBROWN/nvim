@@ -147,35 +147,15 @@ require('lazy').setup({
 	 	},
 	},
 
--- ┌┐┌┌─┐┬  ┬┬┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
--- │││├─┤└┐┌┘││ ┬├─┤ │ ││ ││││
--- ┘└┘┴ ┴ └┘ ┴└─┘┴ ┴ ┴ ┴└─┘┘└┘
-
--- oil
-	{ 'stevearc/oil.nvim',
-		config = function()
-			require('oil').setup({
-  		opts = {},
-  		-- Optional dependencies
-  		dependencies = { "nvim-tree/nvim-web-devicons" },
-		})
-		end
-	},
-
 -- ┌┬┐┬┌┐┌┬
 -- ││││││││
 -- ┴ ┴┴┘└┘┴
 	{ 'echasnovski/mini.surround', version = false },	
+	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
 
-	-- { 'echasnovski/mini.files', version = false,
-	-- 	config = function()	
-	-- require('mini.files').setup({
-	-- })
-	-- end
-	-- },
-
-{  'echasnovski/mini.starter', version = false,
+	{ 'echasnovski/mini.files', version = false },
+	{  'echasnovski/mini.starter', version = false,
 	config = function()
 	require('mini.starter').setup({
 	})
@@ -230,6 +210,3 @@ require('lazy').setup({
 		},
 
 }) -- END LAZY
-
-	-- 'numToStr/Comment.nvim',  -- Commenting functionality 
-	--'yuttie/comfortable-motion.vim', --smooth scrolling

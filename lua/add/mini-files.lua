@@ -1,9 +1,9 @@
-local status_ok, files = pcall(require, "files")
+local status_ok, files = pcall(require, "mini.files")
 if not status_ok then
-	return
+  return
 end
 
-require('files').setup {
+require('mini.files').setup {
   -- Customization of shown content
   content = {
     -- Predicate for which file system entries to show
@@ -17,7 +17,7 @@ require('files').setup {
   -- Module mappings created only inside explorer.
   -- Use `''` (empty string) to not create one.
   mappings = {
-    close       = '-',
+    close       = 'q',
     go_in       = 'l',
     go_in_plus  = 'L',
     go_out      = 'h',
