@@ -14,7 +14,6 @@ local servers = {
   "emmet_ls",
   "html",
   "jsonls",
-  "zk@v0.10.1",
 }
 
 local settings = {

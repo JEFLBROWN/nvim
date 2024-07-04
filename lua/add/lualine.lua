@@ -55,7 +55,7 @@ end
 
 require('lualine').setup {
   options = {
-    theme = "rose-pine",
+    -- theme = "",
     component_separators = { left = "░▒▓", right = "" },
     section_separators = { left = '▓▒░', right = '' },
 		diabled_filetypes = {},
@@ -64,8 +64,8 @@ require('lualine').setup {
     lualine_a = {},
     lualine_b = {},
 		lualine_c = {},
-		lualine_x = {'filename'},
-    lualine_y = {'branch', 'diff'},
+		lualine_x = {},
+    lualine_y = {'filename', 'branch', 'diff'},
 		lualine_z = {'mode'},
   },
   inactive_sections = {

@@ -20,7 +20,7 @@ require('lazy').setup({
 -- ┴┴ ┴┴  └─┘┴└─ ┴ ┴ ┴┘└┘ ┴ 
 
 	'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
-	'kyazdani43/nvim-web-devicons', 
+	-- 'kyazdani43/nvim-web-devicons', 
 	'nvim-treesitter/nvim-treesitter',
 
 -- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
@@ -153,7 +153,7 @@ require('lazy').setup({
 	{ 'echasnovski/mini.surround', version = false },	
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
-
+	{ 'echasnovski/mini.icons', version = false },
 	{ 'echasnovski/mini.files', version = false },
 	{  'echasnovski/mini.starter', version = false,
 	config = function()
