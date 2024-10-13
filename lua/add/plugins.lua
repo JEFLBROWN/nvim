@@ -66,7 +66,6 @@ require('lazy').setup({
 	{ 'yorickpeterse/vim-paper'},
 	{ 'sainnhe/everforest', name = 'everforest', },
 	{ 'NLKNguyen/papercolor-theme' },
-	{ 'aktersnurra/no-clown-fiesta.nvim' },	
 	{ 'norcalli/nvim-colorizer.lua' }, -- Color hex,hsv, and hsl
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
@@ -132,20 +131,20 @@ require('lazy').setup({
 		},
 	},
 	
-	{ "folke/flash.nvim",
-		--search labels, enhanced character motions, and Treesitter integration.
-		event = "VeryLazy",
-	 	---@type Flash.Config
-	 	opts = {},
-	 	-- stylua: ignore
-	 	keys = {
-	  		{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-	   	{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-	   	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-	   	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-	   	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-	 	},
-	},
+	-- { "folke/flash.nvim",
+	-- 	--search labels, enhanced character motions, and Treesitter integration.
+	-- 	event = "VeryLazy",
+	--  	---@type Flash.Config
+	--  	opts = {},
+	--  	-- stylua: ignore
+	--  	keys = {
+	--  		{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+	--    	{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+	--    	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+	--    	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+	--    	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+	--  	},
+	-- },
 
 -- ┌┬┐┬┌┐┌┬
 -- ││││││││
@@ -179,7 +178,7 @@ require('lazy').setup({
   end
 },
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
-	{ 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }},
+	-- { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }},
 	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {} }, -- indentation, space, and tab guide line
 	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
 	{ 'hinell/move.nvim'}, 			-- mimics VS code line movement
@@ -187,7 +186,7 @@ require('lazy').setup({
 
 -- Completion & Snippets
 	{ 'hrsh7th/nvim-cmp'},
-	{ 'rafamadriz/friendly-snippets'},
+	-- { 'rafamadriz/friendly-snippets'},
 	-- 'saadparwaiz2/cmp_luasnip',  -- Snippet Completion
 
 -- ┬  ┌─┐┌─┐
@@ -196,17 +195,16 @@ require('lazy').setup({
 
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim', 
-	'neovim/nvim-lspconfig',
-		
-	{
-		'MaximilianLloyd/tw-values.nvim',
-    keys = {
-        { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
-    	},
-    opts = {
-        border = "rounded", -- Valid window border style,
-        show_unknown_classes = true -- Shows the unknown classes popup
-    	}
-		},
+	-- 'neovim/nvim-lspconfig',	
+	-- {
+	-- 	'MaximilianLloyd/tw-values.nvim',
+	--    keys = {
+	--        { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
+	--    	},
+	--    opts = {
+	--        border = "rounded", -- Valid window border style,
+	--        show_unknown_classes = true -- Shows the unknown classes popup
+	--    	}
+	-- 	},
 
 }) -- END LAZY

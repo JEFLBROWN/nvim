@@ -1,4 +1,4 @@
--- ┌─┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
+
 -- │ │├─┘ │ ││ ││││└─┐
 -- └─┘┴   ┴ ┴└─┘┘└┘└─┘
 
@@ -32,14 +32,13 @@ o.number = true							  -- show	line numbers
 o.signcolumn = "yes"				  -- always show sign column so it doesnt shift
 o.fillchars:append { eob = " " }    -- remove tilde ~
 o.relativenumber = true
-o.ls = 0 -- last status (in statusline) dont show
-o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.	
+-- o.ls = 0 -- last status (in statusline) dont show
+o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
--- vim.cmd[[colorscheme rose-pine]] -- set default colorscheme
 -- vim.cmd[[colorscheme everforest]]
 
 -- Italic Comments
