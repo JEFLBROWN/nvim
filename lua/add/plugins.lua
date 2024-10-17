@@ -195,16 +195,16 @@ require('lazy').setup({
 
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim', 
-	-- 'neovim/nvim-lspconfig',	
-	-- {
-	-- 	'MaximilianLloyd/tw-values.nvim',
-	--    keys = {
-	--        { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
-	--    	},
-	--    opts = {
-	--        border = "rounded", -- Valid window border style,
-	--        show_unknown_classes = true -- Shows the unknown classes popup
-	--    	}
-	-- 	},
+	'neovim/nvim-lspconfig',	
+	{
+		'MaximilianLloyd/tw-values.nvim',
+	   keys = {
+	       { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
+	   	},
+	   opts = {
+	       border = "rounded", -- Valid window border style,
+	       show_unknown_classes = true -- Shows the unknown classes popup
+	   	}
+	 	},
 
 }) -- END LAZY

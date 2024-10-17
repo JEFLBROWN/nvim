@@ -12,10 +12,7 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- ┌─┐┌┐┌┬ ┬┌─┐┌┐┌┌─┐┌─┐┌┬┐┌─┐┌┐┌┌┬┐┌─┐
--- ├┤ │││├─┤├─┤││││  ├┤ │││├┤ │││ │ └─┐
--- └─┘┘└┘┴ ┴┴ ┴┘└┘└─┘└─┘┴ ┴└─┘┘└┘ ┴ └─┘
-
+-- QOL enhancements
 keymap("i", "kj", "<ESC>", opts) -- Escape Chord
 keymap("n", ";", ":", opts) -- Colon is Semi-Colon
 keymap("v", ";", ":", opts)
@@ -25,24 +22,21 @@ keymap("n", "gf", ":edit <cfile><CR>", opts)		-- open non-existant files
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- ┌─┐┌─┐┬  ┬┌┬┐┌─┐
--- └─┐├─┘│  │ │ └─┐
--- └─┘┴  ┴─┘┴ ┴ └─┘
-
+-- Split Windows
 keymap("n", "<leader>v", "<C-w>v", opts)	-- Create a Vertical Split
-keymap("n", "<A-Left>", ":vertical resize +8<CR>", opts) -- Resize Vertical Split, make it wider
-keymap("n", "<A-Right>" , ":vertical resize 2<CR>", opts) -- Resize Vertical Split, make it smaller
+keymap("n", "<M-Left>",":vertical resize +6<CR>", opts) -- Resize Vertical Split, make it wider
+keymap("n", "<M-Right>" , ":vertical resize -4<CR>", opts) -- Resize Vertical Split, make it smaller
 -- keymap("n", "<A-Up>" , ":resize +8<CR>", opts) -- Resize Horizontal Split, make it taller
 -- keymap("n", "<A-Down>" , ":resize 2<CR>", opts) -- Resize Horizontal Split, make it shorter
-keymap("n", "<leader>x", "<C-W>q", opts) -- Close Split window
+keymap("n", "<leader>V", "<C-W>q", opts) -- Close Split window
 keymap("n", "<C-j>", "<C-W>r <C-W>h", opts) -- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>", "<C-W>l", opts) -- Jump to the right Split
 keymap("n", "<C-h>", "<C-W>h", opts) -- Jump to the Left Split	
+-- Horizontal Split
 
--- ┌┐ ┬ ┬┌─┐┌─┐┌─┐┬─┐┌─┐
--- ├┴┐│ │├┤ ├┤ ├┤ ├┬┘└─┐
--- └─┘└─┘└  └  └─┘┴└─└─┘
 
+
+-- buffers
 keymap("n", "<C-w>", ":bd<CR>", opts) -- Close Buffer
 keymap("n", "<tab>", ":bnext<CR>", opts) -- Next Buffer
 keymap("n", "<BS>", ":bprevious<CR>", opts) -- Previous Buffer
@@ -51,10 +45,6 @@ keymap("n", "<C-s>", ":w<CR>", opts) -- Save Normal Mode
 keymap("n", "<C-q>", ":wq!<CR>", opts) -- Save & Quit
 keymap("n", "<C-a>", "ggVG", opts)	    	-- Select All
 
--- ┌┬┐┌─┐┬  ┬┌─┐┌┬┐┌─┐┌┐┌┌┬┐
--- ││││ │└┐┌┘├┤ │││├┤ │││ │ 
--- ┴ ┴└─┘ └┘ └─┘┴ ┴└─┘┘└┘ ┴ 
-
 -- Cursor Movement
 keymap("n", "<C-m>", "$", opts) -- move to the end of a line
 keymap("v", "<C-m>", "$", opts)
@@ -62,18 +52,6 @@ keymap("x", "<C-m>", "$", opts)
 keymap("n", "<C-n>", "1", opts) -- move to the beginning of the line
 keymap("v", "<C-n>", "1", opts)
 keymap("x", "<C-n>", "1", opts)
-
--- Normal-mode commands
-keymap('n', '<A-Up>'    ,':MoveLine 1<CR>', opts)
-keymap('n', '<A-Right>' ,':MoveHChar 2<CR>', opts)
-keymap('n', '<A-Down>'  ,':MoveLine 2<CR>', opts)
-keymap('n', '<A-Left>'  ,':MoveHChar 1<CR>', opts)
-
--- Visual-mode commands
-keymap('x', '<A-Down>' , ':MoveBlock 3<CR>', opts)
-keymap('x', '<A-Up>'   , ':MoveBlock 1<CR>', opts)
-keymap('v', '<A-Left>' , ':MoveHBlock 1<CR>', opts)
-keymap('v', '<A-Right>', ':MoveHBlock 3<CR>', opts)
 
 -- Zen
 keymap("n", "<leader>z", ":ZenMode<CR>", {})
