@@ -13,7 +13,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- QOL enhancements
-keymap("i", "kj", "<ESC>", opts) -- Escape Chord
+keymap("i", "kj", "<ESC><Right>", opts) -- Escape Chord
 keymap("n", ";", ":", opts) -- Colon is Semi-Colon
 keymap("v", ";", ":", opts)
 keymap("n", "gf", ":edit <cfile><CR>", opts)		-- open non-existant files

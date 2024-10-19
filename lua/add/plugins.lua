@@ -47,10 +47,8 @@ require('lazy').setup({
   	end,
 	},
 
--- ┌─┐┌─┐┬  ┌─┐┬─┐
--- │  │ ││  │ │├┬┘
--- └─┘└─┘┴─┘└─┘┴└─
-
+-- Colorscheme
+	
 	{
     'rose-pine/neovim',
     name = 'rose-pine',
@@ -67,6 +65,15 @@ require('lazy').setup({
 	{ 'sainnhe/everforest', name = 'everforest', },
 	{ 'NLKNguyen/papercolor-theme' },
 	{ 'norcalli/nvim-colorizer.lua' }, -- Color hex,hsv, and hsl
+	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
+	{
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require('nordic').load()
+    end
+	},
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
@@ -87,7 +94,7 @@ require('lazy').setup({
 		config = function()
 			require("zen-mode").setup({
 				window = {
-					backdrop = 2,
+					backdrop = 1,
 					width = .61, -- percentage (%) 
 						options = {
      					signcolumn = "no", -- disable signcolumn
