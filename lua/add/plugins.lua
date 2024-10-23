@@ -1,4 +1,4 @@
--- install lazy.nvim
+
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath)then
   vim.fn.system({
@@ -15,80 +15,19 @@ vim.opt.rtp:prepend(lazypath)
 local fn = vim.fn
 require('lazy').setup({
 
--- ┬┌┬┐┌─┐┌─┐┬─┐┌┬┐┌─┐┌┐┌┌┬┐
--- ││││├─┘│ │├┬┘ │ ├─┤│││ │ 
--- ┴┴ ┴┴  └─┘┴└─ ┴ ┴ ┴┘└┘ ┴ 
-
+-- Dependencies
 	'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
-	-- 'kyazdani43/nvim-web-devicons', 
 	'nvim-treesitter/nvim-treesitter',
 
--- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
---  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
---  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
+-- ┌─┐┌─┐┬  ┌─┐┬─┐
+-- │  │ ││  │ │├┬┘
+-- └─┘└─┘┴─┘└─┘┴└─
 
-	'nvim-telescope/telescope.nvim',
-	'ThePrimeagen/harpoon',
-	{ 'nvim-telescope/telescope.nvim',
-  	dependencies = {
-    	"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-project.nvim",
-    	"debugloop/telescope-undo.nvim",
-  	},
-  	config = function()
-    	require("telescope").setup({
-      	extensions = {
-        	undo = {
-          -- telescope-undo.nvim config, see below
-        },
-      },
-    })
-    	require("telescope").load_extension("undo")
-  	end,
-	},
-
--- Colorscheme
-	
-	{
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    lazy = true,
-    priority = 1001,
-    config = function()
-        require("rose-pine").setup({
-				dark_variant = 'moon'
-			})
-        vim.cmd('colorscheme rose-pine')
-    end
-	},
-	{ 'yorickpeterse/vim-paper'},
-	{ 'sainnhe/everforest', name = 'everforest', },
-	{ 'NLKNguyen/papercolor-theme' },
-	{ 'norcalli/nvim-colorizer.lua' }, -- Color hex,hsv, and hsl
 	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
-	{
-    'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-        require('nordic').load()
-    end
-	},
 
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
 -- └  └─┘┴─┘┴ ┴└─┘
-
-	-- { "folke/styler.nvim",
-	--  	config = function()
-	--    	require("styler").setup({
-	--      	themes = {
-	--       		markdown = { colorscheme = '' },
-	--        	help = { colorscheme = '' },
-	--      },
-	--    })
-	--  end,
-	-- },
 
 	{ 'folke/zen-mode.nvim', 
 		config = function()
@@ -117,26 +56,7 @@ require('lazy').setup({
 		end,
 		},
 
-	{ 'folke/twilight.nvim',
-		opts = {
-			dimming = {
-				alpha = 1.25, -- amount of dimming
-    	-- we try to get the foreground from the highlight groups or fallback color
-    		color = { "Normal", "#333334" },
-				term_bg = "#000001", -- if guibg=NONE, this will be used to calculate text color
-				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
-  		},
-			context = 3, -- amount of lines we will try to show around the current line
-  		treesitter = true, -- use treesitter when available for the filetype
-  		expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-    		"function",
-    		"method",
-    		"table",
-    		"if_statement",
-			},
-			exclude = {}, -- exclude these filetypes
-		},
-	},
+	{ 'folke/twilight.nvim', opts = {}, },
 	
 	{ "folke/flash.nvim",
 		--search labels, enhanced character motions, and Treesitter integration.
@@ -153,29 +73,29 @@ require('lazy').setup({
 	 	},
 	},
 
+	{
+  "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+
 -- ┌┬┐┬┌┐┌┬
 -- ││││││││
 -- ┴ ┴┴┘└┘┴
+
 	{ 'echasnovski/mini.surround', version = false },	
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
 	{ 'echasnovski/mini.icons', version = false },
 	{ 'echasnovski/mini.files', version = false },
-	{  'echasnovski/mini.starter', version = false,
-	config = function()
-	require('mini.starter').setup({
-	})
-		end	
-},
+	{ 'echasnovski/mini.starter', version = false },
 
 -- ┌┬┐┌─┐┌─┐┬ ┬┌─┐┌┐┌┬┌─┐┌─┐
 -- │││├┤ │  ├─┤├─┤│││││  └─┐
 -- ┴ ┴└─┘└─┘┴ ┴┴ ┴┘└┘┴└─┘└─┘
 
-	{ 'max397574/better-escape.nvim',
-  config = function()
-    require("better_escape").setup()
-  end,
+{
+  "j-hui/fidget.nvim",
+  opts = {
+    -- options
+  },
 },
 
 {
@@ -195,6 +115,30 @@ require('lazy').setup({
 	{ 'hrsh7th/nvim-cmp'},
 	-- { 'rafamadriz/friendly-snippets'},
 	-- 'saadparwaiz2/cmp_luasnip',  -- Snippet Completion
+
+-- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
+--  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
+--  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
+
+	'nvim-telescope/telescope.nvim',
+	'ThePrimeagen/harpoon',
+	{ 'nvim-telescope/telescope.nvim',
+  	dependencies = {
+    	"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-project.nvim",
+    	"debugloop/telescope-undo.nvim",
+  	},
+  	config = function()
+    	require("telescope").setup({
+      	extensions = {
+        	undo = {
+          -- telescope-undo.nvim config, see below
+        },
+      },
+    })
+    	require("telescope").load_extension("undo")
+  	end,
+	},
 
 -- ┬  ┌─┐┌─┐
 -- │  └─┐├─┘
