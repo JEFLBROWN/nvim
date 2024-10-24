@@ -1,4 +1,3 @@
-
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath)then
   vim.fn.system({
@@ -13,18 +12,26 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local fn = vim.fn
-require('lazy').setup({
+require('lazy').setup({ -- Lazy Start
 
 -- Dependencies
 	'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
 	'nvim-treesitter/nvim-treesitter',
 
--- ┌─┐┌─┐┬  ┌─┐┬─┐
--- │  │ ││  │ │├┬┘
--- └─┘└─┘┴─┘└─┘┴└─
+
+
+-- ┌─┐┌┬┐┬ ┬┬  ┌─┐
+-- └─┐ │ └┬┘│  ├┤ 
+-- └─┘ ┴  ┴ ┴─┘└─┘
 
 	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
-
+	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
+	{    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+},
 -- ┌─┐┌─┐┬  ┬┌─┌─┐
 -- ├┤ │ ││  ├┴┐├┤ 
 -- └  └─┘┴─┘┴ ┴└─┘
@@ -66,21 +73,33 @@ require('lazy').setup({
 	 	-- stylua: ignore
 	 	keys = {
 	 		{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-	   	{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-	   	{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-	   	{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-	   	{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+			{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
 	 	},
 	},
 
-	{
-  "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {}, },
 
 -- ┌┬┐┬┌┐┌┬
 -- ││││││││
 -- ┴ ┴┴┘└┘┴
 
-	{ 'echasnovski/mini.surround', version = false },	
+	{ 'echasnovski/mini.surround',
+		version = false,
+		mappings = {
+			add = '<leader>sa', -- Add surrounding in Normal and Visual modes
+			delete = '<leader>sd', -- Delete surrounding
+			replace = '<leader>sr', -- Replace surrounding
+			update_n_lines = '<leader>sn', -- Update `n_lines`
+			find = '', -- Find surrounding (to the right)
+			find_left = '', -- Find surrounding (to the left)
+			highlight = '', -- Highlight surrounding
+			suffix_last = '', -- Suffix to search with "prev" method
+			suffix_next = '', -- Suffix to search with "next" method
+		},
+	},	
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
 	{ 'echasnovski/mini.icons', version = false },
@@ -91,24 +110,9 @@ require('lazy').setup({
 -- │││├┤ │  ├─┤├─┤│││││  └─┐
 -- ┴ ┴└─┘└─┘┴ ┴┴ ┴┘└┘┴└─┘└─┘
 
-{
-  "j-hui/fidget.nvim",
-  opts = {
-    -- options
-  },
-},
-
-{
-  "karb94/neoscroll.nvim",
-  config = function ()
-    require('neoscroll').setup {}
-  end
-},
-	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
-	-- { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }},
-	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {} }, -- indentation, space, and tab guide line
+	{ "j-hui/fidget.nvim", opts = {}, },
+	{ 'karb94/neoscroll.nvim', },
 	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
-	{ 'hinell/move.nvim'}, 			-- mimics VS code line movement
 	{	'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
 
 -- Completion & Snippets
@@ -120,8 +124,6 @@ require('lazy').setup({
 --  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
 --  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
 
-	'nvim-telescope/telescope.nvim',
-	'ThePrimeagen/harpoon',
 	{ 'nvim-telescope/telescope.nvim',
   	dependencies = {
     	"nvim-lua/plenary.nvim",
@@ -139,6 +141,7 @@ require('lazy').setup({
     	require("telescope").load_extension("undo")
   	end,
 	},
+	 'ThePrimeagen/harpoon', 
 
 -- ┬  ┌─┐┌─┐
 -- │  └─┐├─┘
@@ -155,7 +158,7 @@ require('lazy').setup({
 	   opts = {
 	       border = "rounded", -- Valid window border style,
 	       show_unknown_classes = true -- Shows the unknown classes popup
-	   	}
+			},	
 	 	},
 
 }) -- END LAZY
