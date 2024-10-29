@@ -1,5 +1,5 @@
-
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
+local M = {}
 
 -- LSP clients attached to buffer
 local function lsp_clients()
@@ -47,33 +47,51 @@ local function get_git_diff(type)
   if gsd and gsd[type] then
     return gsd[type]
   end
-
   return 0
 end
 
+---@return string
 local modes = {
-  ["n"] = "NORMAL",
-  ["no"] = "NORMAL",
-  ["v"] = "VISUAL",
-  ["V"] = "VISUAL LINE",
-  [""] = "VISUAL BLOCK",
-  ["s"] = "SELECT",
-  ["S"] = "SELECT LINE",
-  [""] = "SELECT BLOCK",
-  ["i"] = "INSERT",
-  ["ic"] = "INSERT",
-  ["R"] = "REPLACE",
-  ["Rv"] = "VISUAL REPLACE",
-  ["c"] = "COMMAND",
-  ["cv"] = "VIM EX",
-  ["ce"] = "EX",
-  ["r"] = "PROMPT",
-  ["rm"] = "MOAR",
-  ["r?"] = "CONFIRM",
-  ["!"] = "SHELL",
-  ["t"] = "TERMINAL",
+  ['n']      = 'NO', -- Normal
+  ['no']     = 'OP', -- 
+  ['nov']    = 'OC',
+  ['noV']    = 'OL',
+  ['no\x16'] = 'OB',
+  ['\x16']   = 'VB',
+  ['niI']    = 'IN',
+  ['niR']    = 'RE',
+  ['niV']    = 'RV',
+  ['nt']     = 'NT',
+  ['ntT']    = 'TM',
+  ['v']      = 'VI',
+  ['vs']     = 'VI',
+  ['V']      = 'VL',
+  ['Vs']     = 'VL',
+  ['\x16s']  = 'VB',
+  ['s']      = 'SE',
+  ['S']      = 'SL',
+  ['\x13']   = 'SB',
+  ['i']      = 'IN',
+  ['ic']     = 'IC',
+  ['ix']     = 'IX',
+  ['R']      = 'RE',
+  ['Rc']     = 'RC',
+  ['Rx']     = 'RX',
+  ['Rv']     = 'RV',
+  ['Rvc']    = 'RC',
+  ['Rvx']    = 'RX',
+  ['c']      = 'CO',
+  ['cv']     = 'CV',
+  ['r']      = 'PR',
+  ['rm']     = 'PM',
+  ['r?']     = 'P?',
+  ['!']      = 'SH',
+  ['t']      = 'TE',
 }
---- @return string
+
+
+
+--- @return strino
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
   return string.format(" %s ", modes[current_mode]):upper()
@@ -372,26 +390,26 @@ StatusLine.active = function()
     })
   end
 
+-- this is the order of the statusline
   local statusline = {
-    "▊",
     mode(),
-    filename(),
-    full_git(),
-    "%=",
-    "%=",
-    "%S ",
+    " ", -- blank for aesthetics
+		filename(),
+		-- "%=",
+		"%=", -- separator
+		-- "%S ", -- separator
     lsp_status(),
     diagnostics_error(),
     diagnostics_warns(),
     diagnostics_hint(),
     diagnostics_info(),
     lsp_active(),
-    python_env(),
-    filetype(),
+    -- python_env(),
+    -- filetype(),
+    full_git(),
     file_percentage(),
     total_lines(),
     lsp_clients(),
-    " ▊",
   }
 
   return table.concat(statusline)
@@ -402,8 +420,6 @@ vim.opt.statusline = "%!v:lua.StatusLine.active()"
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType" }, {
   group = statusline_augroup,
   pattern = {
-    "NvimTree_1",
-    "NvimTree",
     "TelescopePrompt",
     "fzf",
     "lspinfo",
@@ -417,3 +433,5 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType" }, {
     vim.opt_local.statusline = "%!v:lua.StatusLine.inactive()"
   end,
 })
+
+-- the way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created

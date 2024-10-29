@@ -17,7 +17,7 @@ require('mini.files').setup {
   -- Module mappings created only inside explorer.
   -- Use `''` (empty string) to not create one.
   mappings = {
-    close       = 'q',
+    close       = '-',
     go_in       = 'l',
     go_in_plus  = 'L',
     go_out      = 'h',

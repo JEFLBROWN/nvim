@@ -14,15 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 local fn = vim.fn
 require('lazy').setup({ -- Lazy Start
 
+------------------------------------------------------------
 -- Dependencies
-	'nvim-lua/plenary.nvim',  -- Useful lua functions used by lots of plugins
-	'nvim-treesitter/nvim-treesitter',
+------------------------------------------------------------
 
+	{	'nvim-lua/plenary.nvim' },  -- Useful lua functions used by lots of plugins
+	{ 'nvim-treesitter/nvim-treesitter' },
 
-
--- ┌─┐┌┬┐┬ ┬┬  ┌─┐
--- └─┐ │ └┬┘│  ├┤ 
--- └─┘ ┴  ┴ ┴─┘└─┘
+------------------------------------------------------------
+-- Styles
+------------------------------------------------------------
 
 	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
@@ -32,9 +33,10 @@ require('lazy').setup({ -- Lazy Start
     ---@type ibl.config
     opts = {},
 },
--- ┌─┐┌─┐┬  ┬┌─┌─┐
--- ├┤ │ ││  ├┴┐├┤ 
--- └  └─┘┴─┘┴ ┴└─┘
+{ "chentoast/marks.nvim", event = "VeryLazy", opts = {}, }, 
+------------------------------------------------------------
+-- Folke
+------------------------------------------------------------
 
 	{ 'folke/zen-mode.nvim', 
 		config = function()
@@ -82,47 +84,37 @@ require('lazy').setup({ -- Lazy Start
 
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {}, },
 
--- ┌┬┐┬┌┐┌┬
--- ││││││││
--- ┴ ┴┴┘└┘┴
+------------------------------------------------------------
+-- Mini
+------------------------------------------------------------
 
-	{ 'echasnovski/mini.surround',
-		version = false,
-		mappings = {
-			add = '<leader>sa', -- Add surrounding in Normal and Visual modes
-			delete = '<leader>sd', -- Delete surrounding
-			replace = '<leader>sr', -- Replace surrounding
-			update_n_lines = '<leader>sn', -- Update `n_lines`
-			find = '', -- Find surrounding (to the right)
-			find_left = '', -- Find surrounding (to the left)
-			highlight = '', -- Highlight surrounding
-			suffix_last = '', -- Suffix to search with "prev" method
-			suffix_next = '', -- Suffix to search with "next" method
-		},
-	},	
+	{ 'echasnovski/mini.surround', version = '*'},	
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
 	{ 'echasnovski/mini.icons', version = false },
 	{ 'echasnovski/mini.files', version = false },
 	{ 'echasnovski/mini.starter', version = false },
+	{ 'echasnovski/mini.completion', version = '*' },
+	{ 'echasnovski/mini.sessions', version = '*' },
 
--- ┌┬┐┌─┐┌─┐┬ ┬┌─┐┌┐┌┬┌─┐┌─┐
--- │││├┤ │  ├─┤├─┤│││││  └─┐
--- ┴ ┴└─┘└─┘┴ ┴┴ ┴┘└┘┴└─┘└─┘
+------------------------------------------------------------
+-- Mechanics
+------------------------------------------------------------
 
 	{ "j-hui/fidget.nvim", opts = {}, },
 	{ 'karb94/neoscroll.nvim', },
 	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
-	{	'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
+	{ 'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
 
--- Completion & Snippets
+------------------------------------------------------------
+	-- Completion & Snippets
+------------------------------------------------------------
+
 	{ 'hrsh7th/nvim-cmp'},
-	-- { 'rafamadriz/friendly-snippets'},
-	-- 'saadparwaiz2/cmp_luasnip',  -- Snippet Completion
 
--- ┌┬┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
---  │ ├┤ │  ├┤ └─┐│  │ │├─┘├┤ 
---  ┴ └─┘┴─┘└─┘└─┘└─┘└─┘┴  └─┘
+------------------------------------------------------------
+-- Telescope
+------------------------------------------------------------
 
 	{ 'nvim-telescope/telescope.nvim',
   	dependencies = {
@@ -143,9 +135,9 @@ require('lazy').setup({ -- Lazy Start
 	},
 	 'ThePrimeagen/harpoon', 
 
--- ┬  ┌─┐┌─┐
--- │  └─┐├─┘
--- ┴─┘└─┘┴  
+------------------------------------------------------------
+-- LSP
+------------------------------------------------------------
 
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim', 
