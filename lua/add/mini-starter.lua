@@ -8,8 +8,8 @@
     evaluate_single = true,
     items = {
       starter.sections.builtin_actions(),
-      starter.sections.recent_files(8, false),
-      starter.sections.recent_files(8, true),
+      starter.sections.recent_files(3, true),
+      starter.sections.recent_files(5, false),
       -- Use this if you set up 'mini.sessions'
       starter.sections.sessions(3, true)
     },
