@@ -27,13 +27,9 @@ require('lazy').setup({ -- Lazy Start
 
 	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
-	{    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
-},
-{ "chentoast/marks.nvim", event = "VeryLazy", opts = {}, }, 
+	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
+	{ 'chentoast/marks.nvim', event = "VeryLazy", opts = {}, }, 
+
 ------------------------------------------------------------
 -- Folke
 ------------------------------------------------------------
@@ -82,18 +78,19 @@ require('lazy').setup({ -- Lazy Start
 	 	},
 	},
 
-	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {}, },
+	{ 'folke/todo-comments.nvim', dependencies = { "nvim-lua/plenary.nvim" }, opts = {}, },
 
 ------------------------------------------------------------
 -- Mini
 ------------------------------------------------------------
 
-	{ 'echasnovski/mini.surround', version = '*'},	
+	{ 'echasnovski/mini.surround', version = '*'},
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
 	{ 'echasnovski/mini.icons', version = false },
 	{ 'echasnovski/mini.files', version = false },
 	{ 'echasnovski/mini.starter', version = false },
+	{ 'echasnovski/mini.statusline', version = false },
 	{ 'echasnovski/mini.completion', version = '*' },
 	{ 'echasnovski/mini.sessions', version = '*' },
 
@@ -101,7 +98,7 @@ require('lazy').setup({ -- Lazy Start
 -- Mechanics
 ------------------------------------------------------------
 
-	{ "j-hui/fidget.nvim", opts = {}, },
+	{ 'j-hui/fidget.nvim', opts = {}, },
 	{ 'karb94/neoscroll.nvim', },
 	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
 	{ 'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
@@ -110,17 +107,23 @@ require('lazy').setup({ -- Lazy Start
 	-- Completion & Snippets
 ------------------------------------------------------------
 
-	{ 'hrsh7th/nvim-cmp'},
-
+	-- { 'hrsh7th/nvim-cmp'},
+	{	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp"
+	},
 ------------------------------------------------------------
 -- Telescope
 ------------------------------------------------------------
 
 	{ 'nvim-telescope/telescope.nvim',
   	dependencies = {
-    	"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-project.nvim",
-    	"debugloop/telescope-undo.nvim",
+    	'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope-project.nvim',
+    	'debugloop/telescope-undo.nvim',
+			'ThePrimeagen/harpoon',
   	},
   	config = function()
     	require("telescope").setup({
@@ -133,7 +136,7 @@ require('lazy').setup({ -- Lazy Start
     	require("telescope").load_extension("undo")
   	end,
 	},
-	 'ThePrimeagen/harpoon', 
+	 -- { 'ThePrimeagen/harpoon', }, 
 
 ------------------------------------------------------------
 -- LSP

@@ -29,7 +29,7 @@ o.signcolumn = "yes"				  -- always show sign column so it doesnt shift
 o.fillchars:append { eob = " " }    -- remove tilde ~
 o.relativenumber = true
 -- o.ls = 0 -- last status (in statusline) dont show
-o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
+-- o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
@@ -62,47 +62,6 @@ vim.keymap.set({'n', 'v'}, '<leader>0', function () vim.cmd([[
   set norelativenumber
 ]]) end)
 
-local function modes()
-	return mode_map[vim.api.nvim_get_mode().mode] or "__"
-end
-
-local mode_map = {
-	["n"] = "N",
-	["no"] = "O·P",
-	["nov"] = "O·P",
-	["noV"] = "O·P",
-	["no\22"] = "O·P",
-	["niI"] = "N·I",
-	["niR"] = "N·R",
-	["niV"] = "N",
-	["nt"] = "N·T",
-	["v"] = "V",
-	["vs"] = "V",
-	["V"] = "V·L",
-	["Vs"] = "V·L",
-	["\22"] = "V·B",
-	["\22s"] = "V·B",
-	["s"] = "S",
-	["S"] = "S·L",
-	["\19"] = "S·B",
-	["i"] = "I",
-	["ic"] = "I·C",
-	["ix"] = "I·X",
-	["R"] = "R",
-	["Rc"] = "R·C",
-	["Rx"] = "R·X",
-	["Rv"] = "V·R",
-	["Rvc"] = "RVC",
-	["Rvx"] = "RVX",
-	["c"] = "C",
-	["cv"] = "EX",
-	["ce"] = "EX",
-	["r"] = "R",
-	["rm"] = "M",
-	["r?"] = "C",
-	["!"] = "SH",
-	["t"] = "T",
-}
 -- attempts to set a colorscheme for markdown
 -- vim.api.nvim_create_autocmd("Filetype", {
 --     group = vim.api.nvim_create_augroup("colorscheme", { clear = true }),

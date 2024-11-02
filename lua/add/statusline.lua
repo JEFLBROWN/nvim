@@ -1,7 +1,10 @@
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
 local M = {}
 
--- LSP clients attached to buffer
+-------------------------------
+-- LSP attached to buffer
+-------------------------------
+
 local function lsp_clients()
   local current_buf = vim.api.nvim_get_current_buf()
 
@@ -16,6 +19,11 @@ local function lsp_clients()
   end
   return " 󰌘 " .. table.concat(c, "|")
 end
+
+-------------------------------
+--- Filetype
+-------------------------------
+
 --- @return string
 local function filename()
   local fname = vim.fn.expand("%:t")
@@ -50,10 +58,32 @@ local function get_git_diff(type)
   return 0
 end
 
+-------------------------------
+--- Modes
+-------------------------------
+
+function M.get_or_create_hl(hl)
+    local hl_name = 'Statusline' .. hl
+
+    if not statusline_hls[hl] then
+        -- If not in the cache, create the highlight group using the icon's foreground color
+        -- and the statusline's background color.
+        local bg_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
+        local fg_hl = vim.api.nvim_get_hl(0, { name = hl })
+        vim.api.nvim_set_hl(0, hl_name, { bg = ('#%06x'):format(bg_hl.bg), fg = ('#%06x'):format(fg_hl.fg) })
+        statusline_hls[hl] = true
+    end
+
+    return hl_name
+end
+
+-- Note that:
+-- \19 = ^S 
+-- \22 = ^V
 ---@return string
 local modes = {
-  ['n']      = 'NO', -- Normal
-  ['no']     = 'OP', -- 
+  ['n']      = 'NO',
+  ['no']     = 'OP',
   ['nov']    = 'OC',
   ['noV']    = 'OL',
   ['no\x16'] = 'OB',
@@ -89,40 +119,15 @@ local modes = {
   ['t']      = 'TE',
 }
 
-
-
---- @return strino
+--- @return string
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
   return string.format(" %s ", modes[current_mode]):upper()
 end
 
---- @return string
-local function python_env()
-  if not rawget(vim, "lsp") then
-    return ""
-  end
-
-  local buf = vim.api.nvim_get_current_buf()
-  local buf_clients = vim.lsp.get_clients({ bufnr = buf })
-  if next(buf_clients) == nil then
-    return ""
-  end
-
-  for _, client in pairs(buf_clients) do
-    if client.name == "pyright" or client.name == "pylance" then
-      local virtual_env = os.getenv("VIRTUAL_ENV_PROMPT")
-      if virtual_env == nil then
-        return ""
-      end
-
-      virtual_env = virtual_env:gsub("%s+", "")
-      return string.format("%%#StatusLineMedium# %s%%*", virtual_env)
-    end
-  end
-
-  return ""
-end
+-------------------------------
+--- LSP
+-------------------------------
 
 --- @return string
 local function lsp_active()
@@ -255,11 +260,16 @@ local function lsp_status()
   return string.format("%%#StatusLineLspMessages#%s%%* ", lsp_message)
 end
 
+
+-------------------------------
+--- Git
+-------------------------------
+
 --- @return string
 local function git_diff_added()
   local added = get_git_diff("added")
   if added > 0 then
-    return string.format("%%#StatusLineGitDiffAdded#  %s%%*", added)
+    return string.format("%%#StatusLineGitDiffAdded#+%s%%*", added)
   end
 
   return ""
@@ -269,7 +279,7 @@ end
 local function git_diff_changed()
   local changed = get_git_diff("changed")
   if changed > 0 then
-    return string.format("%%#StatusLineGitDiffChanged#  %s%%*", changed)
+    return string.format("%%#StatusLineGitDiffChanged#~%s%%*", changed)
   end
 
   return ""
@@ -279,7 +289,7 @@ end
 local function git_diff_removed()
   local removed = get_git_diff("removed")
   if removed > 0 then
-    return string.format("%%#StatusLineGitDiffRemoved#  %s%%*", removed)
+    return string.format("%%#StatusLineGitDiffRemoved#-%s%%*", removed)
   end
 
   return ""
@@ -354,6 +364,10 @@ local function filetype()
   return string.format(" {ft:%s}", vim.bo.filetype):lower()
 end
 
+-------------------------------
+--- Statusline format
+-------------------------------
+
 StatusLine = {}
 
 StatusLine.inactive = function()
@@ -394,22 +408,21 @@ StatusLine.active = function()
   local statusline = {
     mode(),
     " ", -- blank for aesthetics
-		filename(),
-		-- "%=",
+    full_git(),
 		"%=", -- separator
-		-- "%S ", -- separator
+		"%=", -- separator
+		"%S ", -- separator
+		filename(),
+    lsp_clients(),
     lsp_status(),
+    lsp_active(),
     diagnostics_error(),
     diagnostics_warns(),
     diagnostics_hint(),
     diagnostics_info(),
-    lsp_active(),
-    -- python_env(),
     -- filetype(),
-    full_git(),
     file_percentage(),
     total_lines(),
-    lsp_clients(),
   }
 
   return table.concat(statusline)

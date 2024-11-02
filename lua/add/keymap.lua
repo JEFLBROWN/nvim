@@ -32,7 +32,7 @@ keymap("n", "<C-h>","<C-W>h", opts)													-- Jump to the Left Split
 keymap("n", "<leader>V","<C-w>t<C-w>H", opts) 							-- switch split to Vertical
 
 -- buffers
-keymap("n", "<leader>bd", ":bd<CR>", opts)									-- Close Buffer
+-- keymap("n", "<leader>bd", ":bd<CR>", opts)									-- Close Buffer *this didn't feel good to type, use :bd instead
 keymap("n", "<tab>", ":bnext<CR>", opts)										-- Next Buffer
 keymap("n", "<BS>", ":bprevious<CR>", opts)									-- Previous Buffer
 

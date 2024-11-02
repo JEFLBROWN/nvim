@@ -9,20 +9,19 @@ if not status_ok_1 then
 end
 
 local servers = {
-  "cssls",
-  "cssmodules_ls",
-  "emmet_ls",
-  "html",
-  "jsonls",
+  -- "cssls",
+  -- "cssmodules_ls",
+  -- "html",
+  -- "jsonls",
 }
 
 local settings = {
   ui = {
     border = "rounded",
     icons = {
-      package_installed = "◍",
-      package_pending = "◍",
-      package_uninstalled = "◍",
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
     },
   },
   log_level = vim.log.levels.INFO,
