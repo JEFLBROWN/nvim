@@ -29,7 +29,7 @@ require('lazy').setup({ -- Lazy Start
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
 	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
 	{ 'chentoast/marks.nvim', event = "VeryLazy", opts = {}, }, 
-
+	{ 'brenoprata10/nvim-highlight-colors', opts ={}, },
 ------------------------------------------------------------
 -- Folke
 ------------------------------------------------------------

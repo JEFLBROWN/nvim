@@ -77,7 +77,14 @@ telescope.setup {
   },
 
   pickers = {
-    -- Default configuration for builtin pickers goes here:
+	 help_tags = { -- this opens help docs in a vertical split always
+			mappings = {
+				i = {
+				 ["<CR>"] = "file_vsplit",
+				},
+			},
+		},
+		-- Default configuration for builtin pickers goes here:
     -- picker_name = {
       -- picker_config_key = value,
       -- ...

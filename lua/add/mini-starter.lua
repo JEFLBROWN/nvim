@@ -7,11 +7,11 @@
   starter.setup({
     evaluate_single = true,
     items = {
-      starter.sections.builtin_actions(),
       starter.sections.recent_files(3, true),
       starter.sections.recent_files(5, false),
       -- Use this if you set up 'mini.sessions'
-      starter.sections.sessions(3, true)
+      starter.sections.sessions(3, true),
+      starter.sections.builtin_actions()
     },
     content_hooks = {
       starter.gen_hook.adding_bullet(),

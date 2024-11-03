@@ -1,6 +1,7 @@
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
 local M = {}
 
+
 -------------------------------
 -- LSP attached to buffer
 -------------------------------
@@ -61,25 +62,14 @@ end
 -------------------------------
 --- Modes
 -------------------------------
+-- Define custom highlights for each mode to color only the mode text
+vim.api.nvim_set_hl(0, "NormalColor", { fg = "#ffffff", bg = "#5f87af", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineModeInsert", { fg = "#ffffff", bg = "#5f875f", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineModeVisual", { fg = "#ffffff", bg = "#af5f5f", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineModeReplace", { fg = "#ffffff", bg = "#af87d7", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineModeCommand", { fg = "#ffffff", bg = "#d7875f", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineModeOther",  { fg = "#ffffff", bg = "#5f5f87", bold = true })
 
-function M.get_or_create_hl(hl)
-    local hl_name = 'Statusline' .. hl
-
-    if not statusline_hls[hl] then
-        -- If not in the cache, create the highlight group using the icon's foreground color
-        -- and the statusline's background color.
-        local bg_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
-        local fg_hl = vim.api.nvim_get_hl(0, { name = hl })
-        vim.api.nvim_set_hl(0, hl_name, { bg = ('#%06x'):format(bg_hl.bg), fg = ('#%06x'):format(fg_hl.fg) })
-        statusline_hls[hl] = true
-    end
-
-    return hl_name
-end
-
--- Note that:
--- \19 = ^S 
--- \22 = ^V
 ---@return string
 local modes = {
   ['n']      = 'NO',
@@ -118,11 +108,24 @@ local modes = {
   ['!']      = 'SH',
   ['t']      = 'TE',
 }
-
 --- @return string
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format(" %s ", modes[current_mode]):upper()
+  local mode_color = "%#StatusLineModeOther#"  -- Default color if mode is unrecognized
+
+  if current_mode == "n" then
+    mode_color = "%#NormalColor#"
+  elseif current_mode == "i" then
+    mode_color = "%#StatusLineModeInsert#"
+  elseif current_mode == "v" or current_mode == "V" or current_mode == "^V" then
+    mode_color = "%#StatusLineModeVisual#"
+  elseif current_mode == "R" then
+    mode_color = "%#StatusLineModeReplace#"
+  elseif current_mode == "c" then
+    mode_color = "%#StatusLineModeCommand#"
+  end
+
+  return string.format("%s %s", mode_color, modes[current_mode] or "??"):upper()
 end
 
 -------------------------------
@@ -409,10 +412,10 @@ StatusLine.active = function()
     mode(),
     " ", -- blank for aesthetics
     full_git(),
-		"%=", -- separator
+		"%=", -- center alignment
+		filename(),
 		"%=", -- separator
 		"%S ", -- separator
-		filename(),
     lsp_clients(),
     lsp_status(),
     lsp_active(),
@@ -446,5 +449,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType" }, {
     vim.opt_local.statusline = "%!v:lua.StatusLine.inactive()"
   end,
 })
+return M
 
 -- the way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created
