@@ -1,7 +1,6 @@
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
 local M = {}
 
-
 -------------------------------
 -- LSP attached to buffer
 -------------------------------
@@ -50,10 +49,6 @@ local function filename()
   return filetype_icon() .. " " .. fname .. " "
 end
 
-
-
-
-
 --- @return string
 local function filename()
   local fname = vim.fn.expand("%:t")
@@ -62,10 +57,6 @@ local function filename()
   end
   return fname .. " "
 end
-
-
-
-
 
 --- @param severity integer
 --- @return integer
@@ -135,7 +126,6 @@ local modes = {
   ['t']      = 'TE',
 }
 
---- Function to get mode with built-in highlights
 --- Function to get mode with built-in highlights
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
@@ -408,16 +398,69 @@ local function total_lines()
   return string.format("%%#StatusLineMedium#of %s %%*", lines)
 end
 
---- @param hlgroup string
-local function formatted_filetype(hlgroup)
-  local filetype = vim.bo.filetype or vim.fn.expand("%:e", false)
-  return string.format("%%#%s# %s %%*", hlgroup, filetype)
+-------------------------------
+--- Filetype
+-------------------------------
+-- Ensure mini-icons is loaded
+local has_icons, mini_icons = pcall(require, 'mini.icons')
+if not has_icons then
+  print("Error: mini.icons not found. Please install or configure mini-icons.")
 end
 
-local function filetype()
-  return string.format(" {ft:%s}", vim.bo.filetype):lower()
+-- Get the background color of StatusLine to apply to the icon
+local function get_statusline_bg()
+  local hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
+  return hl.bg and string.format("#%06x", hl.bg) or "NONE"
 end
 
+-- Function to get the filetype icon with its standard foreground color and StatusLine background
+local function get_filetype_icon_with_standard_color()
+  if not has_icons then return "", "" end
+
+  local filetype = vim.bo.filetype
+  if filetype == "" then
+    return "", ""
+  end
+
+  -- Retrieve the icon and its recommended highlight group from mini-icons
+  local icon, icon_hl = mini_icons.get('filetype', filetype)
+  icon = icon or ""  -- Fallback icon if none found
+
+  -- Get StatusLine background color
+  local statusline_bg = get_statusline_bg()
+
+  -- Get the foreground color from the icon's highlight group
+  local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl }).fg
+
+  -- Define a new highlight for the icon with the icon's standard color and StatusLine background
+  vim.api.nvim_set_hl(0, "StatusLineIconColor", { fg = icon_fg, bg = statusline_bg })
+
+  return icon, "StatusLineIconColor"
+end
+
+-- Function to get the modified indicator if the file is modified
+local function get_modified_indicator()
+  return vim.bo.modified and "●" or ""  -- Display ● if modified, otherwise nothing
+end
+
+-- Function to format the filename with icon, color, and modified indicator
+local function filename()
+  local fname = vim.fn.expand("%:t")  -- Get the filename only
+  if fname == "" then
+    return ""
+  end
+
+  -- Get the filetype icon with customized background and foreground
+  local icon, icon_hl = get_filetype_icon_with_standard_color()
+  local modified = get_modified_indicator()  -- Get modified indicator
+
+  -- Use the Directory highlight group for filename text with StatusLine background
+  local statusline_bg = get_statusline_bg()
+  vim.api.nvim_set_hl(0, "StatusLineFilenameDirectory", { fg = vim.api.nvim_get_hl(0, { name = "Directory" }).fg, bg = statusline_bg, bold = true })
+
+  -- Format the filename with icon, filename, and modified indicator, applying highlights
+  return string.format("%%#%s# %s %%#StatusLineFilenameDirectory# %s %s %%*", icon_hl, icon, fname, modified)
+end
 -------------------------------
 --- Statusline format
 -------------------------------
@@ -450,7 +493,6 @@ StatusLine.active = function()
 
   if redeable_filetypes[vim.bo.filetype] or vim.o.modifiable == false then
     return table.concat({
-      formatted_filetype("StatusLineMode"),
       "%=",
       "%=",
       file_percentage(),
