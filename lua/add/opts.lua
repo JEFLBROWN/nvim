@@ -30,11 +30,13 @@ o.fillchars:append { eob = " " }    -- remove tilde ~
 o.relativenumber = true
 -- o.ls = 0 -- last status (in statusline) dont show
 -- o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
+-- o.winbar = "%= %#PmenuSel# %t " -- this sets the filename at the topright of the screen
+
+
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
-
 -- vim.cmd[[colorscheme everforest]]
 vim.cmd[[colorscheme kanagawa-paper]]
 -- vim.cmd[[colorscheme nordic]]

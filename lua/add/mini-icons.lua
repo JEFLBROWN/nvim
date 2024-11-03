@@ -1,9 +1,4 @@
-local status_ok, micons = pcall(require, "micons")
-if not status_ok then
-return
-end
-
-require('micons').setup {
+require('mini.icons').setup {
 
   -- Icon style: 'glyph' or 'ascii'
   style = 'glyph',

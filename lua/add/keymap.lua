@@ -29,7 +29,7 @@ keymap("n", "<leader>w","<C-W>q", opts)											-- Close Split window
 keymap("n", "<C-j>","<C-W>r <C-W>h", opts)									-- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>","<C-W>l", opts)													-- Jump to the right Split
 keymap("n", "<C-h>","<C-W>h", opts)													-- Jump to the Left Split	
-keymap("n", "<leader>V","<C-w>t<C-w>H", opts) 							-- switch split to Vertical
+-- keymap("n", "<leader>V","<C-w>t<C-w>H", opts) 							-- switch split to Vertical DEPRECIATED (but felt good to execute)
 
 -- buffers
 -- keymap("n", "<leader>bd", ":bd<CR>", opts)									-- Close Buffer *this didn't feel good to type, use :bd instead
@@ -53,7 +53,7 @@ keymap("n","-",":lua MiniFiles.open()<CR>",opts)						-- Mini Files
 keymap('n', '<C-p>',"<cmd>lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
 
 keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader><leader>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
 keymap("n", "<leader>/", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)

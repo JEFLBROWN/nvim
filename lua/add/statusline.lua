@@ -18,12 +18,41 @@ local function lsp_clients()
   for _, client in pairs(clients) do
     table.insert(c, client.name)
   end
-  return " 󰌘 " .. table.concat(c, "|")
+  return " ❖ " .. table.concat(c, "|")
 end
 
 -------------------------------
 --- Filetype
 -------------------------------
+
+--- @return string
+local function filetype_icon()
+  local filetype = vim.bo.filetype
+  if filetype == "" then
+    return ""
+  end
+
+  -- Retrieve the icon for the current file type from mini-icons
+  local icon = require('mini.icons').get_icon(filetype)  -- Adjust based on mini-icons' API
+
+  -- Fallback to filetype name if icon is not found
+  return icon or filetype
+end
+
+--- @return string
+local function filename()
+  local fname = vim.fn.expand("%:t")
+  if fname == "" then
+    return ""
+  end
+
+  -- Concatenate the icon and filename for display
+  return filetype_icon() .. " " .. fname .. " "
+end
+
+
+
+
 
 --- @return string
 local function filename()
@@ -33,6 +62,10 @@ local function filename()
   end
   return fname .. " "
 end
+
+
+
+
 
 --- @param severity integer
 --- @return integer
@@ -62,15 +95,8 @@ end
 -------------------------------
 --- Modes
 -------------------------------
--- Define custom highlights for each mode to color only the mode text
-vim.api.nvim_set_hl(0, "NormalColor", { fg = "#ffffff", bg = "#5f87af", bold = true })
-vim.api.nvim_set_hl(0, "StatusLineModeInsert", { fg = "#ffffff", bg = "#5f875f", bold = true })
-vim.api.nvim_set_hl(0, "StatusLineModeVisual", { fg = "#ffffff", bg = "#af5f5f", bold = true })
-vim.api.nvim_set_hl(0, "StatusLineModeReplace", { fg = "#ffffff", bg = "#af87d7", bold = true })
-vim.api.nvim_set_hl(0, "StatusLineModeCommand", { fg = "#ffffff", bg = "#d7875f", bold = true })
-vim.api.nvim_set_hl(0, "StatusLineModeOther",  { fg = "#ffffff", bg = "#5f5f87", bold = true })
 
----@return string
+-- Define mode names
 local modes = {
   ['n']      = 'NO',
   ['no']     = 'OP',
@@ -86,7 +112,7 @@ local modes = {
   ['v']      = 'VI',
   ['vs']     = 'VI',
   ['V']      = 'VL',
-  ['Vs']     = 'VL',
+  ['Vs']      = 'VL',
   ['\x16s']  = 'VB',
   ['s']      = 'SE',
   ['S']      = 'SL',
@@ -100,7 +126,7 @@ local modes = {
   ['Rv']     = 'RV',
   ['Rvc']    = 'RC',
   ['Rvx']    = 'RX',
-  ['c']      = 'CO',
+  ['c']      = 'CM',
   ['cv']     = 'CV',
   ['r']      = 'PR',
   ['rm']     = 'PM',
@@ -108,24 +134,27 @@ local modes = {
   ['!']      = 'SH',
   ['t']      = 'TE',
 }
---- @return string
+
+--- Function to get mode with built-in highlights
+--- Function to get mode with built-in highlights
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  local mode_color = "%#StatusLineModeOther#"  -- Default color if mode is unrecognized
+  local mode_color = "%#StatusLine#"  -- Default highlight
 
   if current_mode == "n" then
-    mode_color = "%#NormalColor#"
+    mode_color = "%#StatusLine#"           -- Normal mode
   elseif current_mode == "i" then
-    mode_color = "%#StatusLineModeInsert#"
+    mode_color = "%#StatusLineNC#"         -- Insert mode (use StatusLineNC for contrast)
   elseif current_mode == "v" or current_mode == "V" or current_mode == "^V" then
-    mode_color = "%#StatusLineModeVisual#"
+    mode_color = "%#Visual#"               -- Visual mode
   elseif current_mode == "R" then
-    mode_color = "%#StatusLineModeReplace#"
+    mode_color = "%#DiffAdd#"              -- Replace mode (use DiffAdd as a placeholder)
   elseif current_mode == "c" then
-    mode_color = "%#StatusLineModeCommand#"
+    mode_color = "%#IncSearch#"            -- Command mode
   end
 
-  return string.format("%s %s", mode_color, modes[current_mode] or "??"):upper()
+  -- Return the mode string with its color, then reset the highlight to StatusLine
+  return string.format("%s %s %%#StatusLine#", mode_color, modes[current_mode] or "??"):upper()
 end
 
 -------------------------------
@@ -263,18 +292,41 @@ local function lsp_status()
   return string.format("%%#StatusLineLspMessages#%s%%* ", lsp_message)
 end
 
-
 -------------------------------
 --- Git
 -------------------------------
+
+-- Function to get the foreground or background color of a highlight group
+local function get_highlight_color(hl_group, color_type)
+  local hl = vim.api.nvim_get_hl(0, { name = hl_group })
+  return hl[color_type] and string.format("#%06x", hl[color_type]) or nil --The "#%06x" format in the code is a string format specifier that converts a number to a six-digit hexadecimal color code, prefixed with #.
+end
+
+-- Function to set custom Git status highlights using default highlight groups
+local function set_git_status_highlights()
+  local add_fg = get_highlight_color("String", "fg")       -- Greenish color from String
+  local change_fg = get_highlight_color("@diff.delta", "fg") -- Yellowish color from diff.delta
+  local delete_fg = get_highlight_color("DiffDelete", "fg")      -- Reddish color from DiffDelete
+  local statusline_bg = get_highlight_color("StatusLine", "bg") -- Background from StatusLine
+  local gitbranch = get_highlight_color("StatusLine", "bg") -- Background from StatusLine
+
+  -- Define new highlight groups with custom foreground and StatusLine background
+  vim.api.nvim_set_hl(0, "GitStatusAdd", { fg = add_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitStatusChange", { fg = change_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitStatusDelete", { fg = delete_fg, bg = statusline_bg })
+end
+
+-- Call this function once to set up the highlight groups
+set_git_status_highlights()
+
+-- Functions for Git status indicators in the statusline
 
 --- @return string
 local function git_diff_added()
   local added = get_git_diff("added")
   if added > 0 then
-    return string.format("%%#StatusLineGitDiffAdded#+%s%%*", added)
+    return string.format("%%#GitStatusAdd#+%s%%*", added)
   end
-
   return ""
 end
 
@@ -282,9 +334,8 @@ end
 local function git_diff_changed()
   local changed = get_git_diff("changed")
   if changed > 0 then
-    return string.format("%%#StatusLineGitDiffChanged#~%s%%*", changed)
+    return string.format("%%#GitStatusChange#~%s%%*", changed)
   end
-
   return ""
 end
 
@@ -292,32 +343,29 @@ end
 local function git_diff_removed()
   local removed = get_git_diff("removed")
   if removed > 0 then
-    return string.format("%%#StatusLineGitDiffRemoved#-%s%%*", removed)
+    return string.format("%%#GitStatusDelete#-%s%%*", removed)
   end
-
   return ""
 end
 
 --- @return string
 local function git_branch_icon()
-  return "%#StatusLineGitBranchIcon#%*"
+  return "%#StatusLine#%*"  -- Neutral color for icon using StatusLine
 end
 
 --- @return string
 local function git_branch()
   local branch = vim.b.gitsigns_head
-
   if branch == "" or branch == nil then
     return ""
   end
-
-  return string.format("%%#StatusLineMedium#%s%%*", branch)
+  return string.format("%%#StatusLine#%s%%*",branch)  -- Neutral color for branch name
 end
 
 --- @return string
 local function full_git()
   local full = ""
-  local space = "%#StatusLineMedium# %*"
+  local space = "%#StatusLine# %*"  -- Neutral space with StatusLine color
 
   local branch = git_branch()
   if branch ~= "" then
@@ -342,6 +390,9 @@ local function full_git()
 
   return full
 end
+-------------------------------
+--- File Location Percentage 
+-------------------------------
 
 --- @return string
 local function file_percentage()
@@ -411,19 +462,19 @@ StatusLine.active = function()
   local statusline = {
     mode(),
     " ", -- blank for aesthetics
+		filename(),
     full_git(),
 		"%=", -- center alignment
-		filename(),
 		"%=", -- separator
 		"%S ", -- separator
-    lsp_clients(),
+    -- filetype(),
+    -- lsp_clients(),
     lsp_status(),
     lsp_active(),
     diagnostics_error(),
     diagnostics_warns(),
     diagnostics_hint(),
     diagnostics_info(),
-    -- filetype(),
     file_percentage(),
     total_lines(),
   }
