@@ -7,7 +7,7 @@ require "add.lspconfig"
 
 -- require "add.cmp"
 require "add.comment"
-require "add.fidget"
+-- require "add.fidget"
 require "add.flash"
 require "add.gitsigns"
 require "add.harpoon"

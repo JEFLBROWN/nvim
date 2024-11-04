@@ -99,7 +99,7 @@ require('lazy').setup({ -- Lazy Start
 -- Mechanics
 ------------------------------------------------------------
 
-	{ 'j-hui/fidget.nvim', opts = {}, },
+	-- { 'j-hui/fidget.nvim', opts = {}, },
 	{ 'karb94/neoscroll.nvim', },
 	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
 	{ 'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
