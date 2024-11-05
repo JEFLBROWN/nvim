@@ -35,11 +35,11 @@ require('lazy').setup({ -- Lazy Start
 -- Folke
 ------------------------------------------------------------
 
-	{ 'folke/zen-mode.nvim', 
+	{ 'folke/zen-mode.nvim',
 		config = function()
 			require("zen-mode").setup({
 				window = {
-					backdrop = 1,
+					backdrop = 0,
 					width = .61, -- percentage (%) 
 						options = {
      					signcolumn = "no", -- disable signcolumn

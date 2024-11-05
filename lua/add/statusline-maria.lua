@@ -104,7 +104,6 @@ function M.git_component()
     if not head then
         return ''
     end
-
     return string.format(' %s', head)
 end
 

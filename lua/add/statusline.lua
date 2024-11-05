@@ -26,7 +26,7 @@ local modes = {
   ['v']      = 'VI',
   ['vs']     = 'VI',
   ['V']      = 'VL',
-  ['Vs']      = 'VL',
+  ['Vs']     = 'VL',
   ['\x16s']  = 'VB',
   ['s']      = 'SE',
   ['S']      = 'SL',
@@ -108,20 +108,6 @@ local function filename()
   return fname .. " "
 end
 
---- @param severity integer
---- @return integer
-local function get_lsp_diagnostics_count(severity)
-  if not rawget(vim, "lsp") then
-    return 0
-  end
-
-  local count = vim.diagnostic.count(0, { serverity = severity })[severity]
-  if count == nil then
-    return 0
-  end
-
-  return count
-end
 
 --- @param type string
 --- @return integer
@@ -276,20 +262,20 @@ local function full_git()
     full = full .. space .. icon .. space .. branch .. space
   end
 
-  local added = git_diff_added()
-  if added ~= "" then
-    full = full .. added .. space
-  end
-
-  local changed = git_diff_changed()
-  if changed ~= "" then
-    full = full .. changed .. space
-  end
-
-  local removed = git_diff_removed()
-  if removed ~= "" then
-    full = full .. removed .. space
-  end
+  -- local added = git_diff_added()
+  -- if added ~= "" then
+  --   full = full .. added .. space
+  -- end
+  --
+  -- local changed = git_diff_changed()
+  -- if changed ~= "" then
+  --   full = full .. changed .. space
+  -- end
+  --
+  -- local removed = git_diff_removed()
+  -- if removed ~= "" then
+  --   full = full .. removed .. space
+  -- end
 
   return full
 end
@@ -303,7 +289,7 @@ local function lsp_clients()
 
   local clients = vim.lsp.get_clients({ bufnr = current_buf })
   if next(clients) == nil then
-    return ""
+    return " %#StatusLine#% "
   end
 
   local c = {}
@@ -312,6 +298,25 @@ local function lsp_clients()
   end
   return " " .. table.concat(c, "|")
 end
+
+--- @param severity integer
+---@return integer
+local function get_lsp_diagnostics_count(severity)
+  if not rawget(vim, "lsp") then
+    return 0
+  end
+
+  local count = vim.diagnostic.count(0, { serverity = severity })[severity]
+  if count == nil then
+    return 0
+  end
+
+  return count
+end
+
+
+	local nada = "" -- added this myself to pass nothing to diagnostic parameter
+
 --- @return string
 local function lsp_active()
   if not rawget(vim, "lsp") then
@@ -324,16 +329,16 @@ local function lsp_active()
   local space = "%#StatusLineMedium# %*"
 
   if #clients > 0 then
-    return space .. "%#GitStatusAdd#🖳%*"
+    return space .. "%#GitStatusAdd#⦿%*"
   end
   return ""
 end
--- 
+
 --- @return string
 local function diagnostics_error()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
   if count > 0 then
-    return string.format("%%#StatusLineLspError#  %s%%*", count)
+    return string.format("%%#DiagnosticError#•%s%%*", nada  ) -- change nada to 'count' and you get the number of diagnostics 
   end
 
   return ""
@@ -343,7 +348,7 @@ end
 local function diagnostics_warns()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
   if count > 0 then
-    return string.format("%%#StatusLineLspWarn#  %s%%*", count)
+    return string.format("%%#DiagnosticWarn#•%s%%*", nada)
   end
 
   return ""
@@ -353,7 +358,7 @@ end
 local function diagnostics_hint()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.HINT)
   if count > 0 then
-    return string.format("%%#StatusLineLspHint#  %s%%*", count)
+    return string.format("%%#DiagnosticHint#•%s%%*", nada)
   end
 
   return ""
@@ -363,15 +368,15 @@ end
 local function diagnostics_info()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.INFO)
   if count > 0 then
-    return string.format("%%#StatusLineLspInfo#  %s%%*", count)
+    return string.format("%%#DiagnosticInfo#•%s%%*", nada)
   end
 
   return ""
 end
 
----------------
+----------------------
 -- LSP Progress
-----------------
+----------------------
 
 --- @class LspProgress
 --- @field client vim.lsp.Client?
@@ -520,9 +525,9 @@ StatusLine.active = function()
     full_git(),
     lsp_active(),
     lsp_clients(),
-    -- diagnostics_error(),
-    -- diagnostics_warns(),
-    -- diagnostics_hint(),
+    diagnostics_error(),
+    diagnostics_warns(),
+    diagnostics_hint(),
     file_percentage(),
     total_lines(),
   }
@@ -550,5 +555,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType" }, {
 })
 return M
 
-
+-- ◉ lsp is loaded, turns green
+-- ○ no lsp loaded
 -- the way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created

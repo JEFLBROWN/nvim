@@ -30,13 +30,11 @@ o.fillchars:append { eob = " " }    -- remove tilde ~
 o.relativenumber = true
 -- o.ls = 0 -- last status (in statusline) dont show
 -- o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
--- o.winbar = "%= %#PmenuSel# %t " -- this sets the filename at the topright of the screen
-
-
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
+
 -- vim.cmd[[colorscheme everforest]]
 vim.cmd[[colorscheme kanagawa-paper]]
 -- vim.cmd[[colorscheme nordic]]
@@ -63,18 +61,3 @@ vim.keymap.set({'n', 'v'}, '<leader>0', function () vim.cmd([[
   exe "normal " . cmd . key
   set norelativenumber
 ]]) end)
-
--- attempts to set a colorscheme for markdown
--- vim.api.nvim_create_autocmd("Filetype", {
---     group = vim.api.nvim_create_augroup("colorscheme", { clear = true }),
---     pattern = { "markdown" },
---     command = "colorscheme everforest",
--- })
--- hide the ~ by making it the same color as the bkg
--- vim.cmd[[hi! EndOfBuffer ctermfg=black ctermfg=black guiblack=black guifg=black]]
-
--- these hide the bottom command line
--- vim.cmd[[vim.o.ls = 0]]
--- vim.cmd[[vim.o.ch = 0]]
-
-
