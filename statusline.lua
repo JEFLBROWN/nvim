@@ -424,10 +424,10 @@ StatusLine.active = function()
 -- this is the order of the statusline
   local statusline = {
     mode(),
-		filename(),
+		-- filename(),
 	-- M.filetype(),
-    full_git(),
 		"%S ", -- separator
+    full_git(),
     lsp_status(),
 		"%S ", -- separator
 		"%=", -- center alignment

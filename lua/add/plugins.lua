@@ -89,7 +89,13 @@ require('lazy').setup({ -- Lazy Start
 	-- { 'rktjmp/lush.nvim' }, -- tool to help make a colorscheme
 	{ 'SmiteshP/nvim-navic'}, -- winbar context
 	{ 'LunarVim/breadcrumbs.nvim' },
-
+  -- { 'Bekaboo/dropbar.nvim',
+	--TODO
+  --   -- optional, but required for fuzzy finder support
+  --   dependencies = {
+  --     'nvim-telescope/telescope-fzf-native.nvim'
+  --   }
+  -- },
 ------------------------------------------------------------
 	-- Completion & Snippets
 ------------------------------------------------------------
