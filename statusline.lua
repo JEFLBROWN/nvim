@@ -1,4 +1,5 @@
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
+local icons = require 'mini.icons'
 local M = {}
 
 local function get_highlight_color(hl_group, color_type) -- this is a general color function, gets the foreground and background
@@ -6,6 +7,20 @@ local function get_highlight_color(hl_group, color_type) -- this is a general co
   return hl[color_type] and string.format("#%06x", hl[color_type]) or nil --The "#%06x" format in the code is a string format specifier that converts a number to a six-digit hexadecimal color code, prefixed with #.
 end
 
+function M.get_or_create_hl(hl)
+    local hl_name = 'Statusline' .. hl
+
+    if not statusline_hls[hl] then
+        -- If not in the cache, create the highlight group using the icon's foreground color
+        -- and the statusline's background color.
+        local bg_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
+        local fg_hl = vim.api.nvim_get_hl(0, { name = hl })
+        vim.api.nvim_set_hl(0, hl_name, { bg = ('#%06x'):format(bg_hl.bg), fg = ('#%06x'):format(fg_hl.fg) })
+        statusline_hls[hl] = true
+    end
+
+    return hl_name
+end
 -------------------------------
 --- Modes
 -------------------------------
@@ -74,57 +89,16 @@ end
 --- Filetype
 -------------------------------
 
---- @return string
-local function filetype_icon()
-  local filetype = vim.bo.filetype
-  if filetype == "" then
-    return ""
-  end
+---@return string
+function M.filetype()
 
-  -- Retrieve the icon for the current file type from mini-icons
-  local icon = require('mini.icons').get_icon(filetype)  -- Adjust based on mini-icons' API
 
-  -- Fallback to filetype name if icon is not found
-  return icon or filetype
+
+
+
+	return ""
 end
 
---- @return string
-local function filename()
-  local fname = vim.fn.expand("%:t")
-  if fname == "" then
-    return ""
-  end
-
-  -- Concatenate the icon and filename for display
-  return filetype_icon() .. " " .. fname .. " "
-end
-
---- @return string
-local function filename()
-  local fname = vim.fn.expand("%:t")
-  if fname == "" then
-    return ""
-  end
-  return fname .. " "
-end
-
-
---- @param type string
---- @return integer
-local function get_git_diff(type)
-  local gsd = vim.b.gitsigns_status_dict
-  if gsd and gsd[type] then
-    return gsd[type]
-  end
-  return 0
-end
-
--------------------------------------------------------------
--- Ensure mini-icons is loaded
-local has_icons, mini_icons = pcall(require, 'mini.icons')
-if not has_icons then
-  print("Error: mini.icons not found. Please install or configure mini-icons.")
-end
 
 -- Get the background color of StatusLine to apply to the icon
 local function get_statusline_bg()
@@ -188,55 +162,6 @@ end
 --- Git
 -------------------------------
 
--- Function to set custom Git status highlights using default highlight groups
-local function set_git_status_highlights()
-  local add_fg = get_highlight_color("String", "fg")       -- Greenish color from String
-  local change_fg = get_highlight_color("@diff.delta", "fg") -- Yellowish color from diff.delta
-  local delete_fg = get_highlight_color("DiffDelete", "fg")      -- Reddish color from DiffDelete
-  local statusline_bg = get_highlight_color("StatusLine", "bg") -- Background from StatusLine
-  local branch_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
-  local icon_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
-
-  -- Define new highlight groups with custom foreground and StatusLine background
-  vim.api.nvim_set_hl(0, "GitStatusAdd", { fg = add_fg, bg = statusline_bg })
-  vim.api.nvim_set_hl(0, "GitStatusChange", { fg = change_fg, bg = statusline_bg })
-  vim.api.nvim_set_hl(0, "GitStatusDelete", { fg = delete_fg, bg = statusline_bg })
-  vim.api.nvim_set_hl(0, "GitBranch", { fg = branch_fg, bg = statusline_bg })
-  vim.api.nvim_set_hl(0, "GitIcon", { fg = icon_fg, bg = statusline_bg })
-end
-
--- Call this function once to set up the highlight groups
-set_git_status_highlights()
-
--- Functions for Git status indicators in the statusline
-
---- @return string
-local function git_diff_added()
-  local added = get_git_diff("added")
-  if added > 0 then
-    return string.format("%%#GitStatusAdd#+%s%%*", added)
-  end
-  return ""
-end
-
---- @return string
-local function git_diff_changed()
-  local changed = get_git_diff("changed")
-  if changed > 0 then
-    return string.format("%%#GitStatusChange#~%s%%*", changed)
-  end
-  return ""
-end
-
---- @return string
-local function git_diff_removed()
-  local removed = get_git_diff("removed")
-  if removed > 0 then
-    return string.format("%%#GitStatusDelete#-%s%%*", removed)
-  end
-  return ""
-end
-
 --- @return string
 local function git_branch_icon()
   return "%#GitIcon#%*"  -- Neutral color for icon using StatusLine
@@ -259,23 +184,8 @@ local function full_git()
   local branch = git_branch()
   if branch ~= "" then
     local icon = git_branch_icon()
-    full = full .. space .. icon .. space .. branch .. space
+    full = full .. icon .. space .. branch
   end
-
-  -- local added = git_diff_added()
-  -- if added ~= "" then
-  --   full = full .. added .. space
-  -- end
-  --
-  -- local changed = git_diff_changed()
-  -- if changed ~= "" then
-  --   full = full .. changed .. space
-  -- end
-  --
-  -- local removed = git_diff_removed()
-  -- if removed ~= "" then
-  --   full = full .. removed .. space
-  -- end
 
   return full
 end
@@ -289,15 +199,19 @@ local function lsp_clients()
 
   local clients = vim.lsp.get_clients({ bufnr = current_buf })
   if next(clients) == nil then
-    return " %#StatusLine#% "
+    return " %#StatusLine#% ○"
   end
 
   local c = {}
   for _, client in pairs(clients) do
     table.insert(c, client.name)
   end
-  return " " .. table.concat(c, "|")
+  return " " .. table.concat(c, "|") .. " "
 end
+
+-------------------------------
+--- LSP signal dots
+-------------------------------
 
 --- @param severity integer
 ---@return integer
@@ -313,7 +227,6 @@ local function get_lsp_diagnostics_count(severity)
 
   return count
 end
-
 
 	local nada = "" -- added this myself to pass nothing to diagnostic parameter
 
@@ -338,7 +251,7 @@ end
 local function diagnostics_error()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
   if count > 0 then
-    return string.format("%%#DiagnosticError#•%s%%*", nada  ) -- change nada to 'count' and you get the number of diagnostics 
+    return string.format("%%#DiagnosticError#•%s%%*", nada) -- change nada to 'count' and you get the number of diagnostics 
   end
 
   return ""
@@ -378,12 +291,12 @@ end
 -- LSP Progress
 ----------------------
 
---- @class LspProgress
---- @field client vim.lsp.Client?
---- @field kind string?
---- @field title string?
---- @field percentage integer?
---- @field message string?
+----- @class LspProgress
+----- @field client vim.lsp.Client?
+----- @field kind string?
+----- @field title string?
+----- @field percentage integer?
+----- @field message string?
 local lsp_progress = {
   client = nil,
   kind = nil,
@@ -512,13 +425,14 @@ StatusLine.active = function()
   local statusline = {
     mode(),
 		filename(),
+	-- M.filetype(),
+    full_git(),
 		"%S ", -- separator
     lsp_status(),
 		"%S ", -- separator
 		"%=", -- center alignment
     -- filetype(),
     diagnostics_info(),
-    full_git(),
     lsp_active(),
     lsp_clients(),
     diagnostics_error(),

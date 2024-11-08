@@ -35,9 +35,11 @@ o.relativenumber = true
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
--- vim.cmd[[colorscheme everforest]]
-vim.cmd[[colorscheme kanagawa-paper]]
--- vim.cmd[[colorscheme nordic]]
+-- vim.cmd[[colorscheme kanagawa-paper]]
+-- vim.cmd[[colorscheme mosel]]
+-- vim.cmd[[colorscheme darkplus]]
+vim.cmd[[colorscheme nordic]]
+-- vim.cmd[[colorscheme gruvbox-material]]
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]

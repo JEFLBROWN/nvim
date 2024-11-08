@@ -14,11 +14,19 @@ keymap("", "<Space>", "<Nop>", opts)												--Remap space as leader key
 keymap("n", ";", ":", opts)																	-- Colon is Semi-Colon in normal mode
 keymap("v", ";", ":", opts)																	-- Colon is Semi-Colon in visual mode
 keymap("n", "gf", ":edit <cfile><CR>", opts)								-- open non-existant files in new buffer. good if you're making things in one buffer that refer to another file, but the file doesn't exist. 
-
 keymap("v", "<", "<gv", opts)																-- Stay in indent mode
 keymap("v", ">", ">gv", opts)																-- Stay in indent mode
 
 keymap('n', "B", "<C-q>", opts) 														-- Better Visual Block keybind 
+
+-- Jump to next/prevous LSP diagnostic
+keymap("n", "]g", "vim.diagnostic.goto_next", opts)
+keymap("n", "[g", "vim.diagnostic.goto_prev" , opts) --TODO go to next and previous LSP diagnostic
+-- Create new file
+--:new will create a split window with an unnamed buffer.
+--:enew will open one in the current window.
+--:vnew will open one in a vertically split window.
+--:tabnew will open one in a new tab.
 
 -- Split Windows
 keymap("n", "<leader>v","<C-w>v", opts)											-- Open a new Vertical Split
@@ -30,7 +38,7 @@ keymap("n", "<leader>w","<C-W>q", opts)											-- Close Split window
 keymap("n", "<C-j>","<C-W>r <C-W>h", opts)									-- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>","<C-W>l", opts)													-- Jump to the right Split
 keymap("n", "<C-h>","<C-W>h", opts)													-- Jump to the Left Split	
--- keymap("n", "<leader>V","<C-w>t<C-w>H", opts) 						-- switch horiz split to Vertical DEPRECIATED (but felt good to execute)
+keymap("n", "<leader>V","<C-w>t<C-w>H", opts)
 -- TODO add functionality for the rare horizontal split
 
 -- buffers

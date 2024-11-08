@@ -25,45 +25,22 @@ require('lazy').setup({ -- Lazy Start
 -- Styles
 ------------------------------------------------------------
 
+	{ 'slugbyte/lackluster.nvim' },
 	{ 'sho-87/kanagawa-paper.nvim', lazy = false, priority = 1000, opts = {}, },
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
 	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
 	{ 'chentoast/marks.nvim', event = "VeryLazy", opts = {}, },
 	{ 'brenoprata10/nvim-highlight-colors', opts ={}, },
-
+	{ 'Domeee/mosel.nvim' },
+	{ 'LunarVim/darkplus.nvim' },
+	{ 'AlexvZyl/nordic.nvim'},
+	{ 'sainnhe/gruvbox-material'},
 ------------------------------------------------------------
 -- Folke
 ------------------------------------------------------------
 
-	{ 'folke/zen-mode.nvim',
-		config = function()
-			require("zen-mode").setup({
-				window = {
-					backdrop = 0,
-					width = .61, -- percentage (%) 
-						options = {
-     					signcolumn = "no", -- disable signcolumn
-      				number = false, -- disable number column
-      				-- relativenumber = false, -- disable relative numbers
-      				-- cursorline = false, -- disable cursorline
-      				-- cursorcolumn = false, -- disable cursor column
-      				-- foldcolumn = "1", -- disable fold column
-      				-- list = false, -- disable whitespace characters
-    				},
-				},
-				plugins = {
-						gitsigns = { enabled = false }, -- disables git signs
-					kitty = {
-						enabled = true,
-						font = "+5", -- font size increment
-						},
-			},
-			})
-		end,
-		},
-
+	{ 'folke/zen-mode.nvim' },
 	{ 'folke/twilight.nvim', opts = {}, },
-	
 	{ "folke/flash.nvim",
 		--search labels, enhanced character motions, and Treesitter integration.
 		event = "VeryLazy",
@@ -85,15 +62,16 @@ require('lazy').setup({ -- Lazy Start
 -- Mini
 ------------------------------------------------------------
 
-	{ 'echasnovski/mini.surround', version = '*'},
-	{ 'echasnovski/mini.move', version= '*' },
+	{ 'echasnovski/mini.colors', version = '*' },
 	{ 'echasnovski/mini.comment', version = '*' },
-	{ 'echasnovski/mini.icons', version = false },
+	{ 'echasnovski/mini.completion', version = '*' },
 	{ 'echasnovski/mini.files', version = false },
+	{ 'echasnovski/mini.icons', version = false },
+	{ 'echasnovski/mini.move', version= '*' },
+	{ 'echasnovski/mini.sessions', version = '*' },
 	{ 'echasnovski/mini.starter', version = false },
 	{ 'echasnovski/mini.statusline', version = false },
-	{ 'echasnovski/mini.completion', version = '*' },
-	{ 'echasnovski/mini.sessions', version = '*' },
+	{ 'echasnovski/mini.surround', version = '*'},
 
 ------------------------------------------------------------
 -- Mechanics
@@ -101,8 +79,16 @@ require('lazy').setup({ -- Lazy Start
 
 	-- { 'j-hui/fidget.nvim', opts = {}, },
 	{ 'karb94/neoscroll.nvim', },
-	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal 
 	{ 'windwp/nvim-autopairs'},  -- Autopairs, integrates with both cmp and treesitter
+
+------------------------------------------------------------
+-- Utilities
+------------------------------------------------------------
+
+	{ 'akinsho/toggleterm.nvim'}, -- toggle a floating terminal
+	-- { 'rktjmp/lush.nvim' }, -- tool to help make a colorscheme
+	{ 'SmiteshP/nvim-navic'}, -- winbar context
+	{ 'LunarVim/breadcrumbs.nvim' },
 
 ------------------------------------------------------------
 	-- Completion & Snippets
@@ -144,8 +130,8 @@ require('lazy').setup({ -- Lazy Start
 ------------------------------------------------------------
 
 	'williamboman/mason.nvim',
-	'williamboman/mason-lspconfig.nvim', 
-	'neovim/nvim-lspconfig',	
+	'williamboman/mason-lspconfig.nvim',
+	'neovim/nvim-lspconfig',
 	{
 		'MaximilianLloyd/tw-values.nvim',
 	   keys = {
@@ -154,7 +140,7 @@ require('lazy').setup({ -- Lazy Start
 	   opts = {
 	       border = "rounded", -- Valid window border style,
 	       show_unknown_classes = true -- Shows the unknown classes popup
-			},	
+			},
 	 	},
 
 }) -- END LAZY
