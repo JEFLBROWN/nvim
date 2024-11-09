@@ -1,92 +1,53 @@
+:fi
+
+-- My own version of Dracula.
+
 -- Reset highlighting.
 vim.cmd.highlight 'clear'
 if vim.fn.exists 'syntax_on' then
     vim.cmd.syntax 'reset'
 end
 vim.o.termguicolors = true
-vim.g.colors_name = 'jasper'
-
--- "background": "#183a37",
--- "foreground": "#dac8a7",
--- "cursorColor": "#dac8a7",
--- "black": "#121212",
--- "red": "#b4605d",
--- "green": "#7d8b6d",
--- "yellow": "#7A6F4D",
--- "blue": "#5a7a9f",
--- "purple": "#88789b",
--- "cyan": "#6b888d",
--- "white": "#dac8a7",
--- "brightBlack": "#2a2f36",
--- "brightRed": "#d57f7a",
--- "brightGreen": "#96aa83",
--- "brightYellow": "#c4a579",
--- "brightBlue": "#657fa9",
--- "brightPurple": "#9987b2",
--- "brightCyan": "#85a3aa",
--- "brightWhite": "#e4d6be"
-
--- Foggy Teal - #6a8483
--- Sage Teal - #547f7e
--- Stormy Sea - #4a6b6a
--- Blue Spruce - #3e5c5b
--- Muted Jade - #3a5c55
--- Pacific Teal - #335e5a
--- Dusky Teal - #26484a
--- Slate Teal - #2a3f3f
--- Evergreen - #1f3534
--- Deep Teal - #183a37
---
--- Pale Cyan - #a0d9d9
--- Sky Cyan - #8acccf
--- Dusty Cyan - #6fb7b8
--- Teal Cyan - #5aa6a7
--- Winter Cyan - #4e9494
--- Dark Aqua - #3a7f7f
--- Storm Cyan - #326a6b
--- Ocean Cyan - #295757
--- Seafoam Cyan - #204545
--- Deep Cyan - #183636
-
+vim.g.colors_name = 'miss-dracula'
 
 local colors = {
-    bg = "#0F1112",
-    fg = "#A8B7AC",
-		black = "#644455",
-		comment = "#5A6570",
-		grey = "#A9ABAC",
-		gutter_fg = "#4B5263",
-		menu = "#21222C",
-		nontext = "#3B4048",
-		selection = "#3C4148",
-		visual = "#3E4452",
-		white = "#879794",
-		bright_white = "#e4d6be",
-		blue = "#326a6b",
-		bright_blue = "#657fa9",
-		cyan = "#6b888d",
-		neon_cyan = "#00DFDF",
-		bright_cyan = "#85a3aa",
-		lavender = "#6272A4",
-		transparent_blue = "#19272C",
-		green = "#7d8b6d",
-		bright_green = "#96aa83",
-		transparent_green = "#22372c",
-		red = "#9a5a4a",
-		bright_red = "#d57f7a",
-		orange = "#A63E26",
-		transparent_red = "#342231",
-		fuchsia = "#7B2358",
-		lilac = "#6D5978",
-		purple = "#88789b",
-		bright_magenta = "#9987b2",
-		pink = "#E48CC1",
-		yellow = "#FEC406",
-		bright_yellow = "#FEFF02",
-		transparent_yellow = "#202624"
+    bg = '#0E1419',
+    black = '#000000',
+    bright_blue = '#D0B5F3',
+    bright_cyan = '#BCF4F5',
+    bright_green = '#97EDA2',
+    bright_magenta = '#E7A1D7',
+    bright_red = '#EC6A88',
+    bright_white = '#FFFFFF',
+    bright_yellow = '#F6F6B6',
+    comment = '#B08BBB',
+    cyan = '#A7DFEF',
+    fg = '#F6F6F5',
+    fuchsia = '#E11299',
+    green = '#87E58E',
+    grey = '#A9ABAC',
+    gutter_fg = '#4B5263',
+    lavender = '#6272A4',
+    lilac = '#6D5978',
+    menu = '#21222C',
+    neon_cyan = '#00DFDF',
+    nontext = '#3B4048',
+    orange = '#FFBFA9',
+    pink = '#E48CC1',
+    purple = '#BAA0E8',
+    red = '#E95678',
+    selection = '#3C4148',
+    transparent_black = '#1E1F29',
+    transparent_blue = '#19272C',
+    transparent_green = '#22372c',
+    transparent_red = '#342231',
+    transparent_yellow = '#202624',
+    visual = '#3E4452',
+    white = '#F6F6F5',
+    yellow = '#E8EDA2',
 }
 
--- Terminal colors
+-- Terminal colors.
 vim.g.terminal_color_0 = colors.transparent_black
 vim.g.terminal_color_1 = colors.red
 vim.g.terminal_color_2 = colors.green
@@ -139,8 +100,8 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     CurSearch = { fg = colors.black, bg = colors.fuchsia },
     Cursor = { fg = colors.black, bg = colors.white },
     CursorColumn = { bg = colors.transparent_black },
-    CursorLine = { bg = colors.transparent_yellow },
-    CursorLineNr = { fg = colors.orange, bold = true },
+    CursorLine = { bg = colors.selection },
+    CursorLineNr = { fg = colors.lilac, bold = true },
     Define = { fg = colors.purple },
     Directory = { fg = colors.cyan },
     EndOfBuffer = { fg = colors.bg },
@@ -154,7 +115,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     Include = { fg = colors.purple },
     Keyword = { fg = colors.cyan },
     Label = { fg = colors.cyan },
-    LineNr = { fg = colors.gutter_fg },
+    LineNr = { fg = colors.lilac },
     Macro = { fg = colors.purple },
     MatchParen = { sp = colors.fg, underline = true },
     NonText = { fg = colors.nontext },
@@ -169,7 +130,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     PreProc = { fg = colors.yellow },
     Question = { fg = colors.purple },
     Repeat = { fg = colors.pink },
-    Search = { fg = colors.bg, bg = colors.black }, -- highlight color for selected text, in search or whatever
+    Search = { fg = colors.bg, bg = colors.orange },
     SignColumn = { bg = colors.bg },
     Special = { fg = colors.green, italic = true },
     SpecialComment = { fg = colors.comment, italic = true },
@@ -179,7 +140,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     SpellLocal = { sp = colors.yellow, underline = true },
     SpellRare = { sp = colors.yellow, underline = true },
     Statement = { fg = colors.purple },
-    StatusLine = { fg = colors.white, bg = colors.bg },
+    StatusLine = { fg = colors.white, bg = colors.transparent_black },
     StorageClass = { fg = colors.pink },
     Structure = { fg = colors.yellow },
     Substitute = { fg = colors.fuchsia, bg = colors.orange, bold = true },
@@ -194,7 +155,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     WarningMsg = { fg = colors.yellow },
     WildMenu = { fg = colors.transparent_black, bg = colors.white },
 
-    -- -- Treesitter.
+    -- Treesitter.
     ['@annotation'] = { fg = colors.yellow },
     ['@attribute'] = { fg = colors.cyan },
     ['@boolean'] = { fg = colors.purple },
@@ -214,12 +175,12 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@keyword.function'] = { fg = colors.cyan },
     ['@keyword.function.ruby'] = { fg = colors.pink },
     ['@keyword.include'] = { fg = colors.pink },
-    ['@keyword.operator'] = { fg = colors.blue },
+    ['@keyword.operator'] = { fg = colors.pink },
     ['@keyword.repeat'] = { fg = colors.pink },
     ['@label'] = { fg = colors.cyan },
-    ['@markup'] = { fg = colors.nontext },
+    ['@markup'] = { fg = colors.orange },
     ['@markup.emphasis'] = { fg = colors.yellow, italic = true },
-    ['@markup.heading'] = { fg = colors.nontext, bold = true },
+    ['@markup.heading'] = { fg = colors.pink, bold = true },
     ['@markup.link'] = { fg = colors.orange, bold = true },
     ['@markup.link.uri'] = { fg = colors.yellow, italic = true },
     ['@markup.list'] = { fg = colors.cyan },
@@ -229,12 +190,12 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@module'] = { fg = colors.orange },
     ['@number'] = { fg = colors.purple },
     ['@number.float'] = { fg = colors.green },
-    ['@operator'] = { fg = colors.blue },
+    ['@operator'] = { fg = colors.pink },
     ['@parameter.reference'] = { fg = colors.orange },
-    ['@property'] = { fg = colors.blue },
+    ['@property'] = { fg = colors.purple },
     ['@punctuation.bracket'] = { fg = colors.fg },
     ['@punctuation.delimiter'] = { fg = colors.fg },
-    ['@string'] = { fg = colors.cyan },
+    ['@string'] = { fg = colors.yellow },
     ['@string.escape'] = { fg = colors.cyan },
     ['@string.regexp'] = { fg = colors.bright_red },
     ['@string.special.symbol'] = { fg = colors.purple },
@@ -245,9 +206,9 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@type'] = { fg = colors.bright_cyan },
     ['@type.builtin'] = { fg = colors.cyan, italic = true },
     ['@type.qualifier'] = { fg = colors.pink },
-    ['@variable'] = { fg = colors.cyan },
+    ['@variable'] = { fg = colors.fg },
     ['@variable.builtin'] = { fg = colors.purple },
-    ['@variable.member'] = { fg = colors.green },
+    ['@variable.member'] = { fg = colors.orange },
     ['@variable.parameter'] = { fg = colors.orange },
 
     -- Semantic tokens.
@@ -266,8 +227,8 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@lsp.type.macro'] = { fg = colors.cyan },
     ['@lsp.type.method'] = { fg = colors.green },
     ['@lsp.type.namespace'] = { fg = colors.orange },
-    ['@lsp.type.partransparent_yellow'] = { fg = colors.orange },
-    ['@lsp.type.property'] = { fg = colors.blue },
+    ['@lsp.type.parameter'] = { fg = colors.orange },
+    ['@lsp.type.property'] = { fg = colors.purple },
     ['@lsp.type.struct'] = { fg = colors.cyan },
     ['@lsp.type.type'] = { fg = colors.bright_cyan },
     ['@lsp.type.variable'] = { fg = colors.fg },
@@ -338,31 +299,31 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     CmpItemMenu = { fg = colors.grey },
 
     -- Dap UI.
-    -- DapStoppedLine = { default = true, link = 'Visual' },
-    -- DapUIBreakpointsCurrentLine = { fg = colors.bright_green, bold = true },
-    -- DapUIBreakpointsInfo = { fg = colors.bright_green },
-    -- DapUIBreakpointsPath = { fg = colors.bright_cyan },
-    -- DapUIDecoration = { fg = colors.bright_cyan },
-    -- DapUIFloatBorder = { fg = colors.bright_cyan },
-    -- DapUILineNumber = { fg = colors.bright_cyan },
-    -- DapUIModifiedValue = { fg = colors.bright_cyan, bold = true },
-    -- DapUIPlayPause = { fg = colors.bright_green },
-    -- DapUIRestart = { fg = colors.green },
-    -- DapUIScope = { fg = colors.bright_cyan },
-    -- DapUISource = { fg = colors.bright_blue },
-    -- DapUIStepBack = { fg = colors.cyan },
-    -- DapUIStepInto = { fg = colors.cyan },
-    -- DapUIStepOut = { fg = colors.cyan },
-    -- DapUIStepOver = { fg = colors.cyan },
-    -- DapUIStop = { fg = colors.red },
-    -- DapUIStoppedThread = { fg = colors.bright_cyan },
-    -- DapUIThread = { fg = colors.bright_green },
-    -- DapUIType = { fg = colors.bright_blue },
-    -- DapUIWatchesEmpty = { fg = colors.pink },
-    -- DapUIWatchesError = { fg = colors.pink },
-    -- DapUIWatchesValue = { fg = colors.bright_green },
-    -- DapUIWinSelect = { fg = colors.bright_cyan, bold = true },
-    -- NvimDapVirtualText = { fg = colors.lavender, underline = true },
+    DapStoppedLine = { default = true, link = 'Visual' },
+    DapUIBreakpointsCurrentLine = { fg = colors.bright_green, bold = true },
+    DapUIBreakpointsInfo = { fg = colors.bright_green },
+    DapUIBreakpointsPath = { fg = colors.bright_cyan },
+    DapUIDecoration = { fg = colors.bright_cyan },
+    DapUIFloatBorder = { fg = colors.bright_cyan },
+    DapUILineNumber = { fg = colors.bright_cyan },
+    DapUIModifiedValue = { fg = colors.bright_cyan, bold = true },
+    DapUIPlayPause = { fg = colors.bright_green },
+    DapUIRestart = { fg = colors.green },
+    DapUIScope = { fg = colors.bright_cyan },
+    DapUISource = { fg = colors.bright_blue },
+    DapUIStepBack = { fg = colors.cyan },
+    DapUIStepInto = { fg = colors.cyan },
+    DapUIStepOut = { fg = colors.cyan },
+    DapUIStepOver = { fg = colors.cyan },
+    DapUIStop = { fg = colors.red },
+    DapUIStoppedThread = { fg = colors.bright_cyan },
+    DapUIThread = { fg = colors.bright_green },
+    DapUIType = { fg = colors.bright_blue },
+    DapUIWatchesEmpty = { fg = colors.pink },
+    DapUIWatchesError = { fg = colors.pink },
+    DapUIWatchesValue = { fg = colors.bright_green },
+    DapUIWinSelect = { fg = colors.bright_cyan, bold = true },
+    NvimDapVirtualText = { fg = colors.lavender, underline = true },
 
     -- Diffs.
     DiffAdd = { fg = colors.green, bg = colors.transparent_green },
@@ -379,7 +340,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     MsgSeparator = { fg = colors.lilac },
 
     -- Winbar styling.
-    WinBar = { fg = colors.fg, bg = colors.bg },
+    WinBar = { fg = colors.fg, bg = colors.transparent_black },
     WinBarDir = { fg = colors.bright_magenta, bg = colors.transparent_black, italic = true },
     WinBarNC = { bg = colors.transparent_black },
     WinBarSeparator = { fg = colors.green, bg = colors.transparent_black },
@@ -403,8 +364,8 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     TabLineSel = { bg = colors.purple },
 
     -- When triggering flash, use a white font and make everything in the backdrop italic.
-    -- FlashBackdrop = { italic = true },
-    -- FlashPrompt = { link = 'Normal' },
+    FlashBackdrop = { italic = true },
+    FlashPrompt = { link = 'Normal' },
 
     -- Make these titles more visible.
     MiniClueTitle = { bold = true, fg = colors.cyan },

@@ -1,5 +1,8 @@
 -- Tiger Iron
 
+local yellow = "#826f4e"
+
+
 -- Jasper Color Scheme for Neovim
 vim.opt.termguicolors = true
 
@@ -9,7 +12,7 @@ vim.api.nvim_set_hl(0, "LineNr", { fg = "#a89a80" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#c4a579" })
 
 -- Basic groups
-vim.api.nvim_set_hl(0, "Comment", { fg = "#3a3f46", italic = true })          -- Muted purple for comments
+vim.api.nvim_set_hl(0, "Comment", { fg = "#484E56", italic = true })          -- Muted purple for comments
 vim.api.nvim_set_hl(0, "Constant", { fg = "#a48f6d" })                        -- Earthy yellow for constants
 vim.api.nvim_set_hl(0, "String", { fg = "#d2b27e" })                          -- Warm amber for strings
 vim.api.nvim_set_hl(0, "Identifier", { fg = "#dac8a7" })                      -- Cream for identifiers
@@ -21,10 +24,11 @@ vim.api.nvim_set_hl(0, "Special", { fg = "#85a3aa" })                         --
 
 -- UI groups
 vim.api.nvim_set_hl(0, "StatusLine", { bg = "#121212", fg = "#dac8a7" })
+vim.api.nvim_set_hl(0, "WinBar", { bg = "#121212", fg = "#dac8a7" })
 vim.api.nvim_set_hl(0, "Pmenu", { bg = "#18191F", fg = "#dac8a7" })
 vim.api.nvim_set_hl(0, "VertSplit", { fg = "#2a2f36" })
 vim.api.nvim_set_hl(0, "Search", { bg = "#66583e", fg = "#dac8a7" })
-vim.api.nvim_set_hl(0, "incsearch", { bg = "#826f4e", fg = "#dac8a7" })
+vim.api.nvim_set_hl(0, "incsearch", { bg = "yellow", fg = "#dac8a7" })
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#111111" })                          -- Highlighted selection
 
 -- Modes
