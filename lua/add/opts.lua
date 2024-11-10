@@ -35,7 +35,9 @@ o.relativenumber = true
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
 
-vim.cmd[[colorscheme jasper]]
+vim.cmd[[highlight Normal ctermbg=NONE guibg=NONE]] -- this makes the background transparent.
+-- vim.cmd[[colorscheme jasper]]
+vim.cmd[[colorscheme terafox]]
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]

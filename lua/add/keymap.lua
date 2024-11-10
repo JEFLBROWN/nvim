@@ -19,6 +19,9 @@ keymap("v", ">", ">gv", opts)																-- Stay in indent mode
 
 keymap('n', "B", "<C-q>", opts) 														-- Better Visual Block keybind 
 
+keymap('n', "<leader>i", ":Inspect<CR>", opts)
+
+
 -- Jump to next/prevous LSP diagnostic
 keymap("n", "]g", "vim.diagnostic.goto_next", opts)
 keymap("n", "[g", "vim.diagnostic.goto_prev" , opts) --TODO go to next and previous LSP diagnostic
@@ -60,15 +63,14 @@ keymap("n","-",":lua MiniFiles.open()<CR>",opts)						-- Mini Files
 ---------------------------------------------------
 
 -- projects
-keymap('n', '<C-p>',"<cmd>lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
-
-keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
 keymap("n", "<leader>/", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
+keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown())<cr>", opts)
-keymap("n", "<leader>t", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
+-- keymap("n", "<leader>i", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) -- finder with preview
 keymap("n", "<leader>m", "<cmd>lua require('telescope.builtin').marks(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap("n", "<leader>t", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>", opts)
+keymap('n', '<leader>p',"<cmd>lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
 
 ---------------------------------------------------
 -- Harpoon

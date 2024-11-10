@@ -1,89 +1,41 @@
 -- Reset highlighting.
-vim.cmd.highlight 'clear'
-if vim.fn.exists 'syntax_on' then
-    vim.cmd.syntax 'reset'
-end
-vim.o.termguicolors = true
-vim.g.colors_name = 'jasper'
-
--- "background": "#183a37",
--- "foreground": "#dac8a7",
--- "cursorColor": "#dac8a7",
--- "black": "#121212",
--- "red": "#b4605d",
--- "green": "#7d8b6d",
--- "yellow": "#7A6F4D",
--- "blue": "#5a7a9f",
--- "purple": "#88789b",
--- "cyan": "#6b888d",
--- "white": "#dac8a7",
--- "brightBlack": "#2a2f36",
--- "brightRed": "#d57f7a",
--- "brightGreen": "#96aa83",
--- "brightYellow": "#c4a579",
--- "brightBlue": "#657fa9",
--- "brightPurple": "#9987b2",
--- "brightCyan": "#85a3aa",
--- "brightWhite": "#e4d6be"
-
--- Foggy Teal - #6a8483
--- Sage Teal - #547f7e
--- Stormy Sea - #4a6b6a
--- Blue Spruce - #3e5c5b
--- Muted Jade - #3a5c55
--- Pacific Teal - #335e5a
--- Dusky Teal - #26484a
--- Slate Teal - #2a3f3f
--- Evergreen - #1f3534
--- Deep Teal - #183a37
+-- vim.cmd.highlight 'clear'
+-- if vim.fn.exists 'syntax_on' then
+--     vim.cmd.syntax 'reset'
+-- end
+-- vim.o.termguicolors = true
+-- vim.g.colors_name = 'jasper'
 --
--- Pale Cyan - #a0d9d9
--- Sky Cyan - #8acccf
--- Dusty Cyan - #6fb7b8
--- Teal Cyan - #5aa6a7
--- Winter Cyan - #4e9494
--- Dark Aqua - #3a7f7f
--- Storm Cyan - #326a6b
--- Ocean Cyan - #295757
--- Seafoam Cyan - #204545
--- Deep Cyan - #183636
-
-
+vim.cmd[[highlight Normal ctermbg=NONE guibg=NONE]] -- this makes the background transparent.
 local colors = {
     bg = "#0F1112",
-    fg = "#A8B7AC",
-		black = "#644455",
-		comment = "#5A6570",
-		grey = "#A9ABAC",
-		gutter_fg = "#4B5263",
-		menu = "#21222C",
-		nontext = "#3B4048",
-		selection = "#3C4148",
-		visual = "#3E4452",
-		white = "#879794",
-		bright_white = "#e4d6be",
-		blue = "#326a6b",
-		bright_blue = "#657fa9",
-		cyan = "#6b888d",
-		neon_cyan = "#00DFDF",
-		bright_cyan = "#85a3aa",
-		lavender = "#6272A4",
-		transparent_blue = "#19272C",
-		green = "#7d8b6d",
-		bright_green = "#96aa83",
-		transparent_green = "#22372c",
-		red = "#9a5a4a",
-		bright_red = "#d57f7a",
-		orange = "#A63E26",
-		transparent_red = "#342231",
-		fuchsia = "#7B2358",
-		lilac = "#6D5978",
-		purple = "#88789b",
-		bright_magenta = "#9987b2",
-		pink = "#E48CC1",
-		yellow = "#FEC406",
-		bright_yellow = "#FEFF02",
-		transparent_yellow = "#202624"
+    fg = "#dac8a7",
+    black = "#0F1112",
+    grey = "#4B5263",
+    white = "#A9CDA7",
+    bright_white = "#D4EAD3",
+    blue = "#52667A",
+    bright_blue = "#5298C0",
+    cyan = "#3B708A",
+    neon_cyan = "#00DFDF",
+    bright_cyan = "#5aa6a7",
+    lavender = "#6272A4",
+    transparent_blue = "#19272C",
+    green = "#557D76",
+    bright_green = "#96aa83",
+    transparent_green = "#22372c",
+    red = "#9a5a4a",
+    bright_red = "#d57f7a",
+    orange = "#A63E26",
+    transparent_red = "#342231",
+    fuchsia = "#7B2358",
+    purple = "#88789b",
+    bright_magenta = "#9987b2",
+    pink = "#E48CC1",
+    yellow = "#a48f6d",
+    bright_yellow = "#F6F6B6",
+    transparent_yellow = "#202624",
+    nontext = "#3B4048",
 }
 
 -- Terminal colors
@@ -129,14 +81,14 @@ statusline_groups = vim.tbl_extend('error', statusline_groups, {
 ---@type table<string, vim.api.keyset.highlight>
 local groups = vim.tbl_extend('error', statusline_groups, {
     -- Builtins.
-    Boolean = { fg = colors.cyan },
+		Boolean = { fg = colors.cyan },
     Character = { fg = colors.green },
     ColorColumn = { bg = colors.selection },
     Comment = { fg = colors.comment, italic = true },
     Conceal = { fg = colors.comment },
     Conditional = { fg = colors.pink },
     Constant = { fg = colors.yellow },
-    CurSearch = { fg = colors.black, bg = colors.fuchsia },
+    CurSearch = { fg = colors.fg, bg = colors.ochre }, -- when highlighted text has the cursor over it
     Cursor = { fg = colors.black, bg = colors.white },
     CursorColumn = { bg = colors.transparent_black },
     CursorLine = { bg = colors.transparent_yellow },
@@ -154,7 +106,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     Include = { fg = colors.purple },
     Keyword = { fg = colors.cyan },
     Label = { fg = colors.cyan },
-    LineNr = { fg = colors.gutter_fg },
+    LineNr = { fg = colors.comment },
     Macro = { fg = colors.purple },
     MatchParen = { sp = colors.fg, underline = true },
     NonText = { fg = colors.nontext },
@@ -169,7 +121,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     PreProc = { fg = colors.yellow },
     Question = { fg = colors.purple },
     Repeat = { fg = colors.pink },
-    Search = { fg = colors.bg, bg = colors.black }, -- highlight color for selected text, in search or whatever
+    Search = { fg = colors.bg, bg = colors.yellow }, -- highlight color for selected text, in search or whatever
     SignColumn = { bg = colors.bg },
     Special = { fg = colors.green, italic = true },
     SpecialComment = { fg = colors.comment, italic = true },
@@ -229,12 +181,12 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@module'] = { fg = colors.orange },
     ['@number'] = { fg = colors.purple },
     ['@number.float'] = { fg = colors.green },
-    ['@operator'] = { fg = colors.blue },
+    ['@operator'] = { fg = colors.green },
     ['@parameter.reference'] = { fg = colors.orange },
-    ['@property'] = { fg = colors.blue },
-    ['@punctuation.bracket'] = { fg = colors.fg },
+    ['@property'] = { fg = colors.grey },
+    ['@punctuation.bracket'] = { fg = colors.ochre },
     ['@punctuation.delimiter'] = { fg = colors.fg },
-    ['@string'] = { fg = colors.cyan },
+    ['@string'] = { fg = colors.foreground },
     ['@string.escape'] = { fg = colors.cyan },
     ['@string.regexp'] = { fg = colors.bright_red },
     ['@string.special.symbol'] = { fg = colors.purple },
@@ -245,7 +197,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@type'] = { fg = colors.bright_cyan },
     ['@type.builtin'] = { fg = colors.cyan, italic = true },
     ['@type.qualifier'] = { fg = colors.pink },
-    ['@variable'] = { fg = colors.cyan },
+    ['@variable'] = { fg = colors.white },
     ['@variable.builtin'] = { fg = colors.purple },
     ['@variable.member'] = { fg = colors.green },
     ['@variable.parameter'] = { fg = colors.orange },
@@ -267,7 +219,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     ['@lsp.type.method'] = { fg = colors.green },
     ['@lsp.type.namespace'] = { fg = colors.orange },
     ['@lsp.type.partransparent_yellow'] = { fg = colors.orange },
-    ['@lsp.type.property'] = { fg = colors.blue },
+    ['@lsp.type.property'] = { fg = colors.grey },
     ['@lsp.type.struct'] = { fg = colors.cyan },
     ['@lsp.type.type'] = { fg = colors.bright_cyan },
     ['@lsp.type.variable'] = { fg = colors.fg },
@@ -295,8 +247,8 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     DiagnosticUnnecessary = { fg = colors.grey, italic = true },
     DiagnosticVirtualTextError = { fg = colors.red, bg = colors.transparent_red },
     DiagnosticVirtualTextHint = { fg = colors.cyan, bg = colors.transparent_blue },
-    DiagnosticVirtualTextInfo = { fg = colors.cyan, bg = colors.transparent_blue },
-    DiagnosticVirtualTextWarn = { fg = colors.yellow, bg = colors.transparent_yellow },
+    DiagnosticVirtualTextInfo = { fg = colors.blue, bg = colors.transparent_blue },
+    DiagnosticVirtualTextWarn = { fg = colors.yellow },
     DiagnosticWarn = { fg = colors.yellow },
     LspCodeLens = { fg = colors.cyan },
     LspFloatWinBorder = { fg = colors.comment },
@@ -375,8 +327,8 @@ local groups = vim.tbl_extend('error', statusline_groups, {
 
     -- Command line.
     MoreMsg = { fg = colors.bright_white, bold = true },
-    MsgArea = { fg = colors.cyan },
-    MsgSeparator = { fg = colors.lilac },
+    MsgArea = { fg = colors.ochre },
+    MsgSeparator = { fg = colors.purple },
 
     -- Winbar styling.
     WinBar = { fg = colors.fg, bg = colors.bg },
@@ -415,7 +367,7 @@ local groups = vim.tbl_extend('error', statusline_groups, {
     YankyYanked = { link = 'Visual' },
 
     -- Highlight for the Treesitter sticky context.
-    TreesitterContextBottom = { underline = true, sp = colors.lilac },
+    TreesitterContextBottom = { underline = true, sp = colors.purple },
 
     -- Fzf overrides.
     FzfLuaBorder = { fg = colors.comment },
