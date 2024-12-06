@@ -91,45 +91,38 @@ end
 
 ---@return string
 function M.filetype()
-
-
-
-
-
 	return ""
 end
-
-
--- Get the background color of StatusLine to apply to the icon
-local function get_statusline_bg()
-  local hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
-  return hl.bg and string.format("#%06x", hl.bg) or "NONE"
-end
+-- -- Get the background color of StatusLine to apply to the icon
+-- local function get_statusline_bg()
+--   local hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
+--   return hl.bg and string.format("#%06x", hl.bg) or "NONE"
+-- end
 
 -- Function to get the filetype icon with its standard foreground color and StatusLine background
-local function get_filetype_icon_with_standard_color()
-  if not has_icons then return "", "" end
-
-  local filetype = vim.bo.filetype
-  if filetype == "" then
-    return "", ""
-  end
-
-  -- Retrieve the icon and its recommended highlight group from mini-icons
-  local icon, icon_hl = mini_icons.get('filetype', filetype)
-  icon = icon or ""  -- Fallback icon if none found
-
-  -- Get StatusLine background color
-  local statusline_bg = get_statusline_bg()
-
-  -- Get the foreground color from the icon's highlight group
-  local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl }).fg
-
-  -- Define a new highlight for the icon with the icon's standard color and StatusLine background
-  vim.api.nvim_set_hl(0, "StatusLineIconColor", { fg = icon_fg, bg = statusline_bg })
-
-  return icon, "StatusLineIconColor"
-end
+-- local function get_filetype_icon_with_standard_color()
+--   if not has_icons then return "", "" end
+--
+--   local filetype = vim.bo.filetype
+--   if filetype == "" then
+--     return "", ""
+--   end
+--
+--   -- Retrieve the icon and its recommended highlight group from mini-icons
+--   local icon, icon_hl = mini_icons.get('filetype', filetype)
+--   icon = icon or ""  -- Fallback icon if none found
+--
+--   -- Get StatusLine background color
+--   local statusline_bg = get_statusline_bg()
+--
+--   -- Get the foreground color from the icon's highlight group
+--   local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl }).fg
+--
+--   -- Define a new highlight for the icon with the icon's standard color and StatusLine background
+--   vim.api.nvim_set_hl(0, "StatusLineIconColor", { fg = icon_fg, bg = statusline_bg })
+--
+--   return icon, "StatusLineIconColor"
+-- end
 
 -- Function to get the modified indicator if the file is modified
 local function get_modified_indicator()

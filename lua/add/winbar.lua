@@ -19,7 +19,7 @@ local function get_winbar_content()
   end
 
   local icon = get_filetype_icon()  -- Get the filetype icon
-  local modified = vim.bo.modified and "●" or ""  -- Indicator if the file is modified
+  local modified = vim.bo.modified and "*" or ""  -- Indicator if the file is modified
 
   -- Customize the winbar with icon, filename, and modified indicator
   return string.format("%%=%s %%#PmenuSel# %s %%* %s", icon, fname, modified)
