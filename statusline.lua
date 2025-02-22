@@ -157,7 +157,7 @@ end
 
 --- @return string
 local function git_branch_icon()
-  return "%#GitIcon#%*"  -- Neutral color for icon using StatusLine
+  return "%#GitIcon#󰘬%*"  -- Neutral color for icon using StatusLine
 end
 
 --- @return string
@@ -192,14 +192,15 @@ local function lsp_clients()
 
   local clients = vim.lsp.get_clients({ bufnr = current_buf })
   if next(clients) == nil then
-    return " %#StatusLine#% ○"
+    return " %#StatusLine#%•"
+    -- return " %#StatusLine#% ○" -- old style "LSP inactive, it fills in when its active"
   end
 
   local c = {}
   for _, client in pairs(clients) do
     table.insert(c, client.name)
   end
-  return " " .. table.concat(c, "|") .. " "
+  return " " .. table.concat(c, ",") .. " "
 end
 
 -------------------------------
@@ -235,7 +236,8 @@ local function lsp_active()
   local space = "%#StatusLineMedium# %*"
 
   if #clients > 0 then
-    return space .. "%#GitStatusAdd#⦿%*"
+    return space .. "%#GitStatusAdd#%*"
+    -- return space .. "%#GitStatusAdd#⦿%*"
   end
   return ""
 end
@@ -255,6 +257,7 @@ local function diagnostics_warns()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
   if count > 0 then
     return string.format("%%#DiagnosticWarn#•%s%%*", nada)
+    -- return string.format("%%#DiagnosticWarn#•%s%%*", count) -- old "dot indicator"
   end
 
   return ""
@@ -420,19 +423,20 @@ StatusLine.active = function()
 		-- filename(),
 	-- M.filetype(),
 		"%S ", -- separator
-    full_git(),
     lsp_status(),
 		"%S ", -- separator
 		"%=", -- center alignment
     -- filetype(),
+    full_git(),
     diagnostics_info(),
-    lsp_active(),
+    -- lsp_active(),
     lsp_clients(),
     diagnostics_error(),
     diagnostics_warns(),
     diagnostics_hint(),
-    file_percentage(),
-    total_lines(),
+		"%S ", -- separator
+    -- file_percentage(),
+    -- total_lines(),
   }
 
   return table.concat(statusline)
@@ -460,4 +464,4 @@ return M
 
 -- ◉ lsp is loaded, turns green
 -- ○ no lsp loaded
--- toe way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created
+-- the way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created

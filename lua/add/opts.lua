@@ -29,7 +29,7 @@ o.signcolumn = "yes"				  -- always show sign column so it doesnt shift
 o.fillchars:append { eob = " " }    -- remove tilde ~
 o.relativenumber = true
 -- o.ls = 0 -- last status (in statusline) dont show
--- o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
+o.ch = 0 -- command height (the bar at the bottom that shows the last command) dont show.
 
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
@@ -37,7 +37,8 @@ o.relativenumber = true
 
 vim.cmd[[highlight Normal ctermbg=NONE guibg=NONE]] -- this makes the background transparent.
 -- vim.cmd[[colorscheme jasper]]
-vim.cmd[[colorscheme terafox]]
+vim.cmd[[colorscheme duskfox]]
+--- terafox, duskfox, nightfox, nordfox, dayfox, dawnfox, carbonfox.
 
 -- Italic Comments
 vim.cmd[[highlight Comment cterm=italic gui=italic]]

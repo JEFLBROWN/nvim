@@ -119,81 +119,16 @@ local function get_git_diff(type)
   return 0
 end
 
--------------------------------------------------------------
--- Ensure mini-icons is loaded
-local has_icons, mini_icons = pcall(require, 'mini.icons')
-if not has_icons then
-  print("Error: mini.icons not found. Please install or configure mini-icons.")
-end
-
--- Get the background color of StatusLine to apply to the icon
-local function get_statusline_bg()
-  local hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
-  return hl.bg and string.format("#%06x", hl.bg) or "NONE"
-end
-
--- Function to get the filetype icon with its standard foreground color and StatusLine background
-local function get_filetype_icon_with_standard_color()
-  if not has_icons then return "", "" end
-
-  local filetype = vim.bo.filetype
-  if filetype == "" then
-    return "", ""
-  end
-
-  -- Retrieve the icon and its recommended highlight group from mini-icons
-  local icon, icon_hl = mini_icons.get('filetype', filetype)
-  icon = icon or ""  -- Fallback icon if none found
-
-  -- Get StatusLine background color
-  local statusline_bg = get_statusline_bg()
-
-  -- Get the foreground color from the icon's highlight group
-  local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl }).fg
-
-  -- Define a new highlight for the icon with the icon's standard color and StatusLine background
-  vim.api.nvim_set_hl(0, "StatusLineIconColor", { fg = icon_fg, bg = statusline_bg })
-
-  return icon, "StatusLineIconColor"
-end
-
--- Function to get the modified indicator if the file is modified
-local function get_modified_indicator()
-  return vim.bo.modified and "*" or ""  -- Display * if modified, otherwise nothing
-end
-
--- Function to format the filename with icon, color, and modified indicator
-local function filename()
-  local fname = vim.fn.expand("%:t")  -- Get the filename only
-  if fname == "" then
-    return ""
-  end
-
-  -- Get the filetype icon with customized background and foreground
-  local icon, icon_hl = get_filetype_icon_with_standard_color()
-  local modified = get_modified_indicator()  -- Get modified indicator
-
-  -- Use the Directory highlight group for filename text with StatusLine background
-  local statusline_bg = get_statusline_bg()
-  vim.api.nvim_set_hl(0, "StatusLineFilenameDirectory", {
-		fg = vim.api.nvim_get_hl(0,
-			{ name = "Whitespace" }).fg,
-		bg = statusline_bg, bold = true })
-
-  -- Format the filename with icon, filename, and modified indicator, applying highlights
-  return string.format("%%#%s#%s%%#StatusLineFilenameDirectory# %s%s %%*", icon_hl, icon, fname, modified)
-end
-
 -------------------------------
 --- Git
 -------------------------------
 
 -- Function to set custom Git status highlights using default highlight groups
 local function set_git_status_highlights()
-  local add_fg = get_highlight_color("String", "fg")       -- Greenish color from String
-  local change_fg = get_highlight_color("@diff.delta", "fg") -- Yellowish color from diff.delta
-  local delete_fg = get_highlight_color("DiffDelete", "fg")      -- Reddish color from DiffDelete
   local statusline_bg = get_highlight_color("StatusLine", "bg") -- Background from StatusLine
+  local add_fg = get_highlight_color("String", "fg")       -- Greenish color from String
+  local change_fg = get_highlight_color("LineNr", "fg") -- Yellowish color from diff.delta
+  local delete_fg = get_highlight_color("DiffRemoved", "fg")      -- Reddish color from DiffDelete
   local branch_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
   local icon_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
 
@@ -232,14 +167,14 @@ end
 local function git_diff_removed()
   local removed = get_git_diff("removed")
   if removed > 0 then
-    return string.format("%%#GitStatusDelete#-%s%%*", removed)
+    return string.format("-%%#GitStatusDelete#%s%%*", removed)
   end
   return ""
 end
 
 --- @return string
 local function git_branch_icon()
-  return "%#GitIcon#%*"  -- Neutral color for icon using StatusLine
+  return "%#GitIcon#%*"  -- Neutral color for icon using StatusLine
 end
 
 --- @return string
@@ -262,20 +197,21 @@ local function full_git()
     full = full .. space .. icon .. space .. branch .. space
   end
 
-  -- local added = git_diff_added()
-  -- if added ~= "" then
-  --   full = full .. added .. space
-  -- end
-  --
-  -- local changed = git_diff_changed()
-  -- if changed ~= "" then
-  --   full = full .. changed .. space
-  -- end
-  --
-  -- local removed = git_diff_removed()
-  -- if removed ~= "" then
-  --   full = full .. removed .. space
-  -- end
+  local added = git_diff_added()
+  if added ~= "" then
+    full = full .. added .. space
+  end
+
+  local changed = git_diff_changed()
+  if changed ~= "" then
+    full = full .. changed .. space
+  end
+
+  local removed = git_diff_removed()
+  if removed ~= "" then
+    -- full = full .. removed .. space
+    full = full .. removed
+  end
 
   return full
 end
@@ -296,7 +232,7 @@ local function lsp_clients()
   for _, client in pairs(clients) do
     table.insert(c, client.name)
   end
-  return " " .. table.concat(c, "|")
+  return " " .. table.concat(c, "•")
 end
 
 --- @param severity integer
@@ -329,7 +265,8 @@ local function lsp_active()
   local space = "%#StatusLineMedium# %*"
 
   if #clients > 0 then
-    return space .. "%#GitStatusAdd#⦿%*"
+    return space .. "%#GitStatusAdd#%*"
+    -- return space .. "%#GitStatusAdd#⦿%*"
   end
   return ""
 end
@@ -456,17 +393,9 @@ end
 -------------------------------
 
 --- @return string
-local function file_percentage()
-  local current_line = vim.api.nvim_win_get_cursor(0)[1]
-  local lines = vim.api.nvim_buf_line_count(0)
-
-  return string.format("%%#StatusLineMedium#  %d%%%% %%*", math.ceil(current_line / lines * 100))
-end
-
---- @return string
 local function total_lines()
   local lines = vim.fn.line("$")
-  return string.format("%%#StatusLineMedium#of %s %%*", lines)
+  return string.format("%%#StatusLineMedium# 󰉡 %s %%*", lines)
 end
 
 -------------------------------
@@ -494,7 +423,7 @@ StatusLine.active = function()
       mode(),
       "%=",
       "%=",
-      file_percentage(),
+      -- file_percentage(),
       total_lines(),
     })
   end
@@ -503,7 +432,7 @@ StatusLine.active = function()
     return table.concat({
       "%=",
       "%=",
-      file_percentage(),
+      -- file_percentage(),
       total_lines(),
     })
   end
@@ -511,20 +440,19 @@ StatusLine.active = function()
 -- this is the order of the statusline
   local statusline = {
     mode(),
-		filename(),
+		-- filename(),
 		"%S ", -- separator
     lsp_status(),
-		"%S ", -- separator
+		-- "%S ", -- separator
 		"%=", -- center alignment
     -- filetype(),
     diagnostics_info(),
     full_git(),
-    lsp_active(),
     lsp_clients(),
-    diagnostics_error(),
-    diagnostics_warns(),
-    diagnostics_hint(),
-    file_percentage(),
+    -- lsp_active(),
+    -- diagnostics_error(),
+    -- diagnostics_warns(),
+    -- diagnostics_hint(),
     total_lines(),
   }
 

@@ -3,9 +3,6 @@ if not status_ok then
 	return
 end
 
-
-
-
 -- Mappings.
 --
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
