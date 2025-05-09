@@ -1,5 +1,4 @@
 local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
-local icons = require 'mini.icons'
 local M = {}
 
 local function get_highlight_color(hl_group, color_type) -- this is a general color function, gets the foreground and background
@@ -7,61 +6,47 @@ local function get_highlight_color(hl_group, color_type) -- this is a general co
   return hl[color_type] and string.format("#%06x", hl[color_type]) or nil --The "#%06x" format in the code is a string format specifier that converts a number to a six-digit hexadecimal color code, prefixed with #.
 end
 
-function M.get_or_create_hl(hl)
-    local hl_name = 'Statusline' .. hl
-
-    if not statusline_hls[hl] then
-        -- If not in the cache, create the highlight group using the icon's foreground color
-        -- and the statusline's background color.
-        local bg_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
-        local fg_hl = vim.api.nvim_get_hl(0, { name = hl })
-        vim.api.nvim_set_hl(0, hl_name, { bg = ('#%06x'):format(bg_hl.bg), fg = ('#%06x'):format(fg_hl.fg) })
-        statusline_hls[hl] = true
-    end
-
-    return hl_name
-end
 -------------------------------
 --- Modes
 -------------------------------
-
+-- Note that: \19 = ^S and \22 = ^V.
 -- Define mode names
 local modes = {
-  ['n']      = 'NO',
-  ['no']     = 'OP',
-  ['nov']    = 'OC',
-  ['noV']    = 'OL',
-  ['no\x16'] = 'OB',
-  ['\x16']   = 'VB',
-  ['niI']    = 'IN',
-  ['niR']    = 'RE',
-  ['niV']    = 'RV',
-  ['nt']     = 'NT',
-  ['ntT']    = 'TM',
-  ['v']      = 'VI',
-  ['vs']     = 'VI',
-  ['V']      = 'VL',
-  ['Vs']     = 'VL',
-  ['\x16s']  = 'VB',
-  ['s']      = 'SE',
-  ['S']      = 'SL',
-  ['\x13']   = 'SB',
-  ['i']      = 'IN',
-  ['ic']     = 'IC',
-  ['ix']     = 'IX',
-  ['R']      = 'RE',
-  ['Rc']     = 'RC',
-  ['Rx']     = 'RX',
-  ['Rv']     = 'RV',
-  ['Rvc']    = 'RC',
-  ['Rvx']    = 'RX',
-  ['c']      = 'CM',
-  ['cv']     = 'CV',
-  ['r']      = 'PR',
-  ['rm']     = 'PM',
-  ['r?']     = 'P?',
-  ['!']      = 'SH',
-  ['t']      = 'TE',
+  ['n']      = 'NO', -- Normal
+  ['no']     = 'OP', -- OP-Pending
+  ['nov']    = 'OC', -- OP-Pending
+  ['noV']    = 'OL', -- OP-Pending
+  ['no\x16'] = 'OB', -- OP-Pending
+  ['\x16']   = 'VB', -- 
+  ['niI']    = 'IN', -- Normal
+  ['niR']    = 'RE', -- Normal
+  ['niV']    = 'RV', -- Normal
+  ['nt']     = 'NT', -- Normal
+  ['ntT']    = 'TM', -- Normal
+  ['v']      = 'VI', -- Visual
+  ['vs']     = 'VI', -- Visual
+  ['V']      = 'VL', -- Visual
+  ['Vs']     = 'VL', -- Visual
+  ['\x16s']  = 'VB', -- Visual 
+  ['s']      = 'SE', -- Select
+  ['S']      = 'SL', -- Select
+  ['\x13']   = 'SB', -- 
+  ['i']      = 'IN', -- Insert
+  ['ic']     = 'IC', -- Insert
+  ['ix']     = 'IX', -- Insert
+  ['R']      = 'RE', -- Replace
+  ['Rc']     = 'RC', -- Replace
+  ['Rx']     = 'RX', -- Replace
+  ['Rv']     = 'RV', -- Virt Replace
+  ['Rvc']    = 'RC', -- Virt Replace
+  ['Rvx']    = 'RX', -- Virt Replace
+  ['c']      = 'CM', -- Command
+  ['cv']     = 'CV', -- Vim Ex
+  ['r']      = 'PR', -- Prompt
+  ['rm']     = 'PM', -- More
+  ['r?']     = 'P?', -- Confirm
+  ['!']      = '$_', -- Shell
+  ['t']      = '>_', -- Terminal
 }
 
 --- Function to get mode with built-in highlights
@@ -89,75 +74,107 @@ end
 --- Filetype
 -------------------------------
 
----@return string
-function M.filetype()
-	return ""
-end
--- -- Get the background color of StatusLine to apply to the icon
--- local function get_statusline_bg()
---   local hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
---   return hl.bg and string.format("#%06x", hl.bg) or "NONE"
--- end
+--- @return string
+local function filetype_icon()
+  local filetype = vim.bo.filetype
+  if filetype == "" then
+    return ""
+  end
 
--- Function to get the filetype icon with its standard foreground color and StatusLine background
--- local function get_filetype_icon_with_standard_color()
---   if not has_icons then return "", "" end
---
---   local filetype = vim.bo.filetype
---   if filetype == "" then
---     return "", ""
---   end
---
---   -- Retrieve the icon and its recommended highlight group from mini-icons
---   local icon, icon_hl = mini_icons.get('filetype', filetype)
---   icon = icon or ""  -- Fallback icon if none found
---
---   -- Get StatusLine background color
---   local statusline_bg = get_statusline_bg()
---
---   -- Get the foreground color from the icon's highlight group
---   local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl }).fg
---
---   -- Define a new highlight for the icon with the icon's standard color and StatusLine background
---   vim.api.nvim_set_hl(0, "StatusLineIconColor", { fg = icon_fg, bg = statusline_bg })
---
---   return icon, "StatusLineIconColor"
--- end
+  -- Retrieve the icon for the current file type from mini-icons
+  local icon = require('mini.icons').get_icon(filetype)  -- Adjust based on mini-icons' API
 
--- Function to get the modified indicator if the file is modified
-local function get_modified_indicator()
-  return vim.bo.modified and "*" or ""  -- Display * if modified, otherwise nothing
+  -- Fallback to filetype name if icon is not found
+  return icon or filetype
 end
 
--- Function to format the filename with icon, color, and modified indicator
+--- @return string
 local function filename()
-  local fname = vim.fn.expand("%:t")  -- Get the filename only
+  local fname = vim.fn.expand("%:t")
   if fname == "" then
     return ""
   end
 
-  -- Get the filetype icon with customized background and foreground
-  local icon, icon_hl = get_filetype_icon_with_standard_color()
-  local modified = get_modified_indicator()  -- Get modified indicator
+  -- Concatenate the icon and filename for display
+  return filetype_icon() .. " " .. fname .. " "
+end
 
-  -- Use the Directory highlight group for filename text with StatusLine background
-  local statusline_bg = get_statusline_bg()
-  vim.api.nvim_set_hl(0, "StatusLineFilenameDirectory", {
-		fg = vim.api.nvim_get_hl(0,
-			{ name = "Whitespace" }).fg,
-		bg = statusline_bg, bold = true })
+--- @return string
+local function filename()
+  local fname = vim.fn.expand("%:t")
+  if fname == "" then
+    return ""
+  end
+  return fname .. " "
+end
 
-  -- Format the filename with icon, filename, and modified indicator, applying highlights
-  return string.format("%%#%s#%s%%#StatusLineFilenameDirectory# %s%s %%*", icon_hl, icon, fname, modified)
+
+--- @param type string
+--- @return integer
+local function get_git_diff(type)
+  local gsd = vim.b.gitsigns_status_dict
+  if gsd and gsd[type] then
+    return gsd[type]
+  end
+  return 0
 end
 
 -------------------------------
 --- Git
 -------------------------------
 
+-- Function to set custom Git status highlights using default highlight groups
+local function set_git_status_highlights()
+  local statusline_bg = get_highlight_color("StatusLine", "bg") -- Background from StatusLine
+  local add_fg = get_highlight_color("String", "fg")       -- Greenish color from String
+  local change_fg = get_highlight_color("LineNr", "fg") -- Yellowish color from diff.delta
+  local delete_fg = get_highlight_color("DiffRemoved", "fg")      -- Reddish color from DiffDelete
+  local branch_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
+  local icon_fg = get_highlight_color("Whitespace", "fg") -- Background from StatusLine
+
+  -- Define new highlight groups with custom foreground and StatusLine background
+  vim.api.nvim_set_hl(0, "GitStatusAdd", { fg = add_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitStatusChange", { fg = change_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitStatusDelete", { fg = delete_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitBranch", { fg = branch_fg, bg = statusline_bg })
+  vim.api.nvim_set_hl(0, "GitIcon", { fg = icon_fg, bg = statusline_bg })
+end
+
+-- Call this function once to set up the highlight groups
+set_git_status_highlights()
+
+-- Functions for Git status indicators in the statusline
+
+--- @return string
+local function git_diff_added()
+  local added = get_git_diff("added")
+  if added > 0 then
+    return string.format("%%#GitStatusAdd#%s%%*•", added)
+  end
+  return ""
+end
+
+--- @return string
+local function git_diff_changed()
+  local changed = get_git_diff("changed")
+  if changed > 0 then
+    return string.format("%%#GitStatusChange#%s%%*•", changed)
+  end
+  return ""
+end
+
+--- @return string
+local function git_diff_removed()
+  local removed = get_git_diff("removed")
+  if removed > 0 then
+    return string.format("%%#GitStatusDelete#%s%%*", removed)
+  end
+  return ""
+end
+
 --- @return string
 local function git_branch_icon()
-  return "%#GitIcon#󰘬%*"  -- Neutral color for icon using StatusLine
+  return "%#GitIcon#%*"  -- Neutral color for icon using StatusLine
 end
 
 --- @return string
@@ -177,7 +194,23 @@ local function full_git()
   local branch = git_branch()
   if branch ~= "" then
     local icon = git_branch_icon()
-    full = full .. icon .. space .. branch
+    full = full .. space .. icon .. space .. branch .. space
+  end
+
+  local added = git_diff_added()
+  if added ~= "" then
+    full = full .. added .. space
+  end
+
+  local changed = git_diff_changed()
+  if changed ~= "" then
+    full = full .. changed .. space
+  end
+
+  local removed = git_diff_removed()
+  if removed ~= "" then
+    -- full = full .. removed .. space
+    full = full .. removed
   end
 
   return full
@@ -192,20 +225,15 @@ local function lsp_clients()
 
   local clients = vim.lsp.get_clients({ bufnr = current_buf })
   if next(clients) == nil then
-    return " %#StatusLine#%•"
-    -- return " %#StatusLine#% ○" -- old style "LSP inactive, it fills in when its active"
+    return " %#StatusLine#% "
   end
 
   local c = {}
   for _, client in pairs(clients) do
     table.insert(c, client.name)
   end
-  return " " .. table.concat(c, ",") .. " "
+  return " " .. table.concat(c, "•")
 end
-
--------------------------------
---- LSP signal dots
--------------------------------
 
 --- @param severity integer
 ---@return integer
@@ -222,6 +250,7 @@ local function get_lsp_diagnostics_count(severity)
   return count
 end
 
+
 	local nada = "" -- added this myself to pass nothing to diagnostic parameter
 
 --- @return string
@@ -236,8 +265,8 @@ local function lsp_active()
   local space = "%#StatusLineMedium# %*"
 
   if #clients > 0 then
-    return space .. "%#GitStatusAdd#%*"
-    -- return space .. "%#GitStatusAdd#⦿%*"
+    return space .. "%#GitStatusAdd#󰇻%*"
+    -- return space .. "%#GitStatusAdd#⦿%*"
   end
   return ""
 end
@@ -246,7 +275,7 @@ end
 local function diagnostics_error()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
   if count > 0 then
-    return string.format("%%#DiagnosticError#•%s%%*", nada) -- change nada to 'count' and you get the number of diagnostics 
+    return string.format("%%#DiagnosticError#•%s%%*", nada  ) -- change nada to 'count' and you get the number of diagnostics 
   end
 
   return ""
@@ -257,7 +286,6 @@ local function diagnostics_warns()
   local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
   if count > 0 then
     return string.format("%%#DiagnosticWarn#•%s%%*", nada)
-    -- return string.format("%%#DiagnosticWarn#•%s%%*", count) -- old "dot indicator"
   end
 
   return ""
@@ -287,12 +315,12 @@ end
 -- LSP Progress
 ----------------------
 
------ @class LspProgress
------ @field client vim.lsp.Client?
------ @field kind string?
------ @field title string?
------ @field percentage integer?
------ @field message string?
+--- @class LspProgress
+--- @field client vim.lsp.Client?
+--- @field kind string?
+--- @field title string?
+--- @field percentage integer?
+--- @field message string?
 local lsp_progress = {
   client = nil,
   kind = nil,
@@ -365,17 +393,10 @@ end
 -------------------------------
 
 --- @return string
-local function file_percentage()
-  local current_line = vim.api.nvim_win_get_cursor(0)[1]
-  local lines = vim.api.nvim_buf_line_count(0)
-
-  return string.format("%%#StatusLineMedium#  %d%%%% %%*", math.ceil(current_line / lines * 100))
-end
-
---- @return string
 local function total_lines()
   local lines = vim.fn.line("$")
-  return string.format("%%#StatusLineMedium#of %s %%*", lines)
+  -- return string.format("%%#StatusLineMedium# L:%s %%*", lines)
+  return string.format("%%#StatusLineMedium# 󰉡 %s%%*", lines)
 end
 
 -------------------------------
@@ -403,7 +424,7 @@ StatusLine.active = function()
       mode(),
       "%=",
       "%=",
-      file_percentage(),
+      -- file_percentage(),
       total_lines(),
     })
   end
@@ -412,7 +433,7 @@ StatusLine.active = function()
     return table.concat({
       "%=",
       "%=",
-      file_percentage(),
+      -- file_percentage(),
       total_lines(),
     })
   end
@@ -420,23 +441,21 @@ StatusLine.active = function()
 -- this is the order of the statusline
   local statusline = {
     mode(),
-		-- filename(),
-	-- M.filetype(),
+		filename(),
 		"%S ", -- separator
     lsp_status(),
-		"%S ", -- separator
+		-- "%S ", -- separator
 		"%=", -- center alignment
     -- filetype(),
-    full_git(),
     diagnostics_info(),
-    -- lsp_active(),
-    lsp_clients(),
-    diagnostics_error(),
-    diagnostics_warns(),
-    diagnostics_hint(),
-		"%S ", -- separator
-    -- file_percentage(),
-    -- total_lines(),
+    full_git(),
+    -- lsp_clients(),
+    -- diagnostics_error(),
+    -- diagnostics_warns(),
+    -- diagnostics_hint(),
+    total_lines(),
+    lsp_active(),
+		"%S "
   }
 
   return table.concat(statusline)
@@ -462,6 +481,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileType" }, {
 })
 return M
 
--- ◉ lsp is loaded, turns green
--- ○ no lsp loaded
--- the way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created
+-- ◉ 󰇻  lsp is loaded, turns green
+-- ○ 󰩇  no lsp loaded
+-- toe way the statusline works is that you call a bunch of functions (the parts) and then concatonate them as a string in the end. so the stautline is just a list of all the parts you created
