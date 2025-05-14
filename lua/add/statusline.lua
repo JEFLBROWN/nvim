@@ -1,4 +1,8 @@
+
 function Statusline()
+vim.cmd([[
+    highlight Bold gui=bold cterm=bold
+]])
     local colors = {
         git_add = '%#Added#',
         git_change = '%#AlphaHeader#',
@@ -12,7 +16,8 @@ function Statusline()
         diagnostic_warn = '%#DiagnosticWarn#',
         diagnostic_info = '%#DiagnosticInfo#',
         diagnostic_hint = '%#DiagnosticHint#',
-        normal = '%#NonText#'
+        normal = '%#NonText#',
+				bold = '%#Bold#'
     }
 
 -- Note that: \19 = ^S and \22 = ^V.
@@ -55,10 +60,41 @@ function Statusline()
     }
 
     local mode = mode_map[vim.api.nvim_get_mode().mode] or 'NA'
-    local filename = vim.fn.expand('%:t') ~= "" and vim.fn.expand('%:t') or '[No Name]'
+  
+		-- local filename = vim.fn.expand('%:t') ~= "" and vim.fn.expand('%:t') or '[No Name]'
+    -- local modified = vim.bo.modified and '🞯' or ''
+    -- local line_count = vim.fn.line('$') -- if you want line count, uncomment this
+
+    -- Get filename and filepath separately for different styling
+    local filename = vim.fn.expand('%:t')
+    if filename == "" then
+        filename = '[No Name]'
+    end
+    
+    local filepath = vim.fn.expand('%:.:h')
+    local file_display = ""
+    
+    -- If we're in the current directory, just show the filename
+    if filepath == "." then
+        file_display = colors.bold .. filename .. colors.normal
+    else
+        -- Check how many directories deep the file is
+        local dir_depth = select(2, string.gsub(filepath, "/", "")) + 1
+        
+        if dir_depth >= 5 then
+            -- If 5 or more directories deep, show ellipsis
+            file_display = "..." .. "/" .. colors.bold .. filename .. colors.normal
+        else
+            -- Otherwise show the full path with filename in bold
+            file_display = filepath .. "/" .. colors.bold .. filename .. colors.normal
+        end
+    end
+    
     local modified = vim.bo.modified and '🞯' or ''
     local line_count = vim.fn.line('$')
 
+
+	
     local function get_git_status()
         local branch = vim.fn.systemlist("git branch --show-current")[1] or ''
         local git_status = vim.fn.systemlist("git diff --numstat")
@@ -133,10 +169,12 @@ function Statusline()
 
     return table.concat({
         '', mode_highlight, mode, colors.normal,
-        ' ', filename, modified,
+        -- ' ', filename, modified,
+        ' ', filepath, modified,
+
         ' %= ', --blank space
         -- '', line_count, ' lines',
-        ' ',' ' , project_name,
+        ' ', project_name,' ',
         ' ', git_info,
         ' ', lsp_status,
         ' '
@@ -148,3 +186,4 @@ vim.o.statusline = "%!v:lua.Statusline()"
 ---	󰇻󰇻󰇺
 ---	', right = ''
 ---	', right = ''
+

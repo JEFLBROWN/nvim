@@ -71,7 +71,7 @@ require('lazy').setup({ -- Lazy Start
 	{ 'echasnovski/mini.move', version= '*' },
 	{ 'echasnovski/mini.sessions', version = '*' },
 	{ 'echasnovski/mini.starter', version = false },
-	-- { 'echasnovski/mini.statusline', version = false },
+	{ 'echasnovski/mini.statusline', version = '*' },
 	{ 'echasnovski/mini.surround', version = '*'},
 
 ------------------------------------------------------------
@@ -102,7 +102,6 @@ require('lazy').setup({ -- Lazy Start
 ------------------------------------------------------------
 	
 	-- { 'Saghen/blink.cmp' }, -- completion	engine	
-	-- { 'hrsh7th/nvim-cmp'}, -- completion	engine
 	{	'L3MON4D3/LuaSnip',
 	-- follow latest release.
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -139,17 +138,17 @@ require('lazy').setup({ -- Lazy Start
 ------------------------------------------------------------
 
 	{ 'mason-org/mason.nvim' }, 
-	-- 'williamboman/mason-lspconfig.nvim',
-	-- 'neovim/nvim-lspconfig',
-	-- {
-	-- 	'MaximilianLloyd/tw-values.nvim',
-	--    keys = {
-	--        { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
-	--    	},
-	--    opts = {
-	--        border = "rounded", -- Valid window border style,
-	--        show_unknown_classes = true -- Shows the unknown classes popup
-	-- 		},
-	--  	},
+	'williamboman/mason-lspconfig.nvim',
+	'neovim/nvim-lspconfig',
+	{
+		'MaximilianLloyd/tw-values.nvim',
+	   keys = {
+	       { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
+	   	},
+	   opts = {
+	       border = "rounded", -- Valid window border style,
+	       show_unknown_classes = true -- Shows the unknown classes popup
+			},
+	 	},
 
 }) -- END LAZY

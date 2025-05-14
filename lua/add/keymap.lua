@@ -13,7 +13,7 @@ keymap("", "<Space>", "<Nop>", opts)												--Remap space as leader key
 
 keymap("n", ";", ":", opts)																	-- Colon is Semi-Colon in normal mode
 keymap("v", ";", ":", opts)																	-- Colon is Semi-Colon in visual mode
-keymap("n", "gf", ":edit <cfile><CR>", opts)								-- open non-existant files in new buffer. good if you're making things in one buffer that refer to another file, but the file doesn't exist. 
+keymap("n", "gf", ":edit <cfile><CR>", opts)								-- open non-existant files in new buffer.
 keymap("v", "<", "<gv", opts)																-- Stay in indent mode
 keymap("v", ">", ">gv", opts)																-- Stay in indent mode
 keymap('n', "B", "<C-q>", opts) 														-- Better Visual Block keybind 
@@ -39,7 +39,7 @@ keymap("n", "<leader>w","<C-W>q", opts)											-- Close Split window
 keymap("n", "<C-j>","<C-W>r <C-W>h", opts)									-- swap splits and move cursor to the left split. 
 keymap("n", "<C-l>","<C-W>l", opts)													-- Jump to the right Split
 keymap("n", "<C-h>","<C-W>h", opts)													-- Jump to the Left Split	
-keymap("n", "<leader>V","<C-w>t<C-w>H", opts)
+keymap("n", "<leader>V","<C-w>t<C-w>H", opts)								-- Horizontal -> Vertical Split Switch
 -- TODO add functionality for the rare horizontal split
 
 -- buffers
@@ -54,7 +54,6 @@ keymap("n", "<C-a>", "ggVG", opts)													-- Select All
 keymap("n", "<leader>z", ":ZenMode<CR>",opts) 							-- Zen
 
 keymap("n","-",":lua MiniFiles.open()<CR>",opts)						-- Mini Files
---TODO I want to use - to close  fminifiles as well
 
 ---------------------------------------------------
 -- Telescope
