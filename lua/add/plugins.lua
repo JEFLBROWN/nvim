@@ -24,8 +24,9 @@ require('lazy').setup({ -- Lazy Start
 ------------------------------------------------------------
 -- Colors
 ------------------------------------------------------------
-	{ "EdenEast/nightfox.nvim" },
-	-- { "uga-rosa/ccc.nvim" },
+
+	{ 'EdenEast/nightfox.nvim' },
+
 ------------------------------------------------------------
 -- Styles
 ------------------------------------------------------------
@@ -34,13 +35,14 @@ require('lazy').setup({ -- Lazy Start
 	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
 	{ 'chentoast/marks.nvim', event = "VeryLazy", opts = {}, },
 	{ 'brenoprata10/nvim-highlight-colors', opts ={}, },
+
 ------------------------------------------------------------
 -- Folke
 ------------------------------------------------------------
 
 	{ 'folke/zen-mode.nvim' },
 	{ 'folke/twilight.nvim', opts = {}, },
-	{ "folke/flash.nvim",
+	{ 'folke/flash.nvim',
 		--search labels, enhanced character motions, and Treesitter integration.
 		event = "VeryLazy",
 	 	---@type Flash.Config
@@ -98,14 +100,16 @@ require('lazy').setup({ -- Lazy Start
 ------------------------------------------------------------
 	-- Completion & Snippets
 ------------------------------------------------------------
+	
 	-- { 'Saghen/blink.cmp' }, -- completion	engine	
 	-- { 'hrsh7th/nvim-cmp'}, -- completion	engine
-	{	"L3MON4D3/LuaSnip",
+	{	'L3MON4D3/LuaSnip',
 	-- follow latest release.
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp"
 	},
+
 ------------------------------------------------------------
 -- Telescope
 ------------------------------------------------------------
@@ -134,7 +138,7 @@ require('lazy').setup({ -- Lazy Start
 -- LSP
 ------------------------------------------------------------
 
-	'mason-org/mason.nvim',
+	{ 'mason-org/mason.nvim' }, 
 	-- 'williamboman/mason-lspconfig.nvim',
 	-- 'neovim/nvim-lspconfig',
 	-- {
