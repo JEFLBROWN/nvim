@@ -135,8 +135,8 @@ function Statusline()
         '', mode_highlight, mode, colors.normal,
         ' ', filename, modified,
         ' %= ', --blank space
-        '', line_count, ' lines',
-        ' ', project_name,
+        -- '', line_count, ' lines',
+        ' ',' ' , project_name,
         ' ', git_info,
         ' ', lsp_status,
         ' '
@@ -147,3 +147,4 @@ vim.o.statusline = "%!v:lua.Statusline()"
 --- 󰩇
 ---	󰇻󰇻󰇺
 ---	', right = ''
+---	', right = ''

@@ -2,8 +2,8 @@ require "add.plugins" -- this has to come first
 require "add.opts"
 
 require "add.mason"
-require "add.mason-lspconfig"
-require "add.lspconfig"
+-- require "add.mason-lspconfig"
+-- require "add.lspconfig"
 
 -- require "add.breadcrumbs"
 require "add.comment"
