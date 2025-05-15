@@ -5,3 +5,4 @@ require("nvim-navic").setup {
 }
 
 require("breadcrumbs").setup()
+
