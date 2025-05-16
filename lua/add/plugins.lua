@@ -72,17 +72,16 @@ require('lazy').setup({ -- Lazy Start
 	{ 'SmiteshP/nvim-navic'}, -- winbar context
 	{ 'LunarVim/breadcrumbs.nvim' },
 	{ 'Saghen/blink.cmp' }, -- completion	engine	
-	{ 'karb94/neoscroll.nvim', },
+	{ 'karb94/neoscroll.nvim' },
 	{ 'lewis6991/gitsigns.nvim'}, -- add git signs in the statusbar 
 	{ 'chentoast/marks.nvim', event = "VeryLazy", opts = {}, },
-{
-  "gbprod/yanky.nvim",
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  },
-},
+--	{ "gbprod/yanky.nvim", opts = {}, },
+------------------------------------------------------------
+-- LSP
+------------------------------------------------------------
+
+	{ 'neovim/nvim-lspconfig' },
+
 ------------------------------------------------------------ 
 --- Picker
 ------------------------------------------------------------ 
@@ -90,13 +89,12 @@ require('lazy').setup({ -- Lazy Start
  { "ibhagwan/fzf-lua",
    -- optional for icon support
    dependencies = { "echasnovski/mini.icons" },
-   opts = {}
+		opts = {}
  },
 
-------------------------------------------------------------
--- LSP
-------------------------------------------------------------
 
-	{ 'neovim/nvim-lspconfig' },
 
-}) -- END LAZY
+
+
+
+ }) -- END LAZY

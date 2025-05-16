@@ -61,11 +61,12 @@ keymap("n", "<leader>z", ":ZenMode<CR>",opts) 							-- ZenMode
 keymap("n", '<leader>ff', ':FzfLua files<CR>', opts )
 keymap("n", '<leader>fg', ':Fzflua live grep<CR>', opts )
 keymap("n", "<leader>fb", ':Fzflua buffers<CR>', opts )
--- keymap("n", "<leader>fh", ':Fzflua helptags<CR>', opts )
--- keymap("n", "<leader>fc", fzf.commands, { desc = "FZF: Commands" })
--- keymap("n", "<leader>fk", fzf.keymaps, { desc = "FZF: Keymaps" })
--- keymap("n", "<leader>fr", fzf.oldfiles, { desc = "FZF: Recent files" })
--- keymap("n", "<leader>ft", fzf.tags, { desc = "FZF: Tags" })
+keymap("n", "<leader>fr", ':Fzflua oldfiles<CR>', opts )
+keymap("n", "<leader>fh", ':Fzflua helptags<CR>', opts )
+keymap("n", "<leader>fc", ':Fzflua commands', opts) 
+keymap("n", "<leader>fk", ':Fzflua keymaps', opts)
+keymap("n", "<leader>ft", ':Fzflua tags', opts )
+-- keymap("n", "<leader>ft", ':Fzflua tags', { desc = "FZF: Tags" }) -- the desc is for which-key hints etc
 
 
 
