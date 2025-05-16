@@ -53,15 +53,28 @@ keymap("n", "<C-a>", "ggVG", opts)													-- Select All
 
 keymap("n","-",":lua MiniFiles.open()<CR>",opts)						-- Mini Files
 
-keymap("n", "<leader>z", ":ZenMode<CR>",opts) 							-- Zen
+keymap("n", "<leader>z", ":ZenMode<CR>",opts) 							-- ZenMode
 
 
-some
+-- Picker
 
--- Yanky
-keymap("n", "p", "<Plug>(YankyPutAfter)", opts)
-keymap("n", "P", "<Plug>(YankyPutBefore)", opts)
-keymap("n", "gp", "<Plug>(YankyGPutAfter)", opts)
-keymap("n", "gP", "<Plug>(YankyGPutBefore)", opts)
-keymap("n", "<c-p>", "<Plug>(YankyPreviousEntry)", opts)
-keymap("n", "<c-n>", "<Plug>(YankyNextEntry)", opts)
+keymap("n", '<leader>ff', ':FzfLua files<CR>', opts )
+keymap("n", '<leader>fg', ':Fzflua live grep<CR>', opts )
+keymap("n", "<leader>fb", ':Fzflua buffers<CR>', opts )
+-- keymap("n", "<leader>fh", ':Fzflua helptags<CR>', opts )
+-- keymap("n", "<leader>fc", fzf.commands, { desc = "FZF: Commands" })
+-- keymap("n", "<leader>fk", fzf.keymaps, { desc = "FZF: Keymaps" })
+-- keymap("n", "<leader>fr", fzf.oldfiles, { desc = "FZF: Recent files" })
+-- keymap("n", "<leader>ft", fzf.tags, { desc = "FZF: Tags" })
+
+
+
+
+-- -- Yanky
+--
+-- keymap("n", "p", "<Plug>(YankyPutAfter)", opts)
+-- keymap("n", "P", "<Plug>(YankyPutBefore)", opts)
+-- keymap("n", "gp", "<Plug>(YankyGPutAfter)", opts)
+-- keymap("n", "gP", "<Plug>(YankyGPutBefore)", opts)
+-- keymap("n", "<c-p>", "<Plug>(YankyPreviousEntry)", opts)
+-- keymap("n", "<c-n>", "<Plug>(YankyNextEntry)", opts)

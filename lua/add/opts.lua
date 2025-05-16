@@ -31,23 +31,6 @@ o.relativenumber = true
 -- o.ls = 0 -- last status (in statusline) dont show
 o.ch = 1 -- command height (the bar at the bottom that shows the last command) dont show.
 
-
--- vim.opt.clipboard:append("unnamedplus")
-
-vim.g.clipboard = {
-    name = "wsl-clip",
-    copy = {
-        ["+"] = "clip.exe",
-        ["*"] = "clip.exe",
-    },
-    paste = {
-        ["+"] = "powershell.exe Get-Clipboard",
-        ["*"] = "powershell.exe Get-Clipboard",
-    },
-    cache_enabled = 0,
-}
-
-
 -- ┌─┐┌┬┐┬ ┬┬  ┌─┐┌─┐
 -- └─┐ │ └┬┘│  ├─ └─┐
 -- └─┘ ┴  ┴ ┴─┘└─┘└─┘
